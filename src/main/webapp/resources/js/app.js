@@ -26,6 +26,11 @@ App.config(['$routeProvider', function ($routeProvider) {
     	controller: AnketaResultsController
     });
     
+    $routeProvider.when('/temp', {
+    	templateUrl: 'temp/layout',
+    	controller: TempController
+    });
+    
     $routeProvider.otherwise({redirectTo: '/anketaTemplate'});
 }]);
 

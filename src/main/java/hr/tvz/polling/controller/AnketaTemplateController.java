@@ -2,6 +2,7 @@ package hr.tvz.polling.controller;
 
 
 
+import hr.tvz.polling.bll.interfaces.SurveyManager;
 import hr.tvz.polling.service.AnketaTemplateServiceImpl;
 
 import java.util.List;
@@ -21,9 +22,9 @@ public class AnketaTemplateController {
 	@Autowired
 	public AnketaTemplateServiceImpl anketaTemplateServiceImpl;
 	
-	/**
-	 * Anketa template
-	 */
+	@Autowired
+	SurveyManager surveyManager;
+	
 	@RequestMapping("/anketeList.json")
 	public @ResponseBody List<String> getAnketaOptionsList(){
 		return anketaTemplateServiceImpl.getOptionsList();
@@ -33,6 +34,7 @@ public class AnketaTemplateController {
     public @ResponseBody void addAnketaOption(@PathVariable("option") String option) {
         anketaTemplateServiceImpl.addOption(option);
     }
+    
     @RequestMapping(value = "/saveAnketa")//, method = RequestMethod.POST)
     public @ResponseBody void saveAnketa() {	
     	String question = anketaTemplateServiceImpl.getQuestion();

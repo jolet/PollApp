@@ -1,0 +1,30 @@
+<div>
+<h3>HERE COMES THE SUN</h3>
+</div>
+<table class="table table-bordered table-striped">
+	<thead>
+		<tr>
+			<th>Test</th>
+			<th>Anketa</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<tr ng-repeat="ank in anketeList">
+		
+			<td style = "min-width:235px !important">
+<!-- 				<button ng-show=" ank.active" class="btn  btn-warning" ng-click="anketaStatusSwitch(ank.question1)">Deactivate</button> -->
+<!-- 				<button ng-show="! ank.active" class="btn  btn-success" ng-click="anketaStatusSwitch(ank.question1)">Activate</button> -->
+<!-- 				<button class="btn  btn-danger" ng-click = "anketaDelete(ank.question1)">Delete</button> -->
+			</td>
+
+			<td style = "min-width:235px !important">{{ank.question}}</td>
+		</tr>
+	</tbody>
+	
+</table>
+	<form ng-submit="save()" method="POST">
+		<p>Anketa: <input type = "text" ng-model = "survey.question"> </p>
+		<br/> 
+		<input type = "submit" value="submit">
+	</form>
