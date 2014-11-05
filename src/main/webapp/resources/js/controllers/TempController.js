@@ -18,8 +18,8 @@ var TempController = function($scope, $http) {
 			question : null
 	};
 	
-	$scope.save = function(survey) {
+	$scope.save = function() {
 		console.log(JSON.stringify($scope.survey));
-		return $http.post('temp/save', survey);
+		return $http.post('temp/save', $scope.survey);
 	}
 };
