@@ -2,7 +2,7 @@
 
 var PollApp = {};
 
-var App = angular.module('PollApp', ['ngRoute', 'PollApp.filters', 'PollApp.services','PollApp.directives','ui.bootstrap']);
+var App = angular.module('PollApp', ['ngRoute', 'ngAnimate', 'PollApp.filters', 'PollApp.services','PollApp.directives','ui.bootstrap']);
 
 // Declare app level module which depends on filters, and services
 App.config(['$routeProvider', function ($routeProvider) {

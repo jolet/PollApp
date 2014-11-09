@@ -1,10 +1,11 @@
 package hr.tvz.polling.controller;
 
+import hr.tvz.polling.bll.interfaces.SurveyManager;
 import hr.tvz.polling.model.Survey;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,25 +17,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/temp")
 public class TempController {
 
+	@Autowired
+	SurveyManager surveyManager;
+	
 	@RequestMapping("/ankete")
-	public @ResponseBody List<Survey> getAnketaOptionsList(){
-		Survey s1 = new Survey();
-		s1.setQuestion("test1");
-		Survey s2 = new Survey();
-		s2.setQuestion("test2");
-		List<Survey> srvy = new ArrayList<>();
-		srvy.add(s1);
-		srvy.add(s2);
-		
-		return srvy;
+	public @ResponseBody List<Survey> getSurveyList(){
+		return surveyManager.findAll();
 	}
 	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public @ResponseBody String saveSurvey(@RequestBody Survey surv) {
 		System.out.println("anketa " + (surv == null ? "mull" : surv.getQuestion()));
+
+		surveyManager.saveAndFlush(surv);
 		
 		return "JSON: Survey name: " + surv.getQuestion();
-		
 	}
 	
     @RequestMapping("/layout")

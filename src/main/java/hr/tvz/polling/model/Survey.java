@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,7 +21,7 @@ public class Survey implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	@OneToMany(mappedBy = "survey")
+	@OneToMany(mappedBy = "survey", fetch=FetchType.EAGER)
 	private List<Option> options;
 
 	@ManyToOne

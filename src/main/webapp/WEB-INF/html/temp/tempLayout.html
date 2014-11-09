@@ -1,30 +1,36 @@
 <div>
 <h3>HERE COMES THE SUN</h3>
 </div>
-<table class="table table-bordered table-striped">
+
+
+	<form ng-submit="save()" method="POST">
+		<p>Anketa:		<span style="font-size:150%">{{survey.question}}</span></p>
+		<input type = "text" ng-model = "survey.question" placeholder="Please enter survey name."> 
+		<br />
+		<input type = "text"  placeholder="Unesite odgovor" ng-model = "optionName"> <button ng-click="addOption()">Dodaj</button>
+		<br />
+		<input type = "text" ng-model = "survey.maxVotes" placeholder = "Max number of votes(optional)"		
+		<input type = "submit" value="add survey">
+		
+	</form>	
+
+<table class="table table-bordered table-striped example-animate-container" >
 	<thead>
 		<tr>
-			<th>Test</th>
-			<th>Anketa</th>
+			<th>Id</th>
+			<th>Survey</th>
 		</tr>
 	</thead>
-
-	<tbody>
-		<tr ng-repeat="ank in anketeList">
+		<tbody>
+		<tr class="animate-repeat" ng-repeat="opt in survey.options">
 		
 			<td style = "min-width:235px !important">
-<!-- 				<button ng-show=" ank.active" class="btn  btn-warning" ng-click="anketaStatusSwitch(ank.question1)">Deactivate</button> -->
-<!-- 				<button ng-show="! ank.active" class="btn  btn-success" ng-click="anketaStatusSwitch(ank.question1)">Activate</button> -->
-<!-- 				<button class="btn  btn-danger" ng-click = "anketaDelete(ank.question1)">Delete</button> -->
+				<button class="btn btn-danger" ng-click = "optionRemove($index)">Remove</button>
+				<button class="btn btn-info" ng-show="opt.state" ng-click="setActive($index, false)">Netoèno</button>
+				<button class="btn btn-success" ng-show="opt.state==false" ng-click="setActive($index, true)">Toèno</button>
 			</td>
 
-			<td style = "min-width:235px !important">{{ank.question}}</td>
+			<td style = "min-width:235px !important">{{opt.name}}</td>
 		</tr>
 	</tbody>
-	
 </table>
-	<form ng-submit="save()" method="POST">
-		<p>Anketa: <input type = "text" ng-model = "survey.question"> </p>
-		<br/> 
-		<input type = "submit" value="submit">
-	</form>
