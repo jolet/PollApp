@@ -4,7 +4,7 @@
 
 
 	<form ng-submit="save()" method="POST">
-		<p>Anketa:		<span style="font-size:150%">{{survey.question}}</span></p>
+
 		<input type = "text" ng-model = "survey.question" placeholder="Please enter survey name."> 
 		<br />
 <!-- 		<number-only-input input-value="survey.maxVotes" input-name="maxInputVotes"> -->
@@ -20,26 +20,31 @@
 		<input type = "text"  placeholder="Option name:" ng-model = "optionName"> 
 		<button type="button" class = "btn btn-default" ng-click="addOption()">Add option</button>
 		<br />
-		<input type = "submit" class = "btn btn-default" value="Add survey"> 
-		
-	</form>	
-<table class="table table-bordered table-striped example-animate-container" >
-	<thead>
-		<tr>
-			<th>Id</th>
-			<th>Survey</th>
-		</tr>
-	</thead>
-		<tbody>
-		<tr class="animate-repeat" ng-repeat="opt in survey.options">
-		
-			<td style = "min-width:235px !important">
-				<button class="btn btn-danger" ng-click = "optionRemove($index)">Remove</button>
-				<button class="btn btn-success" ng-show="opt.state && survey.scored" ng-click="setActive($index, false)">Correct</button>
-				<button class="btn btn-info" ng-show="opt.state==false && survey.scored" ng-click="setActive($index, true)">Incorrect</button>
-			</td>
 
-			<td style = "min-width:235px !important">{{opt.name}}</td>
-		</tr>
-	</tbody>
-</table>
+	<hr>
+	
+	<p>Anketa:		<span style="font-size:150%">{{survey.question}}</span></p>
+	<table class="table table-bordered table-striped example-animate-container" >
+		<thead>
+			<tr>
+				<th>Action</th>
+				<th>Option</th>
+			</tr>
+		</thead>
+			<tbody>
+			<tr class="animate-repeat" ng-repeat="opt in survey.options">
+			
+				<td style = "min-width:235px !important">
+					<button type = "button" class="btn btn-danger" ng-click = "optionRemove($index)">Remove</button>
+					<button type = "button" class="btn btn-success" ng-show="opt.state && survey.scored" ng-click="setActive($index, false)">Correct</button>
+					<button type = "button" class="btn btn-info" ng-show="opt.state==false && survey.scored" ng-click="setActive($index, true)">Incorrect</button>
+				</td>
+	
+				<td style = "min-width:235px !important">{{opt.name}}</td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<hr>
+	<input type = "submit" class = "btn btn-default" value="Add survey"> 
+	</form>	
