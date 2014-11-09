@@ -37,7 +37,7 @@ public class Survey implements Serializable{
 	private Boolean active;
 	
 	@Column(name = "SRV_HAS_POINTS")
-	private Boolean hasPoints;
+	private Boolean scored;
 	
 	@Column(name = "SRV_MAX_VOTES")
 	private Long maxVotes;
@@ -50,6 +50,9 @@ public class Survey implements Serializable{
 	
 	@Column(name = "SRV_VALID_TO")
 	private Date validTo;
+	
+	@Column(name = "SRV_DESCRIPTION")
+	private String description;
 
 	public List<Option> getOptions() {
 		return options;
@@ -83,14 +86,6 @@ public class Survey implements Serializable{
 		this.active = active;
 	}
 
-	public Boolean getHasPoints() {
-		return hasPoints;
-	}
-
-	public void setHasPoints(Boolean hasPoints) {
-		this.hasPoints = hasPoints;
-	}
-
 	public Long getMaxVotes() {
 		return maxVotes;
 	}
@@ -122,8 +117,22 @@ public class Survey implements Serializable{
 	public void setValidTo(Date validTo) {
 		this.validTo = validTo;
 	}
-	
-	
-	
+
+	public Boolean getScored() {
+		return scored;
+	}
+
+	public void setScored(Boolean scored) {
+		this.scored = scored;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	
 }

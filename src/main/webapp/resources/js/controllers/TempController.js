@@ -7,19 +7,25 @@ var TempController = function($scope, $http) {
     $scope.fetchAnketeList = function() {
         $http.get('temp/ankete').success(function(anketeList){
             $scope.anketeList = anketeList;
-//            console.log("ankete: ", anketeList);
+            console.log("ankete: ", anketeList);
         });
     };
 
 //    $scope.fetchAnketeList();   
     
+//    $scope.inputMaxVotesMessage = ''
+    
     $scope.optionName = '';
 	$scope.survey = {
 			id : null,
 			question : null,
-			hasPoints : null,
+			scored : false,
 			maxVotes : null,
-			classGroup : {},
+			classGroup : {
+				id : null,
+				name : null,
+				academicYear : null
+			},
 			options : []
 	};
 	
@@ -63,8 +69,14 @@ var TempController = function($scope, $http) {
 		$scope.survey.options[$index].state = value;
 		console.log("active: ", $scope.survey.options[$index].state);
 	}
+	
+	$scope.setScored = function(value){
+		$scope.survey.scored = value;
+	}
+	
 	$scope.save = function() {
-//		console.log(JSON.stringify($scope.survey));
-//		return $http.post('temp/save', $scope.survey);
+		console.log(JSON.stringify($scope.survey));
+		return $http.post('temp/save', $scope.survey);
 	}
 };
+

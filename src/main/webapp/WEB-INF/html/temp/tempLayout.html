@@ -7,13 +7,21 @@
 		<p>Anketa:		<span style="font-size:150%">{{survey.question}}</span></p>
 		<input type = "text" ng-model = "survey.question" placeholder="Please enter survey name."> 
 		<br />
-		<input type = "text"  placeholder="Unesite odgovor" ng-model = "optionName"> <button ng-click="addOption()">Dodaj</button>
+<!-- 		<number-only-input input-value="survey.maxVotes" input-name="maxInputVotes"> -->
+		<input type = "text" ng-model = "survey.maxVotes" placeholder = "Max number of votes(optional)">
 		<br />
-		<input type = "text" ng-model = "survey.maxVotes" placeholder = "Max number of votes(optional)"		
-		<input type = "submit" value="add survey">
+		<input type = "text" placeholder = "Class group:" ng-model = "survey.classGroup.name">
+		<input type = "text" placeholder = "Academic Year:" ng-model = "survey.classGroup.academicYear">
+		<br />
+		Points:
+		<button type = "button" class="btn btn-primary" ng-show="survey.scored" ng-click="setScored(false)">Scored</button>
+		<button type = "button" class="btn btn-info" ng-show="!survey.scored" ng-click="setScored(true)">Not scored</button>
+		<br />
+		<input type = "text"  placeholder="Option name:" ng-model = "optionName"> <button type="button" ng-click="addOption()">Add option</button>
+		<br />
+		<input type = "submit" value="Add survey"> 
 		
 	</form>	
-
 <table class="table table-bordered table-striped example-animate-container" >
 	<thead>
 		<tr>
@@ -26,8 +34,8 @@
 		
 			<td style = "min-width:235px !important">
 				<button class="btn btn-danger" ng-click = "optionRemove($index)">Remove</button>
-				<button class="btn btn-info" ng-show="opt.state" ng-click="setActive($index, false)">Netoèno</button>
-				<button class="btn btn-success" ng-show="opt.state==false" ng-click="setActive($index, true)">Toèno</button>
+				<button class="btn btn-success" ng-show="opt.state && survey.scored" ng-click="setActive($index, false)">Correct</button>
+				<button class="btn btn-info" ng-show="opt.state==false && survey.scored" ng-click="setActive($index, true)">Incorrect</button>
 			</td>
 
 			<td style = "min-width:235px !important">{{opt.name}}</td>

@@ -1,7 +1,10 @@
 package hr.tvz.polling.bll;
 
+import hr.tvz.polling.bll.interfaces.ClassGroupManager;
+import hr.tvz.polling.bll.interfaces.OptionManager;
 import hr.tvz.polling.bll.interfaces.SurveyManager;
 import hr.tvz.polling.dal.SurveyRepository;
+import hr.tvz.polling.model.Option;
 import hr.tvz.polling.model.Survey;
 
 import java.util.List;
@@ -17,6 +20,12 @@ public class SurveyManagerImpl implements SurveyManager{
 	@Autowired
 	SurveyRepository repository;
 	
+	@Autowired
+	ClassGroupManager classGroupManager;
+	
+	@Autowired
+	OptionManager optionManager;
+	
 	@Override
 	public List<Survey> findAll() {
 		return repository.findAll();
@@ -29,7 +38,20 @@ public class SurveyManagerImpl implements SurveyManager{
 
 	@Override
 	public void saveAndFlush(Survey survey) {
+		
+		classGroupManager.saveAndFlush(survey.getClassGroup());
+//		for(Option opt : survey.getOptions()) {
+//		optionManager.saveAndFlush(opt);
+//		}
+		
+		List<Option> op = survey.getOptions();
+		survey.setOptions(null);
 		repository.saveAndFlush(survey);
+		
+		for(Option opt : op) {
+			opt.setSurvey(survey);
+			optionManager.saveAndFlush(opt);
+		}
 	}
 
 }
