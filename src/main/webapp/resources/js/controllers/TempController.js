@@ -12,7 +12,7 @@ var TempController = function($scope, $http) {
     };
 
 //    $scope.fetchAnketeList();   
-    
+	$scope.surveySaved = null;
 //    $scope.inputMaxVotesMessage = ''
     
     $scope.optionName = '';
@@ -74,9 +74,25 @@ var TempController = function($scope, $http) {
 		$scope.survey.scored = value;
 	}
 	
+	$scope.clearTemplate = function(){
+		$scope.survey.question = null
+		$scope.survey.scored = false
+		$scope.survey.maxVotes = null
+		$scope.survey.classGroup = {}
+		$scope.survey.options = [];
+//		$scope.survey = null;
+	}
+	
 	$scope.save = function() {
 		console.log(JSON.stringify($scope.survey));
-		return $http.post('temp/save', $scope.survey);
+		return $http.post('temp/save', $scope.survey)
+			.success(function(){
+				$scope.surveySaved = true;
+			})
+			.error(function(){
+				$scope.surveySaved = false;
+			});
+		clearTemplate();
 	}
 };
 

@@ -13,38 +13,53 @@
 		<input type = "text" placeholder = "Class group:" ng-model = "survey.classGroup.name">
 		<input type = "text" placeholder = "Academic Year:" ng-model = "survey.classGroup.academicYear">
 		<br />
+		<input type = "text"  placeholder="Option name:" ng-model = "optionName"> 
+		<button type="button" class = "btn btn-default" ng-click="addOption()">Add option</button>
+		<br />
 		Points:
 		<button type = "button" class="btn btn-primary" ng-show="survey.scored" ng-click="setScored(false)">Scored</button>
 		<button type = "button" class="btn btn-info" ng-show="!survey.scored" ng-click="setScored(true)">Not scored</button>
 		<br />
-		<input type = "text"  placeholder="Option name:" ng-model = "optionName"> 
-		<button type="button" class = "btn btn-default" ng-click="addOption()">Add option</button>
-		<br />
 
 	<hr>
-	
+	<div ng-show="survey.question">
 	<p>Anketa:		<span style="font-size:150%">{{survey.question}}</span></p>
-	<table class="table table-bordered table-striped example-animate-container" >
-		<thead>
-			<tr>
-				<th>Action</th>
-				<th>Option</th>
-			</tr>
-		</thead>
-			<tbody>
-			<tr class="animate-repeat" ng-repeat="opt in survey.options">
-			
-				<td style = "min-width:235px !important">
-					<button type = "button" class="btn btn-danger" ng-click = "optionRemove($index)">Remove</button>
-					<button type = "button" class="btn btn-success" ng-show="opt.state && survey.scored" ng-click="setActive($index, false)">Correct</button>
-					<button type = "button" class="btn btn-info" ng-show="opt.state==false && survey.scored" ng-click="setActive($index, true)">Incorrect</button>
-				</td>
-	
-				<td style = "min-width:235px !important">{{opt.name}}</td>
-			</tr>
-		</tbody>
-	</table>
+	</div>
+	<div ng-show="survey.options.length > 0">
+		<table class="table table-bordered table-striped example-animate-container" >
+			<thead>
+				<tr>
+					<th>Action</th>
+					<th>Option</th>
+				</tr>
+			</thead>
+				<tbody>
+				<tr class="animate-repeat" ng-repeat="opt in survey.options">
+				
+					<td style = "min-width:235px !important">
+						<button type = "button" class="btn btn-danger" ng-click = "optionRemove($index)">Remove</button>
+						<button type = "button" class="btn btn-success" ng-show="opt.state && survey.scored" ng-click="setActive($index, false)">Correct</button>
+						<button type = "button" class="btn btn-info" ng-show="opt.state==false && survey.scored" ng-click="setActive($index, true)">Incorrect</button>
+					</td>
+		
+					<td style = "min-width:235px !important">{{opt.name}}</td>
+				</tr>
+			</tbody>
+		</table>
 	
 	<hr>
-	<input type = "submit" class = "btn btn-default" value="Add survey"> 
-	</form>	
+		<input type = "button" class = "btn btn-danger" value="Remove all" ng-show = "survey.options.length > 1" ng-click = "clearTemplate()"> 
+		<input type = "submit" class = "btn btn-default" value="Add survey" ng-show = "survey.options.length > 1"> 
+	</div>
+	</form>
+	
+	<div class="alert alert-success alert-dismissible saveNotification" ng-show="surveySaved == true">
+		<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		Survey saved successfully.
+	</div>
+	<div class="alert alert-danger alert-dismissible saveNotification" ng-show="surveySaved == false">
+		<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		Error occurred when trying to save survey.
+	</div>
+		
+	
