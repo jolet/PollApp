@@ -3,24 +3,18 @@
 </div>
 
 
-	<form ng-submit="save()" method="POST">
+	<form name = "templateForm" ng-submit="save()" method="POST">
 
-		<input type = "text" ng-model = "survey.question" placeholder="Please enter survey name."> 
+		<input type = "text" ng-model = "survey.question" placeholder="Please enter survey name." required> 
 		<br />
-<!-- 		<number-only-input input-value="survey.maxVotes" input-name="maxInputVotes"> -->
-		<input type = "text" ng-model = "survey.maxVotes" placeholder = "Max number of votes(optional)">
+		
+		<input type = "text" placeholder = "Class group:" ng-model = "survey.classGroup.name" required>
+		<input type = "text" placeholder = "Academic Year:" ng-model = "survey.classGroup.academicYear" required>
 		<br />
-		<input type = "text" placeholder = "Class group:" ng-model = "survey.classGroup.name">
-		<input type = "text" placeholder = "Academic Year:" ng-model = "survey.classGroup.academicYear">
+		<input type = "text"  placeholder="Option name:" ng-model = "optionName" > 
+		<button type="button" class = "btn btn-default" ng-click="addOption()" ng-disabled="!optionName">Add option</button>
 		<br />
-		<input type = "text"  placeholder="Option name:" ng-model = "optionName"> 
-		<button type="button" class = "btn btn-default" ng-click="addOption()">Add option</button>
-		<br />
-		Points:
-		<button type = "button" class="btn btn-primary" ng-show="survey.scored" ng-click="setScored(false)">Scored</button>
-		<button type = "button" class="btn btn-info" ng-show="!survey.scored" ng-click="setScored(true)">Not scored</button>
-		<br />
-
+		
 	<hr>
 	<div ng-show="survey.question">
 	<p>Anketa:		<span style="font-size:150%">{{survey.question}}</span></p>
@@ -47,9 +41,22 @@
 			</tbody>
 		</table>
 	
+	
 	<hr>
-		<input type = "button" class = "btn btn-danger" value="Remove all" ng-show = "survey.options.length > 1" ng-click = "clearTemplate()"> 
-		<input type = "submit" class = "btn btn-default" value="Add survey" ng-show = "survey.options.length > 1"> 
+	
+		<div ng-show = "survey.options.length > 1">
+			Points:
+			<button type = "button" class="btn btn-primary" ng-show="survey.scored" ng-click="setScored(false)">Scored</button>
+			<button type = "button" class="btn btn-info" ng-show="!survey.scored" ng-click="setScored(true)">Not scored</button>
+			<br />
+			<!-- 		<number-only-input input-value="survey.maxVotes" input-name="maxInputVotes"> -->
+			<input type = "text" ng-model = "survey.maxVotes" placeholder = "Max number of votes(optional)">
+			<br />
+			<br />
+			
+			<input type = "button" class = "btn btn-danger" value="Remove all" ng-show = "survey.options.length > 1" ng-click = "clearTemplate()"> 
+			<input type = "submit" class = "btn btn-default" value="Add survey" ng-show = "survey.options.length > 1" ng-disabled = "templateForm.$invalid"> 
+		</div>		
 	</div>
 	</form>
 	
