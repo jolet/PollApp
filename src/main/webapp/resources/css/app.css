@@ -118,7 +118,11 @@
 /* 	max-height: 40px; */
 /* } */
 
-.devmode {
+.devmode{
 	background-color:dimgray;
 /* 	color:white; */
+}
+
+.growlToast{
+	margin-top:15px;
 }

@@ -2,7 +2,6 @@
 <h3>HERE COMES THE SUN</h3>
 </div>
 
-
 	<form name = "templateForm" ng-submit="save()" method="POST">
 
 		<input type = "text" ng-model = "survey.question" placeholder="Please enter survey name." required> 
@@ -40,10 +39,7 @@
 				</tr>
 			</tbody>
 		</table>
-	
-	
-	<hr>
-	
+		<hr>
 		<div ng-show = "survey.options.length > 1">
 			Points:
 			<button type = "button" class="btn btn-primary" ng-show="survey.scored" ng-click="setScored(false)">Scored</button>
@@ -59,14 +55,7 @@
 		</div>		
 	</div>
 	</form>
-	
-	<div class="alert alert-success alert-dismissible saveNotification" ng-show="surveySaved == true">
-		<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-		Survey saved successfully.
-	</div>
-	<div class="alert alert-danger alert-dismissible saveNotification" ng-show="surveySaved == false">
-		<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-		Error occurred when trying to save survey.
-	</div>
+<!--           <button ng-click="growl()" type="button" class="btn btn-warning">Growl</button>  -->
+	<div class = "growlToast" growl limit-messages="5"></div>
 		
 	
