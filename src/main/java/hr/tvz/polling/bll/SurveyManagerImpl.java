@@ -54,4 +54,18 @@ public class SurveyManagerImpl implements SurveyManager{
 		}
 	}
 
+//	@Override
+//	public void delete(Long id) {
+//		Survey srv =repository.findOne(id); 
+//		if(srv ==null) {
+//			System.out.println("Survey with id " + id + " doesn't exist");
+//			return;
+//		}
+//		for(Option opt : srv.getOptions()) {
+//			optionManager.delete(opt.getId());
+//		}
+//		
+//		repository.delete(id);
+//	}
+
 }

@@ -2,10 +2,13 @@
 
 var PollApp = {};
 
-var App = angular.module('PollApp', ['ngRoute', 'ngAnimate', 'PollApp.filters', 'PollApp.services','PollApp.directives','ui.bootstrap','angular-growl']);
+var App = angular.module('PollApp', ['ngRoute', 'ngAnimate', 'PollApp.filters', 
+                                     'PollApp.services','PollApp.directives','ui.bootstrap',
+                                     'angular-growl','mgcrea.ngStrap']);
 
 // Declare app level module which depends on filters, and services
-App.config(['$routeProvider','growlProvider', function ($routeProvider, growlProvider) {
+App.config(['$routeProvider','growlProvider','$httpProvider', '$datepickerProvider', '$timepickerProvider', 
+            function ($routeProvider, growlProvider, $httpProvider, $datepickerProvider, $timepickerProvider) {
     $routeProvider.when('/anketaTemplate', {
         templateUrl: 'anketaTemplate/layout',
         controller: AnketaTemplateController
@@ -30,6 +33,10 @@ App.config(['$routeProvider','growlProvider', function ($routeProvider, growlPro
     	templateUrl: 'temp/layout',
     	controller: TempController
     });
+    $routeProvider.when('/tempActivate', {
+    	templateUrl: 'tempActivate/layout',
+    	controller: TempActivationController
+    });
     
     $routeProvider.otherwise({redirectTo: '/anketaTemplate'});
 	
@@ -39,7 +46,27 @@ App.config(['$routeProvider','growlProvider', function ($routeProvider, growlPro
 	growlProvider.globalInlineMessages(true);
 	growlProvider.globalTimeToLive({success: 3000, error: -1, warning: 3000, info: 4000});
 	growlProvider.globalDisableCountDown(true);
+	growlProvider.globalReversedOrder(true);
 	
-}
-]);
+//    growlProvider.messagesKey("my-messages");
+//    growlProvider.messageTextKey("message-text");
+//    growlProvider.messageTitleKey("message-title");
+//    growlProvider.messageSeverityKey("severity-level");
+	$httpProvider.interceptors.push(growlProvider.serverMessagesInterceptor);
+	
+	angular.extend($datepickerProvider.defaults, {
+		dateFormat: 'dd.MM.yyyy',
+		startWeek: '1',
+//		dateType: 'string',
+//		placement: 'top-left',
+		autoclose: false
+	});
+	angular.extend($timepickerProvider.defaults, {
+		timeFormat: 'HH:mm', 
+		animation: 'am-fade',
+//		placement: 'top-left',
+		autoclose: false
+	});
+
+}]);
 

@@ -11,14 +11,18 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "POL_OPTION")
+//@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class Option implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
+	@JsonBackReference
 	@ManyToOne
-	@JoinColumn(name = "SRV_ID")
+	@JoinColumn(name = "SRV_ID", nullable = false)
 	private Survey survey;
 	
 	@Id
@@ -35,6 +39,10 @@ public class Option implements Serializable{
 	@Column(name = "OPT_STATE")
 	private Boolean state;
 
+	public Option() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public Survey getSurvey() {
 		return survey;
 	}

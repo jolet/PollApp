@@ -4,5 +4,5 @@ import hr.tvz.polling.model.Survey;
 
 
 public interface SurveyManager extends BaseManager<Survey>{
-
+//	void delete(Long id);
 }

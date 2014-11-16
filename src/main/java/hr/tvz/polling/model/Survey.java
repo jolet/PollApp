@@ -14,14 +14,21 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "POL_SURVEY")
+//@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
 public class Survey implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
+	@JsonManagedReference
 	@OneToMany(mappedBy = "survey", fetch=FetchType.EAGER)
+//	@OneToMany(mappedBy = "survey", fetch=FetchType.EAGER, cascade=CascadeType.ALL, orphanRemoval=true)
 	private List<Option> options;
 
 	@ManyToOne
@@ -45,9 +52,11 @@ public class Survey implements Serializable{
 	@Column(name = "SRV_QUESTION")
 	private String question;
 	
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "SRV_VALID_FROM")
 	private Date validFrom;
 	
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "SRV_VALID_TO")
 	private Date validTo;
 	
@@ -58,6 +67,10 @@ public class Survey implements Serializable{
 		return options;
 	}
 
+	public Survey() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public void setOptions(List<Option> options) {
 		this.options = options;
 	}

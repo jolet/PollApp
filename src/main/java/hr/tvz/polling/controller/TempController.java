@@ -3,8 +3,6 @@ package hr.tvz.polling.controller;
 import hr.tvz.polling.bll.interfaces.SurveyManager;
 import hr.tvz.polling.model.Survey;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -20,14 +18,14 @@ public class TempController {
 	@Autowired
 	SurveyManager surveyManager;
 	
-	@RequestMapping("/ankete")
-	public @ResponseBody List<Survey> getSurveyList(){
-		return surveyManager.findAll();
-	}
+//	@RequestMapping("/ankete")
+//	public @ResponseBody List<Survey> getSurveyList(){
+//		return surveyManager.findAll();
+//	}
 	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public @ResponseBody String saveSurvey(@RequestBody Survey surv) {
-		System.out.println("anketa " + (surv == null ? "mull" : surv.getQuestion()));
+		System.out.println("anketa " + (surv == null ? "null" : surv.getQuestion()));
 
 		surveyManager.saveAndFlush(surv);
 		

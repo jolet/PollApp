@@ -32,4 +32,9 @@ public class OptionManagerImpl implements OptionManager{
 		repository.saveAndFlush(entity);
 	}
 
+//	@Override
+//	public void delete(Long id) {
+//		repository.delete(id);
+//	}
+
 }

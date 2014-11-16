@@ -1,0 +1,47 @@
+<div>
+<h3>HERE COMES THE SUN</h3>
+</div>
+
+<hr>
+<table class="table table-bordered table-striped">
+	<thead>
+		<tr>
+			<th>Activation</th>
+			<th>Survey</th>
+<!-- 			<th>Validity</th> -->
+<!-- 			<th>Hint</th>			 -->
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="survey in surveyList">
+			<td style = "min-width:235px !important">
+<!-- 			on ACTIVATE click = set Date // set time // now! buttons appera -->
+				<button ng-show="!survey.active" class="btn  btn-success" ng-click="setActive($index,true)">Activate</button>
+				<button ng-show="survey.active" class="btn  btn-warning " ng-click="setActive($index,false)">Deactivate</button>
+<!-- 				<br /> -->
+<!-- 				<button class="btn  btn-info" ng-click="anketaEdit(ank.question1)">Edit</button> -->
+<!-- 				<button class="btn  btn-danger" ng-click = "remove($index)">Delete</button> -->
+<!-- 				<br /> -->
+<!-- 				<button class="btn  btn-info" >"#date1/time"></button> -->
+<!-- 				<button class="btn  btn-info" >"#date2/time"></button> -->
+					
+			</td>
+
+			<td style = "min-width:235px !important">{{survey.question}}</td>
+		</tr>
+	</tbody>
+</table>
+
+<div class="form-group">
+    <label class="control-label"><i class="fa fa-calendar"></i> Datetime picker</label><br>
+    <div class="form-group">
+      <input type="text" size="10" class="form-control" ng-model="sharedDate" data-autoclose="0" placeholder="Date" bs-datepicker>
+    </div>
+    <div class="form-group">
+      <input type="text" size="8" class="form-control" ng-model="sharedDate" data-autoclose="1" placeholder="Time" bs-timepicker>
+    </div>
+  </div>
+
+<div class = "growlToast" growl limit-messages="5"></div>
+
+</div>
