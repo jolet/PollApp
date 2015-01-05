@@ -32,16 +32,43 @@
 	</tbody>
 </table>
 
-<div class="form-group">
-    <label class="control-label"><i class="fa fa-calendar"></i> Datetime picker</label><br>
-    <div class="form-group">
-      <input type="text" size="10" class="form-control" ng-model="sharedDate" data-autoclose="0" placeholder="Date" bs-datepicker>
-    </div>
-    <div class="form-group">
-      <input type="text" size="8" class="form-control" ng-model="sharedDate" data-autoclose="1" placeholder="Time" bs-timepicker>
-    </div>
-  </div>
+<!-- <div class="form-group"> -->
+<!--     <label class="control-label"><i class="fa fa-calendar"></i> Datetime picker</label><br> -->
+<!--     <div class="form-group"> -->
+<!--       <input type="text" size="10" class="form-control" ng-model="activeFrom" data-autoclose="0" placeholder="Date" bs-datepicker> -->
+<!--     </div> -->
+<!--     <div class="form-group"> -->
+<!--       <input type="text" size="8" class="form-control" ng-model="activeFrom" data-autoclose="1" placeholder="Time" bs-timepicker> -->
+<!--     </div> -->
+<!-- </div> -->
 
+<!-- <datetimepicker data-ng-model="data.date"></datetimepicker> -->
+
+<!-- <div class="dropdown"> -->
+<!--     <a class="dropdown-toggle my-toggle-select" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href=""> -->
+<!--         <div class="input-append"><input type="text" class="input-large" data-ng-model="data.date"><span class="add-on"> -->
+<!--         <i class="icon-calendar"></i></span> -->
+<!--         </div> -->
+<!--     </a> -->
+<!--     <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel"> -->
+<!--         <datetimepicker data-ng-model="data.date" -->
+<!--                         data-datetimepicker-config="{ dropdownSelector: '.my-toggle-select' }"></datetimepicker> -->
+<!--     </ul> -->
+<!-- </div> -->
+
+<div class="dropdown">
+  <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="">
+    <div class="input-group">
+    	<input type="text" class="form-control" data-ng-model="data.dateDropDownInput" placeholder="Select start datetime">
+    	<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+    </div>
+  </a>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+    <datetimepicker data-ng-model="data.dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/>
+  </ul>
+</div>
+
+<p>Selected Date: {{ data.dateDropDownInput | date:'yyyy-MM-dd HH:mm' }}</p> 
 <div class = "growlToast" growl limit-messages="5"></div>
 
 </div>

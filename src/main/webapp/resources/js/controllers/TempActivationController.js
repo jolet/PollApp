@@ -23,9 +23,11 @@ var TempActivationController = function($scope, $http, growl) {
 	$scope.setActive = function($index, value){
 		var surveyTemp = $scope.surveyList[$index];
 		surveyTemp.active = value;
-		survey.validFrom = 
-		
-		updateSurvey('tempActivate/update', surveyTemp);
+//		var myTimepicker = $timepicker(element, ngModelController);
+		console.log($scope.activeFrom);
+		//		survey.validFrom = 
+			
+//		updateSurvey('tempActivate/update', surveyTemp);
 	}
 	
 	

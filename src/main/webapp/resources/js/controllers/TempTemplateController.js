@@ -89,4 +89,6 @@ var TempController = function($scope, $http, growl) {
 				growl.error("<b>Awww snap!</b> <i>Something</i> went wrong!", {ttl: -1}, {title: 'ALERT WE GOT ERROR'});
 			});
 	}
+	
+	$scope.kita = "";
 }

@@ -27,16 +27,19 @@ public class SurveyManagerImpl implements SurveyManager{
 	OptionManager optionManager;
 	
 	@Override
+	@Transactional(readOnly = true)
 	public List<Survey> findAll() {
 		return repository.findAll();
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Survey findOne(Long id) {
 		return repository.findOne(id);
 	}
 
 	@Override
+	@Transactional
 	public void saveAndFlush(Survey survey) {
 		
 		classGroupManager.saveAndFlush(survey.getClassGroup());

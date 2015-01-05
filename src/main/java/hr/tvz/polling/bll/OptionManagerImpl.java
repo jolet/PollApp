@@ -18,16 +18,19 @@ public class OptionManagerImpl implements OptionManager{
 	OptionRepository repository;
 	
 	@Override
+	@Transactional(readOnly = true)
 	public List<Option> findAll() {
 		return repository.findAll();
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Option findOne(Long id) {
 		return repository.findOne(id);
 	}
 
 	@Override
+	@Transactional
 	public void saveAndFlush(Option entity) {
 		repository.saveAndFlush(entity);
 	}

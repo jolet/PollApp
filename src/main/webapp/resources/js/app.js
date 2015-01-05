@@ -3,12 +3,12 @@
 var PollApp = {};
 
 var App = angular.module('PollApp', ['ngRoute', 'ngAnimate', 'PollApp.filters', 
-                                     'PollApp.services','PollApp.directives','ui.bootstrap',
-                                     'angular-growl','mgcrea.ngStrap']);
+                                     'PollApp.services','PollApp.directives',
+                                     'angular-growl','mgcrea.ngStrap', 'ui.bootstrap.datetimepicker', 'ui.bootstrap']);
 
 // Declare app level module which depends on filters, and services
-App.config(['$routeProvider','growlProvider','$httpProvider', '$datepickerProvider', '$timepickerProvider', 
-            function ($routeProvider, growlProvider, $httpProvider, $datepickerProvider, $timepickerProvider) {
+App.config(['$routeProvider','growlProvider','$httpProvider', 
+            function ($routeProvider, growlProvider, $httpProvider) {
     $routeProvider.when('/anketaTemplate', {
         templateUrl: 'anketaTemplate/layout',
         controller: AnketaTemplateController
@@ -54,19 +54,19 @@ App.config(['$routeProvider','growlProvider','$httpProvider', '$datepickerProvid
 //    growlProvider.messageSeverityKey("severity-level");
 	$httpProvider.interceptors.push(growlProvider.serverMessagesInterceptor);
 	
-	angular.extend($datepickerProvider.defaults, {
-		dateFormat: 'dd.MM.yyyy',
-		startWeek: '1',
-//		dateType: 'string',
-//		placement: 'top-left',
-		autoclose: false
-	});
-	angular.extend($timepickerProvider.defaults, {
-		timeFormat: 'HH:mm', 
-		animation: 'am-fade',
-//		placement: 'top-left',
-		autoclose: false
-	});
+//	angular.extend($datepickerProvider.defaults, {
+//		dateFormat: 'dd.MM.yyyy',
+//		startWeek: '1',
+////		dateType: 'string',
+////		placement: 'top-left',
+//		autoclose: false
+//	});
+//	angular.extend($timepickerProvider.defaults, {
+//		timeFormat: 'HH:mm', 
+//		animation: 'am-fade',
+////		placement: 'top-left',
+//		autoclose: false
+//	});
 
 }]);
 
