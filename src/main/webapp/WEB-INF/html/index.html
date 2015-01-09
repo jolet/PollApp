@@ -1,0 +1,64 @@
+<!doctype html>
+<html ng-app="PollApp">
+	<head>
+	    <meta charset="utf-8">
+	    <title>Polling App</title>
+<!-- 	    <link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css" /> -->
+	    <link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.3.3.1.css" />
+	    <link rel="stylesheet" href="resources/css/app.css"/>
+	    <link rel="stylesheet" href="resources/css/angular-growl.css"/>
+<!-- 	    <link rel="stylesheet" href="resources/css/bootstrap-additions.css"/> -->
+		<link rel="stylesheet" href="resources/css/datetimepicker.css"/>
+	</head>
+	
+	<body class = "devmode container-fluid" >
+	
+		<nav class="navbar navbar-default navbar-static-top" role="navigation">
+		  <div class="container">
+		    <ul class="menu">
+		        <li><a href="#/anketaTemplate">Anketa Template</a></li>
+				<!--         validna od do // za koji razred // vremensko ogranicenje // lozinka // bodovi -->
+		        <li><a href="#/anketaActivation">Anketa Management</a></li>
+		        <li><a href="#/anketaStudenti">Anketa Students</a></li>
+		        <li><a href="#/anketaResults">Results</a></li>
+		        <li><a href="#/temp">Temp</a></li>
+		        <li><a href="#/tempActivate">TempActivate</a></li>
+				<!--         <li><a href="#/">#Bodovi</a></li> -->
+		    </ul>
+		  </div>
+		</nav>
+	    <hr/>
+	    <div ng-view class = "contentView"></div>
+
+		<script src="resources/js/lib/angular/angular.js"></script>
+		<script src="resources/js/lib/angular/angular-route.js"></script>
+		<script src="resources/js/lib/angular/angular-animate.js"></script>
+		<script src="resources/js/ui-bootstrap-tpls-0.12.0.min.js"></script>
+		<script src="resources/js/angular-growl.js"></script>
+		<script src="resources/js/angular-strap.js"></script>
+<!-- 		<script src="resources/js/angular-strap.js"></script> -->
+<!-- 		<script src="resources/js/angular-strap.tpl.js"></script> -->
+		<script src="resources/js/moment.js"></script>
+<!-- 		<script> -->
+<!-- 		moment().format(); -->
+<!-- 		</script> -->
+<!-- 		<script src="resources/js/moment-with-locales.min.js"></script> -->
+		<script src="resources/js/jquery-1.11.1.js"></script>
+<!-- 		<script src="resources/js/bootstrap.js"></script> -->
+		<script src="resources/bootstrap/js/bootstrap.min.3.3.1.js"></script>
+		<script src="resources/js/datetimepicker.js"></script>
+<!-- 		<script src="resources/js/ui-bootstrap-0.12.0.min.js"></script> -->
+<!-- 		<script src="resources/js/angular-datepicker.js"></script> -->
+		<script src="resources/js/app.js"></script>
+		<script src="resources/js/controllers/AnketaTemplateController.js"></script>
+		<script src="resources/js/controllers/AnketaActivationController.js"></script>
+		<script src="resources/js/controllers/AnketaStudentiController.js"></script>
+		<script src="resources/js/controllers/AnketaResultsController.js"></script>
+		<script src="resources/js/controllers/TempTemplateController.js"></script>
+		<script src="resources/js/controllers/TempActivationController.js"></script>
+		<script src="resources/js/filters.js"></script>
+		<script src="resources/js/directives.js"></script>
+		<script src="resources/js/services.js"></script>
+	
+	</body>
+</html>

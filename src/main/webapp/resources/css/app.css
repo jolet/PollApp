@@ -1,0 +1,128 @@
+/* app css stylesheet */
+#wrapper {
+	margin: 0 auto;
+	max-width: 1000px;
+	margin-top: 50px;
+}
+
+.menu {
+	text-align: center;
+	list-style: none;
+	padding: 0 0 0.5em;
+	font-size: 30px;
+	font-weight: bolder;
+	margin-top: 20px;
+}
+
+.menu>li {
+	display: inline;
+}
+
+.menu>li:before {
+	content: "|";
+	padding-right: 0.3em;
+}
+
+.menu>li:nth-child(1):before {
+	content: "";
+	padding: 0;
+}
+
+.menu li a {
+	text-decoration: none;
+}
+
+.menu li a:link {
+	padding: 20px 0px 20px 0px;
+}
+
+.menu li a:visited {
+	background-image: url(nav_bg.png);
+	color: dimgray;
+}
+
+.menu li a:hover {
+	color: #252525;
+	/* 	border:1px solid gray; */
+	/* 	padding:20px 0px 20px 0px; */
+	/* 	background: #f0f0f0; */
+}
+
+.contentView {
+	width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.anketaInput {
+	/* 	width: 358px !important; */
+	/* 	margin-left: 100px !important; */
+	
+}
+
+.h3left {
+	/* 	margin-left:100px !important; */
+	
+}
+
+.divalert {
+	/* 	width:400px !important; */
+	/* 	margin-left:100px !important; */
+	
+}
+
+.tableoptions {
+	/* 	width: 450px !important; */
+	/* 	margin-left: 100px !important; */
+	
+}
+
+/* .saveNotification { */
+/* 	margin-top: 10px; */
+/* } */
+
+.ankStudenti {
+	display: inline;
+}
+
+/* .example-animate-container { */
+/* 	background: white; */
+/* 	border: 1px solid black; */
+/* 	list-style: none; */
+/* 	margin: 0; */
+/* 	padding: 0 10px; */
+/* } */
+
+/* .animate-repeat { */
+/* 	line-height: 40px; */
+/* 	list-style: none; */
+/* 	box-sizing: border-box; */
+/* 	display: block; */
+/* } */
+
+/* .animate-repeat.ng-move, .animate-repeat.ng-enter, .animate-repeat.ng-leave */
+/* 	{ */
+/* 	-webkit-transition: all linear 0.5s; */
+/* 	transition: all linear 0.5s; */
+/* } */
+
+/* .animate-repeat.ng-leave.ng-leave-active, .animate-repeat.ng-move, */
+/* 	.animate-repeat.ng-enter { */
+/* 	opacity: 0; */
+/* 	max-height: 0; */
+/* } */
+
+/* .animate-repeat.ng-leave, .animate-repeat.ng-move.ng-move-active, */
+/* 	.animate-repeat.ng-enter.ng-enter-active { */
+/* 	opacity: 1; */
+/* 	max-height: 40px; */
+/* } */
+
+.devmode{
+	background-color:dimgray;
+/* 	color:white; */
+}
+
+.growlToast{
+	margin-top:15px;
+}

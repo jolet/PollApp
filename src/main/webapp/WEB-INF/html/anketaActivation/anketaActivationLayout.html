@@ -1,0 +1,37 @@
+<h3>Activate poll here </h3>
+<div class="alert alert-warning saveNotification">
+		Note: Only top most activated poll will be used for now.
+</div>
+
+
+<!-- <h5>1. razred ankete</h5> -->
+<button class="btn btn-default" ng-click="anketaGenerate()">Generate example polls</button>
+<hr>
+<table class="table table-bordered table-striped">
+	<thead>
+		<tr>
+			<th>Activate/Deactivate</th>
+			<th>Anketa</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<tr ng-repeat="ank in anketeActivationList">
+
+			<td style = "min-width:235px !important">
+				<button ng-show=" ank.active" class="btn  btn-warning" ng-click="anketaStatusSwitch(ank.question1)">Deactivate</button>
+				<button ng-show="! ank.active" class="btn  btn-success" ng-click="anketaStatusSwitch(ank.question1)">Activate</button>
+<!-- 				<button class="btn  btn-info" ng-click="anketaEdit(ank.question1)">Edit</button> -->
+				<button class="btn  btn-danger" ng-click = "anketaDelete(ank.question1)">Delete</button>
+			</td>
+
+			<td style = "min-width:235px !important">{{ank.question1}}</td>
+		</tr>
+	</tbody>
+</table>
+<div class="alert alert-success saveNotification" ng-show="statusAnkete == 1">
+		Anketa status changed.
+</div>
+<div class="alert alert-danger saveNotification" ng-show="statusAnkete == 3">
+		Anketa deleted.
+</div>
