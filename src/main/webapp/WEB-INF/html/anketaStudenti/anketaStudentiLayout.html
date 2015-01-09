@@ -1,0 +1,21 @@
+<div class = "col-sm-11 col-md-12" ng-repeat="ank in aktivneAnketeList|limitTo:1" ng-show = "hasVoted != 1 || fastTesting == true">
+	<h3>{{ank.question1}}</h3>
+<!-- 	<button ng-click="devmodetoggle()">Botun</button>  -->
+	<hr/>
+	<div class="btn-group-vertical ankStudenti">
+		  <button type="button" class="btn btn-default" ng-repeat = "opt in ank.option1" ng-click="sendAnswer(opt)">{{opt}}</button>
+	</div>
+</div>	    
+<div class="alert alert-danger alert-dismissible saveNotification" ng-show = "maxVotesLimit == true">
+	Anketiranje je završilo.
+	<br/>
+	Hvala na sudjelovanju!
+</div>
+<div class="alert alert-warning alert-dismissible saveNotification" ng-show = "aktivneAnketeList.length == 0">
+	Trenutno nema aktivnih anketa.
+</div>
+<div class="alert alert-success alert-dismissible saveNotification" ng-show = "isVisible == 0">
+	Odabrali ste odgovor <b>{{chosenAnswer}}</b>
+	<br/>
+	Hvala na sudjelovanju!
+</div>
