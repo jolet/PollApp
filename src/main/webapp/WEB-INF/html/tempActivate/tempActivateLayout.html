@@ -15,8 +15,9 @@
 	<tbody>
 		<tr ng-repeat="survey in surveyList">
 			<td style = "min-width:235px !important">
-<<<<<<< HEAD
+
 <!-- 			on ACTIVATE click = set Date // set time // now! buttons appear -->
+				<button ng-show="survey.active == null" class="btn  btn-danger" ng-click="remove($index)">Delete</button>
 				<button ng-show="survey.active == null" class="btn  btn-info" ng-click="setActive($index,false)">Activate</button>
 				
 <!-- 				date from  -->
@@ -53,11 +54,11 @@
 				
 				
 				
-=======
+
 <!-- 			on ACTIVATE click = set Date // set time // now! buttons appera -->
-				<button ng-show="!survey.active" class="btn  btn-success" ng-click="setActive($index,true)">Activate</button>
-				<button ng-show="survey.active" class="btn  btn-warning " ng-click="setActive($index,false)">Deactivate</button>
->>>>>>> ddfc56bdb71bb8b36f1a9b3af1456f97b1450a6e
+<!-- 				<button ng-show="!survey.active" class="btn  btn-success" ng-click="setActive($index,true)">Activate</button> -->
+<!-- 				<button ng-show="survey.active" class="btn  btn-warning " ng-click="setActive($index,false)">Deactivate</button> -->
+
 <!-- 				<br /> -->
 <!-- 				<button class="btn  btn-info" ng-click="anketaEdit(ank.question1)">Edit</button> -->
 <!-- 				<button class="btn  btn-danger" ng-click = "remove($index)">Delete</button> -->
@@ -67,24 +68,22 @@
 					
 			</td>
 
-<<<<<<< HEAD
-			<td style = "min-width:235px !important">
+<td style = "min-width:235px !important">
 				<p ng-click="hint=!hint">{{survey.question}}</p>
 				<br/>
 				<textarea ng-show="hint || survey.description" ng-model="survey.description" placeholder="Hint"></textarea>
 			
 			</td>
-=======
-			<td style = "min-width:235px !important">{{survey.question}}</td>
->>>>>>> ddfc56bdb71bb8b36f1a9b3af1456f97b1450a6e
-		</tr>
+
+<!-- <td style = "min-width:235px !important">{{survey.question}}</td> -->
+
+</tr>
 	</tbody>
 </table>
 
-<<<<<<< HEAD
 <div class = "growlToast" growl limit-messages="5"></div>
 
-=======
+
 <!-- <div class="form-group"> -->
 <!--     <label class="control-label"><i class="fa fa-calendar"></i> Datetime picker</label><br> -->
 <!--     <div class="form-group"> -->
@@ -109,20 +108,19 @@
 <!--     </ul> -->
 <!-- </div> -->
 
-<div class="dropdown">
-  <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="">
-    <div class="input-group">
-    	<input type="text" class="form-control" data-ng-model="data.dateDropDownInput" placeholder="Select start datetime">
-    	<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-    </div>
-  </a>
-  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-    <datetimepicker data-ng-model="data.dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/>
-  </ul>
-</div>
+<!-- <div class="dropdown"> -->
+<!--   <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href=""> -->
+<!--     <div class="input-group"> -->
+<!--     	<input type="text" class="form-control" data-ng-model="data.dateDropDownInput" placeholder="Select start datetime"> -->
+<!--     	<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
+<!--     </div> -->
+<!--   </a> -->
+<!--   <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel"> -->
+<!--     <datetimepicker data-ng-model="data.dateDropDownInput" data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }"/> -->
+<!--   </ul> -->
+<!-- </div> -->
 
-<p>Selected Date: {{ data.dateDropDownInput | date:'yyyy-MM-dd HH:mm' }}</p> 
-<div class = "growlToast" growl limit-messages="5"></div>
+<!-- <p>Selected Date: {{ data.dateDropDownInput | date:'yyyy-MM-dd HH:mm' }}</p>  -->
+<!-- <div class = "growlToast" growl limit-messages="5"></div> -->
 
 </div>
->>>>>>> ddfc56bdb71bb8b36f1a9b3af1456f97b1450a6e
