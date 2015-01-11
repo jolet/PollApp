@@ -1,0 +1,25 @@
+<div>
+	<h3>HERE COMES THE SUN</h3>
+</div>
+
+
+<div class="surveyContainer" ng-repeat="survey in surveyList">
+	<p>{{survey.question}}</p>
+	<table class="table table-bordered table-striped">
+
+
+		<thead>
+			<tr>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="option in survey.options">
+				<td style="min-width: 235px !important">
+					<button ng-click="vote(option.id, survey.id)">{{option.name}}</button>
+				</td>
+			</tr>
+		</tbody>
+
+	</table>
+</div>

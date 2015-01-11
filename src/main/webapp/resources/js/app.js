@@ -37,6 +37,10 @@ App.config(['$routeProvider','growlProvider','$httpProvider',
     	templateUrl: 'tempActivate/layout',
     	controller: TempActivationController
     });
+    $routeProvider.when('/tempSurveyRun', {
+    	templateUrl: 'tempSurveyRun/layout',
+    	controller: TempSurveyRunController
+    });
     
     $routeProvider.otherwise({redirectTo: '/anketaTemplate'});
 	

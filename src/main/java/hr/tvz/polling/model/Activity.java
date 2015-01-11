@@ -1,7 +1,7 @@
 package hr.tvz.polling.model;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "POL_ACTIVITY")
@@ -31,8 +33,9 @@ public class Activity implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "ACT_TIMESTAMP")
-	private Timestamp timestamp;
+	private Date timestamp;
 
 	public User getUser() {
 		return user;
@@ -58,15 +61,12 @@ public class Activity implements Serializable{
 		this.id = id;
 	}
 
-	public Timestamp getTimestamp() {
+	public Date getTimestamp() {
 		return timestamp;
 	}
 
-	public void setTimestamp(Timestamp timestamp) {
+	public void setTimestamp(Date timestamp) {
 		this.timestamp = timestamp;
 	}
-	
-	
-	
 
 }

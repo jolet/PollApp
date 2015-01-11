@@ -80,20 +80,21 @@ var TempActivationController = function($scope, $http, growl) {
 			growl.error("<b>Awww snap!</b> <i>Something</i> went wrong!", {ttl: -1}, {title: 'ALERT WE GOT ERROR'});
 		});
 	}
-//	$scope.remove = function($index){
-//		var surveyTemp = $scope.surveyList[$index];
-//		
-//		$http.post('tempActivate/remove/'+surveyTemp.id)
-//		.success(function() {
-//			growl.success("Survey " + surveyTemp.question+ " deleted.")
-//			$scope.surveyList.splice($index, 1);
-//		})
-//		.error(function(errorLog) {
-//			console.log('Error ', errorLog);
-//			growl.error('Thats an error: ' + JSON.stringify(errorLog));
-//			growl.error("<b>Awww snap!</b> <i>Something</i> went wrong!", {ttl: -1}, {title: 'ALERT WE GOT ERROR'});
-//		});
+	$scope.remove = function($index){
+		var surveyTemp = $scope.surveyList[$index];
 		
-//	}
+		$http.post('tempActivate/remove/'+surveyTemp.id)
+		.success(function() {
+			growl.success("Survey " + surveyTemp.question+ " deleted.")
+			$scope.surveyList.splice($index, 1);
+		})
+		.error(function(errorLog) {
+			console.log('Error ', errorLog);
+			growl.error('Thats an error: ' + JSON.stringify(errorLog));
+			growl.error("<b>Awww snap!</b> <i>Something</i> went wrong!", {ttl: -1}, {title: 'ALERT WE GOT ERROR'});
+		});
+		
+	}
+	
 	$scope.fetchSurveyList();
 }

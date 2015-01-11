@@ -25,39 +25,47 @@ public class TempActivateController {
 
 	@Autowired
 	SurveyManager surveyManager;
-	
+
 	@RequestMapping("/surveys")
 	public @ResponseBody List<Survey> getAnketaActivationList() {
-		return surveyManager.findAll();
+
+		// TODO: remove true/false option values
+		return surveyManager.findAllValuesStripped();
 	}
 
-//	@RequestMapping(value = "/statusSwitch/{nazivAnkete}", method = RequestMethod.POST)
-//	public @ResponseBody void addAnketaQuestion(@PathVariable String nazivAnkete) {
-//		anketaActivationServiceImpl.switchStatus(nazivAnkete);
-//
-//	}
-//
-//	@RequestMapping(value = "/remove/{id}", method = RequestMethod.POST)
-//	public @ResponseBody void deleteAnketa(@PathVariable String id) {
-//		surveyManager.delete(Long.parseLong(id));
-//	}
-//
-//	@RequestMapping(value = "/exampleAnkete", method = RequestMethod.POST)
-//	public @ResponseBody void getMockAnkete() {
-//		anketaActivationServiceImpl.getExampleAnkete();
-//	}
-	
+	// @RequestMapping(value = "/statusSwitch/{nazivAnkete}", method =
+	// RequestMethod.POST)
+	// public @ResponseBody void addAnketaQuestion(@PathVariable String
+	// nazivAnkete) {
+	// anketaActivationServiceImpl.switchStatus(nazivAnkete);
+	//
+	// }
+	//
+	@RequestMapping(value = "/remove/{id}", method = RequestMethod.POST)
+	public @ResponseBody void deleteAnketa(@PathVariable String id) {
+		// Survey toRemove = surveyManager.findOne(id);
+		// toRemove.
+		// surveyManager.saveAndFlush();
+	}
+
+	//
+	// @RequestMapping(value = "/exampleAnkete", method = RequestMethod.POST)
+	// public @ResponseBody void getMockAnkete() {
+	// anketaActivationServiceImpl.getExampleAnkete();
+	// }
+
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public @ResponseBody String saveSurvey(@RequestBody Survey surv) {
-//		System.out.println("anketa " + (surv == null ? "null" : surv.getQuestion()));
+		// System.out.println("anketa " + (surv == null ? "null" :
+		// surv.getQuestion()));
 
 		surveyManager.saveAndFlush(surv);
-		
+
 		return "JSON: Survey name: " + surv.getQuestion();
 	}
-	
-    @RequestMapping("/layout")
-    public String getAnketaListPartialPage(ModelMap modelMap) {
-        return "tempActivate/tempActivateLayout";
-    }
+
+	@RequestMapping("/layout")
+	public String getAnketaListPartialPage(ModelMap modelMap) {
+		return "tempActivate/tempActivateLayout";
+	}
 }

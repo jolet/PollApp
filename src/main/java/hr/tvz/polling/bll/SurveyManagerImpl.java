@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional
-public class SurveyManagerImpl implements SurveyManager{
+@Transactional(readOnly = true)
+public class SurveyManagerImpl  implements SurveyManager{
 
 	@Autowired
 	SurveyRepository repository;
@@ -27,19 +27,17 @@ public class SurveyManagerImpl implements SurveyManager{
 	OptionManager optionManager;
 	
 	@Override
-	@Transactional(readOnly = true)
 	public List<Survey> findAll() {
 		return repository.findAll();
 	}
 
 	@Override
-	@Transactional(readOnly = true)
 	public Survey findOne(Long id) {
 		return repository.findOne(id);
 	}
 
 	@Override
-	@Transactional
+	@Transactional (readOnly = false)
 	public void saveAndFlush(Survey survey) {
 		
 		classGroupManager.saveAndFlush(survey.getClassGroup());
@@ -55,6 +53,29 @@ public class SurveyManagerImpl implements SurveyManager{
 			opt.setSurvey(survey);
 			optionManager.saveAndFlush(opt);
 		}
+	}
+
+	@Override
+	public List<Survey> findAllActive(Boolean active) {
+		return repository.findAllByActive(active);
+	}
+
+	@Override
+	public List<Survey> findAllValuesStripped() {
+		
+//		return repository.findAllOptionValuesStripped();
+		return prepareSurveys(repository.findAll());
+	}
+	
+	private List<Survey> prepareSurveys(List<Survey> surveyList) {
+		for(Survey s : surveyList){
+			for (Option o : s.getOptions()){
+				o.setState(null);
+			}
+			
+		}
+		
+		return surveyList;
 	}
 
 //	@Override
