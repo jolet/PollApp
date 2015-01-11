@@ -48,8 +48,8 @@
 
 				<button ng-show="!survey.active && survey.active != null" class="btn  btn-success " ng-click="setActive($index,!survey.active)">Update</button>
 				<button ng-show="survey.active && survey.active != null" class="btn  btn-warning " ng-click="setActive($index,null)">Deactivate</button>
-				<p>Selected Date: {{ data.dateDropDownInputFrom | date:'yyyy-MM-dd HH:mm' }}</p> 
-				<p>Selected Date3: {{ data.dateDropDownInputTo | date:'yyyy-MM-dd HH:mm' }}</p> 
+				<p>Date from: {{ data.dateDropDownInputFrom | date:'yyyy-MM-dd HH:mm' }}</p> 
+				<p>Date to: {{ data.dateDropDownInputTo | date:'yyyy-MM-dd HH:mm' }}</p> 
 				
 				
 				

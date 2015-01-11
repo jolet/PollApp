@@ -17,7 +17,7 @@ var TempController = function($scope, $http, growl) {
 //	};
 //
 //	 $scope.fetchAnketeList1();
-
+	
 	$scope.survey = { 
 		id : null,
 		question : null,
@@ -90,5 +90,32 @@ var TempController = function($scope, $http, growl) {
 			});
 	}
 	
-	$scope.kita = "";
+	$scope.fetchClassGroups = function(){
+		console.log('fetch cg hit')
+		$http.get('temp/classGroups').success(function(classGroupList) {
+			console.log("Classgroups: ", classGroupList);
+			$scope.classGroupList = classGroupList;
+		}).error(function(errorLog) {
+			console.log("Error: ", errorLog)
+			growl.error(JSON.stringify(errorLog));
+			growl.error("<b>Awww snap!</b> <i>Something</i> went wrong!", {ttl: -1}, {title: 'ALERT WE GOT ERROR'});
+		})
+	}
+	
+	$scope.fetchClassGroups();
+	
+	$scope.classGroupSelect = '';
+	
+	$scope.classChange = function(){
+		console.log("Selected: ", $scope.classGroupSelect);
+		if($scope.classGroupSelect) {
+			$scope.survey.classGroup.name = $scope.classGroupSelect.name;
+			$scope.survey.classGroup.academicYear = $scope.classGroupSelect.academicYear;
+		} else {
+			$scope.survey.classGroup.name = "";
+			$scope.survey.classGroup.academicYear = "";
+		}
+	}
+	
+	
 }

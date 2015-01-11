@@ -31,5 +31,13 @@ public class ActivityManagerImpl implements ActivityManager{
 	public void saveAndFlush(Activity entity) {
 		repository.saveAndFlush(entity);
 	}
+
+	@Override
+	public boolean checkAlreadyVoted(Long surveyId, Long userId) {
+//		if(repository.checkAlreadyVoted(surveyId, userId) == 0){
+//			return true;
+//		}
+		return false;
+	}
 	
 }

@@ -6,11 +6,12 @@
 
 		<input type = "text" ng-model = "survey.question" placeholder="Please enter survey name." required> 
 		<br />
-		classgroup is dropdown<br/>
-		TODO: add sifrarnik
+<!-- 		classgroup is dropdown<br/> -->
+<!-- 		TODO: add sifrarnik -->
 		<br/>
 		<input type = "text" placeholder = "Class group:" ng-model = "survey.classGroup.name" required>
-		<input type = "text" placeholder = "Academic Year:" ng-model = "survey.classGroup.academicYear" required>
+		<input type = "text" placeholder = "Academic Year:" ng-model = "survey.classGroup.academicYear" required></input>
+		<select ng-model="classGroupSelect" ng-change="classChange()" ng-options="classGroup.name group by classGroup.academicYear for classGroup in classGroupList"><option/></select>
 		<br />
 		<input type = "text"  placeholder="Option name:" ng-model = "optionName" > 
 		<button type="button" class = "btn btn-default" ng-click="addOption()" ng-disabled="!optionName">Add option</button>
@@ -23,7 +24,7 @@
 	<div ng-show="survey.options.length > 0">
 		<table class="table table-bordered table-striped example-animate-container" >
 			<thead>
-				<tr>
+		<tr>
 					<th>Action</th>
 					<th>Option</th>
 				</tr>
@@ -40,8 +41,8 @@
 					<td style = "min-width:235px !important">{{opt.name}}</td>
 				</tr>
 			</tbody>
-		</table>
-		<hr>
+ </table>
+	<hr>
 		<div ng-show = "survey.options.length > 1">
 			Points:
 			<button type = "button" class="btn btn-primary" ng-show="survey.scored" ng-click="setScored(false)">Scored</button>
@@ -57,7 +58,7 @@
 		</div>		
 	</div>
 	</form>
-<!--           <button ng-click="growl()" type="button" class="btn btn-warning">Growl</button>  -->
+<!-- <button ng-click="growl()" type="button" class="btn btn-warning">Growl</button>  -->
 	<div class = "growlToast" growl limit-messages="5"></div>
 		
 	

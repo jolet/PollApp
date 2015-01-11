@@ -3,3 +3,6 @@
 target/*
 *.prefs
 .gitignore.*
+.tern-project
+polling-logs/*
+log.log

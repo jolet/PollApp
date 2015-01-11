@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/tempSurveyRun")
 public class TempSurveyController {
 	private static Logger LOG = LoggerFactory.getLogger(TempSurveyController.class);
-	
+
 	@Autowired
 	private SurveyManager surveyManager;
 
@@ -47,17 +47,23 @@ public class TempSurveyController {
 		String[] toSplit = optionSurveyId.split(",");
 		LOG.debug("answered: " + toSplit[0] + " - " + toSplit[1]);
 
-		// TODO: add check if already voted
 		User noobUser = new User();
 		noobUser.setEmail("noob@user.com");
 		noobUser.setId(1337L);
 
-		Activity activity = new Activity();
-		activity.setTimestamp(new Date());
-		activity.setOption(optionManager.findOne(Long.parseLong(toSplit[0])));
-		activity.setUser(noobUser);
+		// TODO: add check if already voted
+		if (activityManager.checkAlreadyVoted(Long.parseLong(toSplit[1]), noobUser.getId())) {
+			LOG.info("Noob Shall Not Pass!");
+		} else {
+			LOG.info("Noob voted");
+			Activity activity = new Activity();
+			activity.setTimestamp(new Date());
+			activity.setOption(optionManager.findOne(Long.parseLong(toSplit[0])));
+			activity.setUser(noobUser);
 
-		activityManager.saveAndFlush(activity);
+			activityManager.saveAndFlush(activity);
+		}
+
 	}
 
 	@RequestMapping("/layout")
