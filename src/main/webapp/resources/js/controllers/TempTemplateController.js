@@ -38,9 +38,10 @@ var TempController = function($scope, $http, growl) {
 		var option = {
 			id : null,
 			name : null,
-			state : false
-
+			state : false,
+			count : 0
 		}
+		
 		if ($scope.optionName) {
 			var match = $scope.survey.options.reduce(function(prev, curr) {
 				return ($scope.optionName === curr.name) || prev;
@@ -74,6 +75,7 @@ var TempController = function($scope, $http, growl) {
 		$scope.survey.maxVotes = null
 		$scope.survey.classGroup = {}
 		$scope.survey.options = [];
+		$scope.classGroupSelect = '';
 	}
 
 	$scope.save = function() {
@@ -81,6 +83,7 @@ var TempController = function($scope, $http, growl) {
 		return $http.post('temp/save', $scope.survey)
 			.success(function() {
 				growl.success("Survey saved.")
+				$scope.fetchClassGroups();
 				$scope.clearTemplate();
 			})
 			.error(function(errorLog) {

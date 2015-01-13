@@ -28,8 +28,8 @@ var TempSurveyRunController = function($scope, $http, growl){
 	$scope.fetchSurveyList();
 	
 	$scope.vote = function(optionId, surveyId){
-		console.log("Chose option: ", optionId, " - ", surveyId);
-		$http.post('tempSurveyRun/sendAnswer/'+optionId+","+surveyId)
+		console.log("Chosen option: ", optionId, " - ", surveyId);
+		$http.post('tempSurveyRun/sendAnswer/'+optionId)
 		.error(function(errorLog){
 //			.error(function (data, status, headers, config) {
 //			console.log(data, status, headers, config)

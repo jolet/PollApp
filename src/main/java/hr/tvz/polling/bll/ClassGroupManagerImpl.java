@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class ClassGroupManagerImpl implements ClassGroupManager{
+public class ClassGroupManagerImpl implements ClassGroupManager {
 
 	@Autowired
 	ClassGroupRepository repository;
@@ -28,9 +28,23 @@ public class ClassGroupManagerImpl implements ClassGroupManager{
 	}
 
 	@Override
-	public void saveAndFlush(ClassGroup entity) {
-		repository.saveAndFlush(entity);
+	public void saveAndFlush(ClassGroup cgr) {
+//		if (checkExisting(cgr.getName(), cgr.getAcademicYear())) {
+//			repository.saveAndFlush(cgr);
+//			
+//		}
+	}
+
+	private boolean checkExisting(String name, String academicYear) {
+		return repository.findByNameAndAcademicYear(name, academicYear) == null ? true : false;
 	}
 	
-	
+	public ClassGroup saveAndFlushAndReturnCGR(ClassGroup cgr){
+		if (checkExisting(cgr.getName(), cgr.getAcademicYear())) {
+			return repository.saveAndFlush(cgr);
+		} else {
+			return repository.findByNameAndAcademicYear(cgr.getName(), cgr.getAcademicYear());
+		}
+	}
+
 }

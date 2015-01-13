@@ -70,6 +70,7 @@
 
 			<td style = "min-width:235px !important">
 				<p ng-click="hint=!hint">{{survey.question}}</p>
+				<p>{{survey.classGroup.name}} {{survey.classGroup.academicYear}}</p>
 				<br/>
 				<textarea ng-show="hint || survey.description" ng-model="survey.description" placeholder="Hint"></textarea>
 			

@@ -31,9 +31,16 @@ public class OptionManagerImpl implements OptionManager{
 
 	@Override
 	@Transactional
-	public void saveAndFlush(Option entity) {
-		repository.saveAndFlush(entity);
+	public void saveAndFlush(Option option) {
+		repository.saveAndFlush(option);
 	}
+	
+	@Override
+	@Transactional
+	public Option saveAndFlushAndReturn(Option option) {
+		return repository.saveAndFlush(option);
+	}
+	
 
 //	@Override
 //	public void delete(Long id) {

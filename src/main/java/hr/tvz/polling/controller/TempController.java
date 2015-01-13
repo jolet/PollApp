@@ -44,7 +44,6 @@ public class TempController {
 
 	@RequestMapping("/classGroups")
 	public @ResponseBody List<ClassGroup> getClassGroups() {
-//		LOG.info("classGroups hit");
 		return classGroupManager.findAll();
 	}
 	

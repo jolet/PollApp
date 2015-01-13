@@ -4,6 +4,7 @@ import hr.tvz.polling.bll.interfaces.ClassGroupManager;
 import hr.tvz.polling.bll.interfaces.OptionManager;
 import hr.tvz.polling.bll.interfaces.SurveyManager;
 import hr.tvz.polling.dal.SurveyRepository;
+import hr.tvz.polling.model.ClassGroup;
 import hr.tvz.polling.model.Option;
 import hr.tvz.polling.model.Survey;
 
@@ -40,13 +41,18 @@ public class SurveyManagerImpl  implements SurveyManager{
 	@Transactional (readOnly = false)
 	public void saveAndFlush(Survey survey) {
 		
-		classGroupManager.saveAndFlush(survey.getClassGroup());
+		//TODO: remove duplicates
+		
+//		classGroupManager.saveAndFlush(survey.getClassGroup());
+		ClassGroup cgr = classGroupManager.saveAndFlushAndReturnCGR(survey.getClassGroup());
 //		for(Option opt : survey.getOptions()) {
 //		optionManager.saveAndFlush(opt);
 //		}
 		
 		List<Option> op = survey.getOptions();
 		survey.setOptions(null);
+		survey.setClassGroup(cgr);
+//		survey.setClassGroup(repo.find(xxx));
 		repository.saveAndFlush(survey);
 		
 		for(Option opt : op) {

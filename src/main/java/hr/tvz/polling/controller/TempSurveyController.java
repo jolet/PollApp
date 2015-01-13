@@ -4,6 +4,7 @@ import hr.tvz.polling.bll.interfaces.ActivityManager;
 import hr.tvz.polling.bll.interfaces.OptionManager;
 import hr.tvz.polling.bll.interfaces.SurveyManager;
 import hr.tvz.polling.model.Activity;
+import hr.tvz.polling.model.Option;
 import hr.tvz.polling.model.Survey;
 import hr.tvz.polling.model.User;
 
@@ -41,24 +42,31 @@ public class TempSurveyController {
 		return surveyManager.findAllActive(true);
 	}
 
-	@RequestMapping(value = "/sendAnswer/{optionSurveyId}", method = RequestMethod.POST)
-	public @ResponseBody void getAnswer(@PathVariable String optionSurveyId) {
-		// anketaStudentiServiceImpl.updateResults(answer);
-		String[] toSplit = optionSurveyId.split(",");
-		LOG.debug("answered: " + toSplit[0] + " - " + toSplit[1]);
-
+	@RequestMapping(value = "/sendAnswer/{optionId}", method = RequestMethod.POST)
+	public @ResponseBody void getAnswer(@PathVariable String optionId) {
+		LOG.debug("answered option Id: " + optionId);
+		//XXX: add check StringUtils.isNumeric
+		Long answerId = Long.parseLong(optionId);
+		Option answer = optionManager.findOne(answerId);
+		
+		if(answer != null){
+			
+		}
 		User noobUser = new User();
 		noobUser.setEmail("noob@user.com");
 		noobUser.setId(1337L);
 
-		// TODO: add check if already voted
-		if (activityManager.checkAlreadyVoted(Long.parseLong(toSplit[1]), noobUser.getId())) {
-			LOG.info("Noob Shall Not Pass!");
+		if (activityManager.checkAlreadyVoted(answer.getSurvey().getId(), noobUser.getId())) {
+			LOG.info("Noob Shall Not Pass!"); 
 		} else {
-			LOG.info("Noob voted");
+			//TODO: check numeric
+			//IDEA: check if JS was tampered, expected vs actual. i.e expecting not null
+			// challenge : if multiple ppl pull option, option counters will have wrong values
+			// should be synchronized or something
+			LOG.info("User "+ noobUser.getId() +" voted, option id: " + optionId + " surveyId: " + answer.getSurvey().getId());
 			Activity activity = new Activity();
 			activity.setTimestamp(new Date());
-			activity.setOption(optionManager.findOne(Long.parseLong(toSplit[0])));
+			activity.setOption(answer);
 			activity.setUser(noobUser);
 
 			activityManager.saveAndFlush(activity);

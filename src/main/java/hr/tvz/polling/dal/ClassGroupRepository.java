@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ClassGroupRepository extends JpaRepository<ClassGroup, Long>{
 
+	ClassGroup findByNameAndAcademicYear(String name, String academicYear);
+
 }

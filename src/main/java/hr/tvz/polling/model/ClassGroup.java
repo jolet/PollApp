@@ -50,5 +50,4 @@ public class ClassGroup implements Serializable{
 		this.academicYear = academicYear;
 	}
 	
-	
 }

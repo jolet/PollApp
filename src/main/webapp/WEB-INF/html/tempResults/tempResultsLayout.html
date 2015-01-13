@@ -1,0 +1,31 @@
+<h2>HERE COMES THE SUN</h2>
+
+<div ng-repeat="survey in surveys">
+	<h2>{{survey.question}}</h2>
+	<div ng-repeat="option in survey.options">
+	<h4>{{option.name}}</h4>
+<!-- 	<progressbar max = "survey.maxVotes != null ? survey.maxVotes : 37" value = "option.count" class="progress-striped active" type="success"> -->
+<!-- 		<span style="color:white;">{{option.count}} / {{survey.maxVotes != null ? survey.maxVotes : 37}}</span> -->
+	<progressbar max = "survey.scored == true ? survey.maxVotes : 10" value = "option.count" class="progress-striped active" type="success">
+		<span style="color:white;">{{option.count}} / {{survey.scored == true ? survey.maxVotes : 'total'}}</span>
+	</progressbar>
+	</div>
+</div>
+
+<div class="progress progress-striped active">
+    <div class="progress-bar progress-bar-striped" role="progressbar" data-transitiongoal="20"></div>
+</div>
+<div class="progress progress-striped active">
+    <div class="progress-bar progress-bar-success" role="progressbar" data-transitiongoal="40"></div>
+</div>
+<div class="progress progress-striped active">
+    <div class="progress-bar progress-bar-info" role="progressbar" data-transitiongoal="60"></div>
+</div>
+<div class="progress progress-striped active">
+    <div class="progress-bar progress-bar-warning" role="progressbar" data-transitiongoal="80"></div>
+</div>
+<div class="progress progress-striped active">
+    <div class="progress-bar progress-bar-danger" role="progressbar" data-transitiongoal="100"></div>
+</div>
+
+
