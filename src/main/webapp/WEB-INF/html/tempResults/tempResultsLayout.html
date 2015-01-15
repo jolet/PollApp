@@ -4,32 +4,16 @@
 	<h2>{{survey.question}}</h2>
 	<div ng-repeat="option in survey.options">
 	<h4>{{option.name}}</h4>
-<!-- 	<progressbar max = "survey.maxVotes != null ? survey.maxVotes : 37" value = "option.count" class="progress-striped active" type="success"> -->
-<!-- 		<span style="color:white;">{{option.count}} / {{survey.maxVotes != null ? survey.maxVotes : 37}}</span> -->
-	<progressbar max = "survey.scored == true ? survey.maxVotes : 10" value = "option.count" class="progress-striped active" type="success">
-		<span style="color:white;">{{option.count}} / {{survey.scored == true ? survey.maxVotes : 'total'}}</span>
+<!-- 	<progressbar max = "survey.scored == true ? survey.maxVotes : 10" value = "option.count" class="progress-striped active" type="success"> -->
+<!-- 		<span style="color:white;">{{option.count}} / {{survey.scored == true ? survey.maxVotes : 'total'}}</span> -->
+<!-- 	</progressbar> -->
+<!-- 	TODO: change progress bar color if too many voted -->
+	<progressbar max = "maxVotes[$parent.$index]" value = "option.count" class="progress-striped active" type="success">
+		<span style="color:white;">{{option.count}} / {{maxVotes[$parent.$parent.$parent.$index]}}</span>
 	</progressbar>
+
 	</div>
 </div>
-<!-- <div ng-repeat="survey in surveys"> -->
-<!-- 	<progressbar max = "100" value = "surveys[0].options[0].count" class="progress-striped active" type="success"> -->
-<!-- 		<span style="color:white;">{{surveys[0].options[0].count}} / 100</span> -->
-<!-- 	</progressbar> -->
-<!-- 	<progressbar max = "100" value = "55" class="progress-striped active" type="success"> -->
-<!-- 		<span style="color:white;">100</span> -->
-<!-- 	</progressbar> -->
-<!-- </div> -->
-<!-- <div class="progress progress-striped active"> -->
-<!--     <div class="progress-bar progress-bar-success" role="progressbar" data-transitiongoal="40"></div> -->
-<!-- </div> -->
-<!-- <div class="progress progress-striped active"> -->
-<!--     <div class="progress-bar progress-bar-info" role="progressbar" data-transitiongoal="60"></div> -->
-<!-- </div> -->
-<!-- <div class="progress progress-striped active"> -->
-<!--     <div class="progress-bar progress-bar-warning" role="progressbar" data-transitiongoal="80"></div> -->
-<!-- </div> -->
-<!-- <div class="progress progress-striped active"> -->
-<!--     <div class="progress-bar progress-bar-danger" role="progressbar" data-transitiongoal="100"></div> -->
-<!-- </div> -->
+
 
 

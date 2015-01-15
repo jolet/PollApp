@@ -21,28 +21,32 @@
 	 }
 	 
 	 $scope.fetchResults();
-	 
 //	 $scope.surveys = $scope.surveyUpdate;
-	 $scope.$watch('surveyUpdate', function(newList){ 
+	 $scope.$watch('surveyUpdate', function(newList){
 		 $scope.surveys = newList;
 		 console.log('-- surveys updated --')
-		 }, true);
-//	 {
-//		 if(!angular.equals(newList,oldList)){
-//		 for(int i = 0; i< newList.length; ++i){
-//			 for (int j = )
-//		 }
-//		 $scope.surveys = newList;
-//		 console.log('wat');
+		 
+		 $scope.maxVotes = [];
+		 
+		 for(var survey in newList){
+			 var counter = 0;
+			 
+			 if(newList[survey].scored){
+				 $scope.maxVotes.push(newList[survey].maxVotes)
+			 } else {
+				 for(var opt in newList[survey].options){
+					 counter = counter + newList[survey].options[opt].count;
+				 }
+				 $scope.maxVotes.push(counter)
+			 }
 
-//		 }
-//	 })
-	 
+		 }
+		 
+		 }, true);
 	 
 	 var interval = $interval(  function() {
 		 $scope.fetchResults();
-//		 $('.progress .progress-bar').progressbar({display_text: 'fill', use_percentage: false, transition_delay: 0});
-	 },2000);
+	 	},2000);
 	    
 	 $scope.$on("$destroy", function() {
 
@@ -52,5 +56,4 @@
 	        }
 	    });
 	 
-//	 $scope.max = 100;
  };
