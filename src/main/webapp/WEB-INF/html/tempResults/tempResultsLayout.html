@@ -1,4 +1,4 @@
-<h2>HERE COMES THE SUN</h2>
+<h2 id="track">HERE COMES THE SUN</h2>
 
 <div ng-repeat="survey in surveys">
 	<h2>{{survey.question}}</h2>
@@ -11,21 +11,25 @@
 	</progressbar>
 	</div>
 </div>
-
-<div class="progress progress-striped active">
-    <div class="progress-bar progress-bar-striped" role="progressbar" data-transitiongoal="20"></div>
-</div>
-<div class="progress progress-striped active">
-    <div class="progress-bar progress-bar-success" role="progressbar" data-transitiongoal="40"></div>
-</div>
-<div class="progress progress-striped active">
-    <div class="progress-bar progress-bar-info" role="progressbar" data-transitiongoal="60"></div>
-</div>
-<div class="progress progress-striped active">
-    <div class="progress-bar progress-bar-warning" role="progressbar" data-transitiongoal="80"></div>
-</div>
-<div class="progress progress-striped active">
-    <div class="progress-bar progress-bar-danger" role="progressbar" data-transitiongoal="100"></div>
-</div>
+<!-- <div ng-repeat="survey in surveys"> -->
+<!-- 	<progressbar max = "100" value = "surveys[0].options[0].count" class="progress-striped active" type="success"> -->
+<!-- 		<span style="color:white;">{{surveys[0].options[0].count}} / 100</span> -->
+<!-- 	</progressbar> -->
+<!-- 	<progressbar max = "100" value = "55" class="progress-striped active" type="success"> -->
+<!-- 		<span style="color:white;">100</span> -->
+<!-- 	</progressbar> -->
+<!-- </div> -->
+<!-- <div class="progress progress-striped active"> -->
+<!--     <div class="progress-bar progress-bar-success" role="progressbar" data-transitiongoal="40"></div> -->
+<!-- </div> -->
+<!-- <div class="progress progress-striped active"> -->
+<!--     <div class="progress-bar progress-bar-info" role="progressbar" data-transitiongoal="60"></div> -->
+<!-- </div> -->
+<!-- <div class="progress progress-striped active"> -->
+<!--     <div class="progress-bar progress-bar-warning" role="progressbar" data-transitiongoal="80"></div> -->
+<!-- </div> -->
+<!-- <div class="progress progress-striped active"> -->
+<!--     <div class="progress-bar progress-bar-danger" role="progressbar" data-transitiongoal="100"></div> -->
+<!-- </div> -->
 
 
