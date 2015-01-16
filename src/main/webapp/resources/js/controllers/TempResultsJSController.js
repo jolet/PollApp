@@ -31,14 +31,14 @@
 		 for(var survey in newList){
 			 var counter = 0;
 			 
-			 if(newList[survey].scored){
-				 $scope.maxVotes.push(newList[survey].maxVotes)
-			 } else {
+//			 if(newList[survey].scored){
+//				 $scope.maxVotes.push(newList[survey].maxVotes)
+//			 } else {
 				 for(var opt in newList[survey].options){
 					 counter = counter + newList[survey].options[opt].count;
 				 }
 				 $scope.maxVotes.push(counter)
-			 }
+//			 }
 
 		 }
 		 

@@ -4,12 +4,9 @@
 	<h2>{{survey.question}}</h2>
 	<div ng-repeat="option in survey.options">
 	<h4>{{option.name}}</h4>
-<!-- 	<progressbar max = "survey.scored == true ? survey.maxVotes : 10" value = "option.count" class="progress-striped active" type="success"> -->
-<!-- 		<span style="color:white;">{{option.count}} / {{survey.scored == true ? survey.maxVotes : 'total'}}</span> -->
-<!-- 	</progressbar> -->
-<!-- 	TODO: change progress bar color if too many voted -->
-	<progressbar max = "maxVotes[$parent.$index]" value = "option.count" class="progress-striped active" type="success">
-		<span style="color:white;">{{option.count}} / {{maxVotes[$parent.$parent.$parent.$index]}}</span>
+<!-- {{survey.maxVotes}} vs {{maxVotes[$parent.$index]}} vs {{$parent.$index}} vs {{$index}} -->
+	<progressbar max = "maxVotes[$parent.$index]" value = "option.count" class="progress-striped active" type="{{survey.scored ? ((maxVotes[$parent.$index] < survey.maxVotes) ? 'success' : 'danger') : 'success'}}">
+		<span style="color:white;">{{option.count}} / {{survey.scored ? survey.maxVotes : maxVotes[$parent.$parent.$parent.$index]}}</span>
 	</progressbar>
 
 	</div>
