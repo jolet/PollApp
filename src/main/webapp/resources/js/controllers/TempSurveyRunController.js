@@ -27,8 +27,10 @@ var TempSurveyRunController = function($scope, $http, growl){
 	
 	$scope.fetchSurveyList();
 	
-	$scope.vote = function(optionId, surveyId){
-		console.log("Chosen option: ", optionId, " - ", surveyId);
+	$scope.vote = function(optionId, surveyId, $index){
+		console.log("Chosen option: ", optionId, " - ", surveyId, "index", $index);
+		$scope.surveyList.splice($index, 1)
+		growl.success("Your vote has been counted in. Thanks.")
 		$http.post('tempSurveyRun/sendAnswer/'+optionId)
 		.error(function(errorLog){
 //			.error(function (data, status, headers, config) {

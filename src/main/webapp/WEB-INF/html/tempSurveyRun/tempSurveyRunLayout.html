@@ -16,7 +16,7 @@
 		<tbody>
 			<tr ng-repeat="option in survey.options">
 				<td style="min-width: 235px !important">
-					<button ng-click="vote(option.id, survey.id)">{{option.name}}</button>
+					<button ng-click="vote(option.id, survey.id, $parent.$index)">{{option.name}}</button>
 				</td>
 			</tr>
 		</tbody>
