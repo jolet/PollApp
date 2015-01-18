@@ -10,11 +10,8 @@ var TempSurveyRunController = function($scope, $http, growl){
 		.success(function(surveyList){
 			$scope.surveyList = surveyList;
 			console.log("surveys: ", $scope.surveyList);
-//			if(surveyList.length == 0){
-//				$scope.surveyList
-//			}
-			if(surveyList.length == 0){
-//				$scope.surveyList
+			if(!surveyList || surveyList.length == 0){
+				growl.info("No active surveys.")
 			}
 		}).error(function(errorLog){
 //			error(function (data, status, headers, config) {

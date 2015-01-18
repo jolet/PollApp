@@ -28,19 +28,9 @@ public class TempActivateController {
 
 	@RequestMapping("/surveys")
 	public @ResponseBody List<Survey> getAnketaActivationList() {
-
-		// TODO: remove true/false option values
-		return surveyManager.findAllValuesStripped();
+		return surveyManager.findAll();
 	}
 
-	// @RequestMapping(value = "/statusSwitch/{nazivAnkete}", method =
-	// RequestMethod.POST)
-	// public @ResponseBody void addAnketaQuestion(@PathVariable String
-	// nazivAnkete) {
-	// anketaActivationServiceImpl.switchStatus(nazivAnkete);
-	//
-	// }
-	//
 	@RequestMapping(value = "/remove/{id}", method = RequestMethod.POST)
 	public @ResponseBody void deleteAnketa(@PathVariable String id) {
 		// Survey toRemove = surveyManager.findOne(id);
@@ -48,19 +38,11 @@ public class TempActivateController {
 		// surveyManager.saveAndFlush();
 	}
 
-	//
-	// @RequestMapping(value = "/exampleAnkete", method = RequestMethod.POST)
-	// public @ResponseBody void getMockAnkete() {
-	// anketaActivationServiceImpl.getExampleAnkete();
-	// }
-
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public @ResponseBody String saveSurvey(@RequestBody Survey surv) {
 		// System.out.println("anketa " + (surv == null ? "null" :
 		// surv.getQuestion()));
-
 		surveyManager.saveAndFlush(surv);
-
 		return "JSON: Survey name: " + surv.getQuestion();
 	}
 

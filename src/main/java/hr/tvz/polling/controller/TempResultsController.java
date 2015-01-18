@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/tempResults")
 public class TempResultsController {
-
+	
 	@Autowired
 	private SurveyManager surveyManager;
 

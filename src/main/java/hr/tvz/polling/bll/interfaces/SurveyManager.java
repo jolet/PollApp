@@ -10,5 +10,5 @@ public interface SurveyManager extends BaseManager<Survey>{
 	List<Survey> findAllActive(Boolean active);
 //	void delete(Long id);
 
-	List<Survey> findAllValuesStripped();
+	List<Survey> findAllActiveValuesStripped();
 }

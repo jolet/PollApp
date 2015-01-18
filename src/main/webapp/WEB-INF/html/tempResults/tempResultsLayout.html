@@ -1,11 +1,11 @@
 <h2 id="track">HERE COMES THE SUN</h2>
 
-<div ng-repeat="survey in surveys">
+<div ng-repeat="survey in surveys track by survey.id">
 	<h2>{{survey.question}}</h2>
-	<div ng-repeat="option in survey.options">
+	<div ng-repeat="option in survey.options track by option.id">
 	<h4>{{option.name}}</h4>
 <!-- {{survey.maxVotes}} vs {{maxVotes[$parent.$index]}} vs {{$parent.$index}} vs {{$index}} -->
-	<progressbar max = "maxVotes[$parent.$index]" value = "option.count" class="progress-striped active" type="{{survey.scored ? ((maxVotes[$parent.$index] < survey.maxVotes) ? 'success' : 'danger') : 'success'}}">
+	<progressbar max = "maxVotes[$parent.$index]" value = "option.count" class="progress-striped" type="{{survey.scored ? ((maxVotes[$parent.$index] < survey.maxVotes) ? 'success' : 'danger') : 'success'}}">
 		<span style="color:white;">{{option.count}} / {{survey.scored ? survey.maxVotes : maxVotes[$parent.$parent.$parent.$index]}}</span>
 	</progressbar>
 

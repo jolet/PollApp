@@ -3,7 +3,6 @@
 /**
  * TempResultsJSController
  */
- 
  var TempResultsJSController = function($scope, $http, growl, $interval){
  
 	 var counter = 0;
@@ -31,14 +30,10 @@
 		 for(var survey in newList){
 			 var counter = 0;
 			 
-//			 if(newList[survey].scored){
-//				 $scope.maxVotes.push(newList[survey].maxVotes)
-//			 } else {
-				 for(var opt in newList[survey].options){
-					 counter = counter + newList[survey].options[opt].count;
-				 }
-				 $scope.maxVotes.push(counter)
-//			 }
+			 for(var opt in newList[survey].options){
+				 counter = counter + newList[survey].options[opt].count;
+			 }
+			 $scope.maxVotes.push(counter)
 
 		 }
 		 

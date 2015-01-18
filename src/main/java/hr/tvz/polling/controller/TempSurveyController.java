@@ -39,7 +39,7 @@ public class TempSurveyController {
 	public @ResponseBody List<Survey> getActiveAnketaList() {
 
 		// TODO: get surveys only for users group
-		return surveyManager.findAllActive(true);
+		return surveyManager.findAllActiveValuesStripped();
 	}
 
 	@RequestMapping(value = "/sendAnswer/{optionId}", method = RequestMethod.POST)

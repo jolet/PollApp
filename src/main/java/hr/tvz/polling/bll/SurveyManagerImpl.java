@@ -66,19 +66,29 @@ public class SurveyManagerImpl  implements SurveyManager{
 		return repository.findAllByActive(active);
 	}
 
+	/**
+	 * Strips values from active surveys which end user could potentially exploit, 
+	 * i.e. removes option state (true/false), counter, and survey hint
+	 */
 	@Override
-	public List<Survey> findAllValuesStripped() {
+	public List<Survey> findAllActiveValuesStripped() {
 		
-//		return repository.findAllOptionValuesStripped();
-		return prepareSurveys(repository.findAll());
+		return prepareSurveys(repository.findAllByActive(true));
 	}
 	
+	/**
+	 * Strips values from active surveys which end user could potentially exploit, 
+	 * i.e. removes option state (true/false), counter, and survey hint
+	 * @param surveyList
+	 * @return surveyList stripped from unnecessary risky data
+	 */
 	private List<Survey> prepareSurveys(List<Survey> surveyList) {
 		for(Survey s : surveyList){
 			for (Option o : s.getOptions()){
 				o.setState(null);
+				o.setCount(null);
 			}
-			
+			s.setDescription(null);
 		}
 		
 		return surveyList;
