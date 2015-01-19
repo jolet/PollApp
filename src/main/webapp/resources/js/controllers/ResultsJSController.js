@@ -1,13 +1,13 @@
 'use strict';
 
 /**
- * TempResultsJSController
+ * ResultsController
  */
- var TempResultsJSController = function($scope, $http, growl, $interval){
+ var ResultsController = function($scope, $http, growl, $interval){
  
 	 var counter = 0;
 	 $scope.fetchResults = function(){
-		 $http.get("tempResults/activeSurveys")
+		 $http.get("results/activeSurveys")
 		 .success(function(surveys){
 		 console.log('#(' + counter++ +'). querying for update....');
 			 $scope.surveyUpdate = surveys;

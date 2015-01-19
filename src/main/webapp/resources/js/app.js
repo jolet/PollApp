@@ -10,24 +10,24 @@ var App = angular.module('PollApp', ['ngRoute', 'ngAnimate', 'PollApp.filters',
 App.config(['$routeProvider','growlProvider','$httpProvider', 
             function ($routeProvider, growlProvider, $httpProvider) {
     
-    $routeProvider.when('/temp', {
-    	templateUrl: 'temp/layout',
-    	controller: TempController
+    $routeProvider.when('/template', {
+    	templateUrl: 'template/layout',
+    	controller: TemplateController
     });
-    $routeProvider.when('/tempActivate', {
-    	templateUrl: 'tempActivate/layout',
-    	controller: TempActivationController
+    $routeProvider.when('/activation', {
+    	templateUrl: 'activation/layout',
+    	controller: ActivationController
     });
-    $routeProvider.when('/tempSurveyRun', {
-    	templateUrl: 'tempSurveyRun/layout',
-    	controller: TempSurveyRunController
+    $routeProvider.when('/vote', {
+    	templateUrl: 'vote/layout',
+    	controller: VoteController
     });
-    $routeProvider.when('/tempResults', {
-    	templateUrl: 'tempResults/layout',
-    	controller: TempResultsJSController
+    $routeProvider.when('/results', {
+    	templateUrl: 'results/layout',
+    	controller: ResultsController
     });
     
-    $routeProvider.otherwise({redirectTo: '/temp'});
+    $routeProvider.otherwise({redirectTo: '/template'});
 	
 //    Growl notifications
 //	growlProvider.globalTimeToLive(3000);

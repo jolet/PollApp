@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/tempResults")
-public class TempResultsController {
+@RequestMapping("/results")
+public class ResultsController {
 	
 	@Autowired
 	private SurveyManager surveyManager;
@@ -26,6 +26,6 @@ public class TempResultsController {
 
 	@RequestMapping("/layout")
 	public String getPartialPage(ModelMap modelMap) {
-		return "tempResults/tempResultsLayout";
+		return "results/resultsLayout";
 	}
 }

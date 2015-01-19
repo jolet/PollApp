@@ -1,12 +1,12 @@
 'use strict';
 
 /**
- * TempActivationController
+ * ActivationController
  */
-var TempActivationController = function($scope, $http, growl) {
+var ActivationController = function($scope, $http, growl) {
 	
 	$scope.fetchSurveyList = function(){
-		$http.get('tempActivate/surveys')
+		$http.get('activation/surveys')
 		.success(function(surveyList){
 			$scope.surveyList = surveyList;
 			console.log("surveys: ", $scope.surveyList);
@@ -48,7 +48,7 @@ var TempActivationController = function($scope, $http, growl) {
 			surveyTemp.validTo = null; 
 		}
 			
-		updateSurvey('tempActivate/update', surveyTemp);
+		updateSurvey('activation/update', surveyTemp);
 	}
 //	$scope.setActive = function($index, value){
 //		var surveyTemp = $scope.surveyList[$index];

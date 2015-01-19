@@ -1,12 +1,12 @@
 'use strict';
 
 /**
- * TempSurveyRunController
+ * VoteController
  */
-var TempSurveyRunController = function($scope, $http, growl){
+var VoteController = function($scope, $http, growl){
 	
 	$scope.fetchSurveyList = function(){
-		$http.get('tempSurveyRun/activeSurveys')
+		$http.get('vote/activeSurveys')
 		.success(function(surveyList){
 			$scope.surveyList = surveyList;
 			console.log("surveys: ", $scope.surveyList);
@@ -28,7 +28,7 @@ var TempSurveyRunController = function($scope, $http, growl){
 		console.log("Chosen option: ", optionId, " - ", surveyId, "index", $index);
 		$scope.surveyList.splice($index, 1)
 		growl.success("Your vote has been counted in. Thanks.")
-		$http.post('tempSurveyRun/sendAnswer/'+optionId)
+		$http.post('vote/sendAnswer/'+optionId)
 		.error(function(errorLog){
 //			.error(function (data, status, headers, config) {
 //			console.log(data, status, headers, config)

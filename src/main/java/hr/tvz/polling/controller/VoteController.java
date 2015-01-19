@@ -22,9 +22,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/tempSurveyRun")
-public class TempSurveyController {
-	private static Logger LOG = LoggerFactory.getLogger(TempSurveyController.class);
+@RequestMapping("/vote")
+public class VoteController {
+	private static Logger LOG = LoggerFactory.getLogger(VoteController.class);
 
 	@Autowired
 	private SurveyManager surveyManager;
@@ -76,6 +76,6 @@ public class TempSurveyController {
 
 	@RequestMapping("/layout")
 	public String getPartialPage(ModelMap modelMap) {
-		return "tempSurveyRun/tempSurveyRunLayout";
+		return "vote/voteLayout";
 	}
 }

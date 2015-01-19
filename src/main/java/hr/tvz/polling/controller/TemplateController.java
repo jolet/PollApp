@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/temp")
-public class TempController {
-	private static Logger LOG = LoggerFactory.getLogger(TempController.class);
+@RequestMapping("/template")
+public class TemplateController {
+	private static Logger LOG = LoggerFactory.getLogger(TemplateController.class);
 
 	@Autowired
 	private SurveyManager surveyManager;
@@ -49,6 +49,6 @@ public class TempController {
 	
 	@RequestMapping("/layout")
 	public String getAnketaListPartialPage(ModelMap modelMap) {
-		return "temp/tempLayout";
+		return "template/templateLayout";
 	}
 }

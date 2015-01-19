@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * TempController
+ * TemplateController
  */
-var TempController = function($scope, $http, growl) {
+var TemplateController = function($scope, $http, growl) {
 
 //	$scope.fetchAnketeList1 = function() {
 //		$http.get('temp/ankete')
@@ -80,7 +80,7 @@ var TempController = function($scope, $http, growl) {
 
 	$scope.save = function() {
 		console.log("Anketa to save: ", JSON.stringify($scope.survey));
-		return $http.post('temp/save', $scope.survey)
+		return $http.post('template/save', $scope.survey)
 			.success(function() {
 				growl.success("Survey saved.")
 				$scope.fetchClassGroups();
@@ -95,7 +95,7 @@ var TempController = function($scope, $http, growl) {
 	
 	$scope.fetchClassGroups = function(){
 		console.log('fetch cg hit')
-		$http.get('temp/classGroups').success(function(classGroupList) {
+		$http.get('template/classGroups').success(function(classGroupList) {
 			console.log("Classgroups: ", classGroupList);
 			$scope.classGroupList = classGroupList;
 		}).error(function(errorLog) {

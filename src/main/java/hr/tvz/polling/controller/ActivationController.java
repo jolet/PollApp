@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/tempActivate")
-public class TempActivateController {
+@RequestMapping("/activation")
+public class ActivationController {
 
 	@SuppressWarnings("unused")
-	private static final Logger logger = LoggerFactory.getLogger(TempActivateController.class);
+	private static final Logger logger = LoggerFactory.getLogger(ActivationController.class);
 
 	@Autowired
 	SurveyManager surveyManager;
@@ -40,14 +40,12 @@ public class TempActivateController {
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public @ResponseBody String saveSurvey(@RequestBody Survey surv) {
-		// System.out.println("anketa " + (surv == null ? "null" :
-		// surv.getQuestion()));
 		surveyManager.saveAndFlush(surv);
 		return "JSON: Survey name: " + surv.getQuestion();
 	}
 
 	@RequestMapping("/layout")
 	public String getAnketaListPartialPage(ModelMap modelMap) {
-		return "tempActivate/tempActivateLayout";
+		return "activation/activationLayout";
 	}
 }
