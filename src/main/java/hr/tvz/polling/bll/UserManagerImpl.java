@@ -30,5 +30,9 @@ public class UserManagerImpl implements UserManager {
 	public void saveAndFlush(User user) {
 		repository.saveAndFlush(user);
 	}
+	@Override
+	public User findByEmail(String username) {
+		return repository.findByEmail(username);
+	}
 	
 }

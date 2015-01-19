@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+      http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+   http://www.springframework.org/schema/security 
+   http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+
+	<security:http auto-config="true" use-expressions="true" access-denied-page="/auth/denied">
+	<security:intercept-url pattern="/auth/login" access="permitAll"/>
+	
+	<security:form-login
+		login-page="/auth/login"
+		authentication-failure-url="/auth/login?error=true"
+		default-target-url="/"/>
+	
+	<security:logout
+		invalidate-session="true"
+		logout-success-url="/auth/login"
+		logout-url="/auth/logout"/>
+	</security:http>
+	
+	<security:authentication-manager>
+		<security:authentication-provider user-service-ref="customUserDetailsService1">
+<!-- 			<security:password-encoder ref="passwordEncoder"></security:password-encoder> -->
+		</security:authentication-provider>
+	</security:authentication-manager>
+	
+<!-- 	<bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder"/> -->
+	<bean id="customUserDetailsService1" class="hr.tvz.polling.bll.CustomUserDetailsService"/>
+</beans>

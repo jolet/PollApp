@@ -9,25 +9,6 @@ var App = angular.module('PollApp', ['ngRoute', 'ngAnimate', 'PollApp.filters',
 // Declare app level module which depends on filters, and services
 App.config(['$routeProvider','growlProvider','$httpProvider', 
             function ($routeProvider, growlProvider, $httpProvider) {
-    $routeProvider.when('/anketaTemplate', {
-        templateUrl: 'anketaTemplate/layout',
-        controller: AnketaTemplateController
-    });
-
-    $routeProvider.when('/anketaActivation', {
-    	templateUrl: 'anketaActivation/layout',
-    	controller: AnketaActivationController
-    });
-    
-    $routeProvider.when('/anketaStudenti', {
-    	templateUrl: 'anketaStudenti/layout',
-    	controller: AnketaStudentiController
-    });
-
-    $routeProvider.when('/anketaResults', {
-    	templateUrl: 'anketaResults/layout',
-    	controller: AnketaResultsController
-    });
     
     $routeProvider.when('/temp', {
     	templateUrl: 'temp/layout',
@@ -46,7 +27,7 @@ App.config(['$routeProvider','growlProvider','$httpProvider',
     	controller: TempResultsJSController
     });
     
-    $routeProvider.otherwise({redirectTo: '/anketaTemplate'});
+    $routeProvider.otherwise({redirectTo: '/temp'});
 	
 //    Growl notifications
 //	growlProvider.globalTimeToLive(3000);
