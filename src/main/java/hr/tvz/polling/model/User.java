@@ -43,7 +43,15 @@ public class User implements Serializable{
 	private String lastName;
 	@Column(name = "USR_PASSWORD")
 	private String password;
-
+	@Column(name = "USR_ACTIVE")
+	private Boolean active;
+	
+	public Boolean isActive() {
+		return active;
+	}
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
 	public List<Activity> getActivities() {
 		return activities;
 	}

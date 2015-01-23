@@ -41,7 +41,8 @@ public class ActivationController {
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public @ResponseBody String saveSurvey(@RequestBody Survey surv) {
 		surveyManager.saveAndFlush(surv);
-		return "JSON: Survey name: " + surv.getQuestion();
+		return "\"success\""; //"unExpected token lol. JSON data needs quotes around values or they can not be parsed back grrr.
+//		return "JSON: Survey name: " + surv.getQuestion();
 	}
 
 	@RequestMapping("/layout")

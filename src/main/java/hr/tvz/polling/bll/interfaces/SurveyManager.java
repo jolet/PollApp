@@ -11,4 +11,6 @@ public interface SurveyManager extends BaseManager<Survey>{
 //	void delete(Long id);
 
 	List<Survey> findAllActiveValuesStripped();
+
+	List<Survey> findAllActiveValuesStripped(String curentUsername);
 }

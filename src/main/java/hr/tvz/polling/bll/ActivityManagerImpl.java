@@ -47,8 +47,8 @@ public class ActivityManagerImpl implements ActivityManager{
 
 	@Override
 	public boolean checkAlreadyVoted(Long surveyId, Long userId) {
-		//XXX: turn comparison for prod mode
-		return repository.checkAlreadyVoted(surveyId, userId) < 0 ? true : false;
+		//XXX: turn comparison for prod mode >
+		return repository.checkAlreadyVoted(surveyId, userId) > 0 ? true : false;
 	}
 	
 }

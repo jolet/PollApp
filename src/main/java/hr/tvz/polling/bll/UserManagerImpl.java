@@ -19,7 +19,6 @@ public class UserManagerImpl implements UserManager {
 	
 	@Override
 	public List<User> findAll() {
-	
 		return repository.findAll();
 	}
 	@Override

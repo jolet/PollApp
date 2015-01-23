@@ -1,3 +1,6 @@
+.project
+org.eclipse.wst.common.component
+.settings/*
 *.class
 *.classpath
 target/*

@@ -61,9 +61,9 @@ var ActivationController = function($scope, $http, growl) {
 	
 	
 	var updateSurvey = function(path, survey){
-		JSON.stringify("updated: ", survey);
+//		JSON.stringify("updated: ", survey);
 		$http.post(path, survey)
-		.success(function() {
+		.success(function(messageBack) {
 			if(survey.active){
 				growl.success("Survey " + survey.question+ " activated.")
 			} else if(survey.active == null){
@@ -76,7 +76,7 @@ var ActivationController = function($scope, $http, growl) {
 		})
 		.error(function(errorLog) {
 			console.log('Error ', errorLog);
-			growl.error('Thats an error: ' + JSON.stringify(errorLog));
+			growl.error(JSON.stringify(errorLog));
 			growl.error("<b>Awww snap!</b> <i>Something</i> went wrong!", {ttl: -1}, {title: 'ALERT WE GOT ERROR'});
 		});
 	}
@@ -90,7 +90,7 @@ var ActivationController = function($scope, $http, growl) {
 		})
 		.error(function(errorLog) {
 			console.log('Error ', errorLog);
-			growl.error('Thats an error: ' + JSON.stringify(errorLog));
+			growl.error(JSON.stringify(errorLog));
 			growl.error("<b>Awww snap!</b> <i>Something</i> went wrong!", {ttl: -1}, {title: 'ALERT WE GOT ERROR'});
 		});
 		

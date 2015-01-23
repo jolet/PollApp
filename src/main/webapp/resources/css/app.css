@@ -1,4 +1,7 @@
 /* app css stylesheet */
+[ng\:cloak], [ng-cloak], .ng-cloak {
+			display: none !important;
+			}
 #wrapper {
 	margin: 0 auto;
 	max-width: 1000px;
@@ -6,39 +9,40 @@
 }
 
 .menu {
-	text-align: center;
-	list-style: none;
-	padding: 0 0 0.5em;
-	font-size: 30px;
-	font-weight: bolder;
-	margin-top: 20px;
+//	text-align: center;
+//	list-style: none;
+//	padding: 0 0 0.5em;
+//	font-size: 30px;
+//	font-weight: bolder;
+//	margin-top: 20px;
+width:600px;
+margin:auto;
+margin-top:5px;
+font-weight:bolder;
+font-size:medium;
+}
+
+.menu li:last-child a:last-child {
+	color:#D80000;
 }
 
 .menu>li {
-	display: inline;
+//	display: inline;
 }
 
-.menu>li:before {
-	content: "|";
-	padding-right: 0.3em;
-}
 
-.menu>li:nth-child(1):before {
-	content: "";
-	padding: 0;
-}
 
 .menu li a {
-	text-decoration: none;
+//	text-decoration: none;
 }
 
 .menu li a:link {
-	padding: 20px 0px 20px 0px;
+//	padding: 20px 0px 20px 0px;
 }
 
 .menu li a:visited {
-	background-image: url(nav_bg.png);
-	color: dimgray;
+//	background-image: url(nav_bg.png);
+//	color: dimgray;
 }
 
 .menu li a:hover {

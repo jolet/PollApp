@@ -7,18 +7,20 @@
 	    <link rel="stylesheet" href="resources/css/app.css"/>
 	    <link rel="stylesheet" href="resources/css/angular-growl.css"/>
 		<link rel="stylesheet" href="resources/css/datetimepicker.css"/>
-		<link rel="stylesheet" href="resources/css/bootstrap-progressbar-3.2.0.css"/>		
+		<link rel="stylesheet" href="resources/css/bootstrap-progressbar-3.2.0.css"/>
 	</head>
 	
-	<body class = "devmode container-fluid" >
+	<body class = "devmode container-fluid ng-cloak">
 	
 		<nav class="navbar navbar-default navbar-static-top" role="navigation">
 		  <div class="container">
-		    <ul class="menu">
-		        <li><a href="#/template">Template</a></li>
-		        <li><a href="#/activation">Activation</a></li>
-		        <li><a href="#/vote">Voting</a></li>
-		        <li><a href="#/results">Results</a></li>
+		    <ul class="nav nav-pills menu">
+		    <li ng-repeat="menuItem in menu"><a href="{{menuItem.link}}">{{menuItem.name}}</a></li>
+<!-- 		        <li ><a href="#/template">Template</a></li> -->
+<!-- 		        <li><a href="#/activation">Activation</a></li> -->
+<!-- 		        <li><a href="#/vote">Voting</a></li> -->
+<!-- 		        <li><a href="#/results">Results</a></li> -->
+<!-- 		        <li style="float:left;"><a style="color: red" href="/PollApp/auth/logout">Logout</a></li> -->
 				<!--         <li><a href="#/">#Bodovi</a></li> -->
 		    </ul>
 		  </div>

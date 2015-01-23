@@ -3,9 +3,9 @@
 </div>
 
 
-<div class="surveyContainer" ng-repeat="survey in surveyList">
+<div class="surveyContainer" ng-repeat="survey in surveyList track by survey.id">
 <!-- 	<h2>{{survey.question}}</h2> -->
-	<table class="table table-bordered table-striped">
+	<table class="table table-bordered table-striped" ng-show="survey && survey.id">
 
 
 		<thead>
@@ -14,7 +14,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="option in survey.options">
+			<tr ng-repeat="option in survey.options track by option.id">
 				<td style="min-width: 235px !important">
 					<button ng-click="vote(option.id, survey.id, $parent.$index)">{{option.name}}</button>
 				</td>
@@ -22,6 +22,9 @@
 		</tbody>
 
 	</table>
+	<div ng-show="!survey || !survey.id">
+	<input placeholder="Unlock me!" ng-model="secret"/><button ng-click="unlockSurvey(secret)">Unlock</button>
+	</div>
 </div>
 
 <div class = "growlToast" growl limit-messages="5"></div>

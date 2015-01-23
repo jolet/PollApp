@@ -60,8 +60,8 @@ public class Survey implements Serializable{
 	@Column(name = "SRV_VALID_TO")
 	private Date validTo;
 	
-	@Column(name = "SRV_DESCRIPTION")
-	private String description;
+	@Column(name = "SRV_HINT")
+	private String hint;
 
 	public List<Option> getOptions() {
 		return options;
@@ -139,12 +139,12 @@ public class Survey implements Serializable{
 		this.scored = scored;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getHint() {
+		return hint;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setHint(String hint) {
+		this.hint = hint;
 	}
 
 	
