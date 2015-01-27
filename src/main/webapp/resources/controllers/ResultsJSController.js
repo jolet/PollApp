@@ -51,4 +51,20 @@
 	        }
 	    });
 	 
+	 $scope.optionVotersMap = {};
+	 
+	 $scope.fetchVotingUsers = function(optionId){
+		 console.log("option id: ", optionId);
+		 $http.get("results/votingUsers/"+optionId)
+		 .success(function(users){
+//			 $scope.votingUsers = users; 
+			 $scope.optionVotersMap.optionId = optionId;
+			 $scope.optionVotersMap[optionId] = users;
+		 }).error(function(errorLog){
+			 console.log("Error: ", errorLog);
+			 growl.error(JSON.stringify(errorLog));
+			 growl.error("<b>Awww snap!</b> <i>Something</i> went wrong!", {ttl: -1}, {title: 'ALERT WE GOT ERROR'});
+		 });
+	 }
+	 
  };

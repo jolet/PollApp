@@ -31,11 +31,9 @@ public class ActivationController {
 		return surveyManager.findAll();
 	}
 
-	@RequestMapping(value = "/remove/{id}", method = RequestMethod.POST)
-	public @ResponseBody void deleteAnketa(@PathVariable String id) {
-		// Survey toRemove = surveyManager.findOne(id);
-		// toRemove.
-		// surveyManager.saveAndFlush();
+	@RequestMapping(value = "/remove/{surveyId}", method = RequestMethod.POST)
+	public @ResponseBody void deleteAnketa(@PathVariable String surveyId) {
+		surveyManager.sendToHistory(surveyId); 
 	}
 
 	@RequestMapping(value = "/update", method = RequestMethod.POST)

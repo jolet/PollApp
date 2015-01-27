@@ -5,4 +5,6 @@ import hr.tvz.polling.model.Role;
 
 public interface RoleManager extends BaseManager<Role>{
 
+	Role getUserRole();
+
 }

@@ -46,5 +46,10 @@ public class ClassGroupManagerImpl implements ClassGroupManager {
 			return repository.findByNameAndAcademicYear(cgr.getName(), cgr.getAcademicYear());
 		}
 	}
+	
+	@Override
+	public ClassGroup findByNameAndAcademicYear(String name, String academicYear){
+		return repository.findByNameAndAcademicYear(name, academicYear);
+	}
 
 }

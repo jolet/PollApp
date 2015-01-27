@@ -4,14 +4,13 @@
 
 	<form name = "templateForm" ng-submit="save()" method="POST">
 
-		<input type = "text" ng-model = "survey.question" placeholder="Please enter survey name." required> 
+		<input type = "text" ng-model = "survey.question" placeholder="Survey name:" required> 
 		<br />
-<!-- 		classgroup is dropdown<br/> -->
-<!-- 		TODO: add sifrarnik -->
 		<br/>
 		<input type = "text" placeholder = "Class group:" ng-model = "survey.classGroup.name" required>
 		<input type = "text" placeholder = "Academic Year:" ng-model = "survey.classGroup.academicYear" required></input>
-		<select ng-model="classGroupSelect" ng-change="classChange()" ng-options="classGroup.name group by classGroup.academicYear for classGroup in classGroupList"><option/></select>
+		<select ng-model="classGroupSelect" ng-change="classChange()" 
+				ng-options="classGroup.name group by classGroup.academicYear for classGroup in classGroupList | orderBy:['-academicYear', 'name']"><option/></select>
 		<br />
 		<input type = "text"  placeholder="Option name:" ng-model = "optionName" > 
 		<button type="button" class = "btn btn-default" ng-click="addOption()" ng-disabled="!optionName">Add option</button>
@@ -35,7 +34,7 @@
 					<td style = "min-width:235px !important">
 						<button type = "button" class="btn btn-danger" ng-click = "optionRemove($index)">Remove</button>
 						<button type = "button" class="btn btn-success" ng-show="opt.state && survey.scored" ng-click="setActive($index, false)">Correct</button>
-						<button type = "button" class="btn btn-info" ng-show="opt.state==false && survey.scored" ng-click="setActive($index, true)">Incorrect</button>
+						<button type = "button" class="btn" ng-show="opt.state==false && survey.scored" ng-click="setActive($index, true)">Incorrect</button>
 					</td>
 		
 					<td style = "min-width:235px !important">{{opt.name}}</td>
@@ -45,8 +44,8 @@
 	<hr>
 		<div ng-show = "survey.options.length > 1">
 			Points:
-			<button type = "button" class="btn btn-primary" ng-show="survey.scored" ng-click="setScored(false)">Scored</button>
-			<button type = "button" class="btn btn-info" ng-show="!survey.scored" ng-click="setScored(true)">Not scored</button>
+			<button type = "button" class="btn btn-default" ng-show="survey.scored" ng-click="setScored(false)">Scored</button>
+			<button type = "button" class="btn" ng-show="!survey.scored" ng-click="setScored(true)">Not scored</button>
 			<br />
 			<!-- 		<number-only-input input-value="survey.maxVotes" input-name="maxInputVotes"> -->
 			<input type = "text" ng-model = "survey.maxVotes" placeholder = "Max number of votes(optional)">
@@ -54,7 +53,7 @@
 			<br />
 			
 			<input type = "button" class = "btn btn-danger" value="Remove all" ng-show = "survey.options.length > 1" ng-click = "clearTemplate()"> 
-			<input type = "submit" class = "btn btn-default" value="Add survey" ng-show = "survey.options.length > 1" ng-disabled = "templateForm.$invalid"> 
+			<input type = "submit" class = "btn btn-primary" value="Add survey" ng-show = "survey.options.length > 1" ng-disabled = "templateForm.$invalid"> 
 		</div>		
 	</div>
 	</form>

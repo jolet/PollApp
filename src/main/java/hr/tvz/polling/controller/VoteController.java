@@ -4,8 +4,10 @@ import hr.tvz.polling.bll.interfaces.ActivityManager;
 import hr.tvz.polling.bll.interfaces.OptionManager;
 import hr.tvz.polling.bll.interfaces.SecurityRealm;
 import hr.tvz.polling.bll.interfaces.SurveyManager;
+import hr.tvz.polling.bll.interfaces.UserManager;
 import hr.tvz.polling.controller.util.Constants;
 import hr.tvz.polling.controller.util.HttpResponsePayloadWrapper;
+import hr.tvz.polling.controller.util.SurveyLog;
 import hr.tvz.polling.model.Activity;
 import hr.tvz.polling.model.Option;
 import hr.tvz.polling.model.Survey;
@@ -42,35 +44,39 @@ public class VoteController {
 	@Autowired
 	private SecurityRealm secRealm;
 
+	@Autowired
+	UserManager userManager;
+
 	/**
-	 * surveys stripped from "locked" surveys
+	 * survey list with "locked" surveys replaced with "secret key input"
 	 * 
 	 * @return
 	 */
 	@RequestMapping("/activeSurveys")
 	public @ResponseBody List<Survey> getActiveSurveyList() {
-//		if (secRealm.hasRole(Constants.ROLE_ADMIN)) {
-//			return getRawSurveyListForUser();
-//		} else if (secRealm.hasRole(Constants.ROLE_USER)) {
-			List<Survey> surveysStripped = new ArrayList<>();
-			for (Survey s : getRawSurveyListForUser()) {
-				if (s.getHint() == null) {
-					surveysStripped.add(s);
-				} else {
-					surveysStripped.add(null);
-				}
-			}
+		// XXX: TODO: return if statement for prod mode, admin should not see locked surveys
 
-			return surveysStripped;
-//		}
-//		return null;
+		// if (secRealm.hasRole(Constants.ROLE_ADMIN)) {
+		// return getRawSurveyListForUser();
+		// } else if (secRealm.hasRole(Constants.ROLE_USER)) {
+		List<Survey> surveysStripped = new ArrayList<>();
+		for (Survey s : getRawSurveyListForUser()) {
+			if (s.getHint() == null) {
+				surveysStripped.add(s);
+			} else {
+				surveysStripped.add(null);
+			}
+		}
+
+		return surveysStripped;
+		// }
+		// return null;
 	}
 
 	private List<Survey> getRawSurveyListForUser() {
 		List<Survey> surveyList = null;
 		if (secRealm.hasRole(Constants.ROLE_ADMIN)) {
-			// surveyList = surveyManager.findAllActiveValuesStripped(); // for
-			// debugging purposes
+			// surveyList = surveyManager.findAllActiveValuesStripped(); // for debugging purposes
 			surveyList = surveyManager.findAllActiveValuesStripped();
 		} else if (secRealm.hasRole(Constants.ROLE_USER)) {
 			surveyList = surveyManager.findAllActiveValuesStripped(secRealm.getCurentUsername());
@@ -82,40 +88,37 @@ public class VoteController {
 	public @ResponseBody void getAnswer(@PathVariable String optionId) {
 		LOG.debug("answered option Id: " + optionId);
 		// XXX: add check StringUtils.isNumeric
-		Long answerId = Long.parseLong(optionId);
-		Option answer = optionManager.findOne(answerId);
 
-		if (answer != null) {
-			//TODO:
+		if (secRealm.hasRole(Constants.ROLE_USER)) {
+
+			Long answerId = Long.parseLong(optionId);
+			Option answer = optionManager.findOne(answerId);
+
+			if (answer != null) {
+				User user = userManager.findByEmail(secRealm.getCurentUsername());
+
+				if (activityManager.checkAlreadyVoted(answer.getSurvey().getId(), user.getId())) {
+					LOG.info(SurveyLog.userLog("Shall Not Pass! (already voted for survey: " + "["
+							+ answer.getSurvey().getQuestion() + ")]"));
+				} else {
+					LOG.info(SurveyLog.userLog("voted, survey: " + "[" + answer.getSurvey().getQuestion()
+							+ "], " + "option: " + answer.getName()));
+
+					Activity activity = new Activity();
+					activity.setTimestamp(new Date());
+					activity.setOption(answer);
+					activity.setUser(user);
+
+					activityManager.saveAndFlush(activity);
+				}
+			}
+		} else if (secRealm.hasRole(Constants.ROLE_ADMIN)) {
+			LOG.info(SurveyLog.userLog("Shall Not Pass!!! ooops."));
 		}
-		User noobUser = new User();
-		noobUser.setEmail("noob@user.com");
-		noobUser.setId(1337L);
-
-		if (activityManager.checkAlreadyVoted(answer.getSurvey().getId(), noobUser.getId())) {
-			LOG.info("Noob Shall Not Pass!");
-		} else {
-			// TODO: check numeric
-			// IDEA: check if JS was tampered, expected vs actual. i.e expecting
-			// not null
-			// challenge : if multiple ppl pull option, option counters will
-			// have wrong values
-			// should be synchronized or something
-			LOG.info("User " + noobUser.getId() + " voted, option id: " + optionId + " surveyId: "
-					+ answer.getSurvey().getId());
-			Activity activity = new Activity();
-			activity.setTimestamp(new Date());
-			activity.setOption(answer);
-			activity.setUser(noobUser);
-
-			activityManager.saveAndFlush(activity);
-		}
-
 	}
 
 	@RequestMapping(value = "/unlockSurvey/{key}", method = RequestMethod.POST)
 	public @ResponseBody HttpResponsePayloadWrapper unlockSurvey(@PathVariable String key) {
-		//need wrapper object
 		boolean correctKey = false;
 		List<Survey> unlockedSurveys = new ArrayList<>();
 		for (Survey s : getRawSurveyListForUser()) {

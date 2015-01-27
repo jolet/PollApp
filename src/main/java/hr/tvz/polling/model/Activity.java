@@ -20,6 +20,7 @@ public class Activity implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
+//	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "USR_ID")
 	private User user;

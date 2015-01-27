@@ -26,6 +26,10 @@ public class ClassGroup implements Serializable{
 	@Column(name = "CGR_ACADEMIC_YEAR")
 	private String academicYear;
 
+	public ClassGroup() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public Long getId() {
 		return id;
 	}

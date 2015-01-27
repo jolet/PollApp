@@ -3,10 +3,9 @@
 /**
  * VoteController
  */
-var VoteController = function($scope, $http, growl, $rootScope){
+var VoteController = function($scope, $http, growl){
 	
 	$scope.fetchSurveyList = function(){
-//		$rootScope.showMenu = false;
 		$http.get('vote/activeSurveys')
 		.success(function(surveyList){
 			$scope.surveyList = surveyList;

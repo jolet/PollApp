@@ -62,6 +62,9 @@ public class Survey implements Serializable{
 	
 	@Column(name = "SRV_HINT")
 	private String hint;
+	
+	@Column(name = "SRV_HISTORY")
+	private Boolean history;
 
 	public List<Option> getOptions() {
 		return options;
@@ -145,6 +148,14 @@ public class Survey implements Serializable{
 
 	public void setHint(String hint) {
 		this.hint = hint;
+	}
+
+	public Boolean getHistory() {
+		return history;
+	}
+
+	public void setHistory(Boolean history) {
+		this.history = history;
 	}
 
 	

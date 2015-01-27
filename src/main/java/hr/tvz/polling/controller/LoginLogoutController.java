@@ -1,8 +1,13 @@
 package hr.tvz.polling.controller;
 
+import hr.tvz.polling.bll.interfaces.ClassGroupManager;
 import hr.tvz.polling.bll.interfaces.SecurityRealm;
+import hr.tvz.polling.bll.interfaces.UserManager;
 import hr.tvz.polling.controller.util.Constants;
 import hr.tvz.polling.controller.util.HttpResponsePayloadWrapper;
+import hr.tvz.polling.controller.util.SurveyLog;
+import hr.tvz.polling.model.ClassGroup;
+import hr.tvz.polling.model.User;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,11 +18,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/auth")
@@ -26,20 +32,39 @@ public class LoginLogoutController {
 
 	@Autowired
 	SecurityRealm secRealm;
+	
+	@Autowired
+	UserManager userManager;
+	
+	@Autowired
+	ClassGroupManager classGroupManager;
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String getLoginPage(@RequestParam(value = "error", required = false) boolean error, ModelMap model) {
-		LOG.info("login hit " + error);
-//		if (error == true) {
-//			model.addAttribute("error", "Invalid username or password!");
-//		}
-//		return model;
-		return "loginPage";
+		LOG.info(SurveyLog.userLog("accessed login page" + (error == true ? " with error = true: " : "")));
+		return "publicPages/loginPage";
 	}
 
 	@RequestMapping(value = "/denied", method = RequestMethod.GET)
 	public String getDeniedPage() {
-		return "deniedPage";
+		LOG.info(SurveyLog.userLog("tried to access denied page..."));
+		return "publicPages/deniedPage";
+	}
+	
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public @ResponseBody String registerUser(@RequestBody User user) {
+//		LOG.info(SurveyLog.userLog("user" + user.getEmail() + " trying to register..."));
+		if(userManager.registerUser(user)){
+			return "\"success\"";
+		} else {
+			return "\"error\"";
+		}
+	}
+	
+	@RequestMapping(value = "/forgottenPassword/{email}", method = RequestMethod.POST)
+	public @ResponseBody void startPasswordResetProcess(@PathVariable String email) {
+		LOG.info(email);
+//		return "\"bullshit\"";
 	}
 
 	@RequestMapping(value = "/menu", method = RequestMethod.GET)
@@ -53,14 +78,23 @@ public class LoginLogoutController {
 				menu.add(new MenuItem("#/activation", "ACTIVATION"));
 				menu.add(new MenuItem("#/vote", "VOTING"));
 				menu.add(new MenuItem("#/results", "RESULTS"));
+				menu.add(new MenuItem("#/administration", "ADMINISTRATION"));
 			} else if (secRealm.hasRole(Constants.ROLE_USER)) {
 				menu.add(new MenuItem("#/vote", "VOTE"));
+				menu.add(new MenuItem("#/points", "SCORE"));
 			}
+//			menu.add(new MenuItem("#", "Welcome " + secRealm.getCurentUsername()));
 			menu.add(new MenuItem("/PollApp/auth/logout", "Logout"));
 		}
 		
 		
 		return new HttpResponsePayloadWrapper(getRoleHomeUrl(), menu);
+	}
+	
+	@RequestMapping("/classGroups")
+	public @ResponseBody List<ClassGroup> getClassGroups() {
+		// XXX: return only latest year
+		return classGroupManager.findAll();
 	}
 	
 	private String getRoleHomeUrl(){
@@ -72,32 +106,54 @@ public class LoginLogoutController {
 		return null;
 	}
 
-	private class MenuItem implements Serializable {
+	private final class MenuItem implements Serializable {
 		private static final long serialVersionUID = 1L;
 
+		private String link;
+		private String name;
+		private String className;
+		
 		public MenuItem(String link, String name) {
 			this.link = link;
 			this.name = name;
 		}
+		
+		@SuppressWarnings("unused")
+		public MenuItem(String link, String name, String className) {
+			this.link = link;
+			this.name = name;
+			this.className = className;
+		}
 
-		private String link;
-		private String name;
-
+		@SuppressWarnings("unused")
 		public String getLink() {
 			return link;
 		}
 
+		@SuppressWarnings("unused")
 		public void setLink(String link) {
 			this.link = link;
 		}
 
+		@SuppressWarnings("unused")
 		public String getName() {
 			return name;
 		}
 
+		@SuppressWarnings("unused")
 		public void setName(String name) {
 			this.name = name;
 		}
 
+		@SuppressWarnings("unused")
+		public String getClassName() {
+			return className;
+		}
+
+		@SuppressWarnings("unused")
+		public void setClassName(String className) {
+			this.className = className;
+		}
+		
 	}
 }

@@ -13,4 +13,6 @@ public interface SurveyManager extends BaseManager<Survey>{
 	List<Survey> findAllActiveValuesStripped();
 
 	List<Survey> findAllActiveValuesStripped(String curentUsername);
+
+	void sendToHistory(String surveyId);
 }

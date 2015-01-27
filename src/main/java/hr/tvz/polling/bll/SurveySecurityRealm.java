@@ -13,12 +13,14 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,12 +42,20 @@ public class SurveySecurityRealm implements SecurityRealm {
 
 		LOG.info("User " + username + " trying to log in...");
 		hr.tvz.polling.model.User user = userManager.findByEmail(username);
+		
 		if(user != null){
+			if(user.isActive()){
+				
 			List<GrantedAuthority> authorities = buildUserAuthority(user.getRole());
 			return authenticateUser(user, authorities);
+			}
+			else {
+				LOG.info("Login fail - inactive user: " + user.getEmail());
+				throw new DisabledException("Inactive user.");
+			}
 		} else {
 			LOG.info("Username not found. That's all we know. Login denied. User " + username);
-			throw new UsernameNotFoundException("");
+			throw new UsernameNotFoundException("Username not found.");
 		}
 	}
 	
@@ -61,20 +71,26 @@ public class SurveySecurityRealm implements SecurityRealm {
 		return new User(user.getEmail(), user.getPassword(), user.isActive(), true, true, true, userAuthority);
 	}
 	
-	private User getCurentUserPrinicipal(){
-		return (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	private static User getCurentUserPrinicipal(){
+		if(SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof User){
+			return (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		} else {
+			return null;
+		}
 	}
 	
 	@Override
 	public String getCurentUsername(){
-		return getCurentUserPrinicipal().getUsername();
+		return getCurentUserPrinicipal() != null ? getCurentUserPrinicipal().getUsername() : "";
 	}
 	
 	@Override
 	public boolean hasRole(String role){
-		for(GrantedAuthority authority : getCurentUserPrinicipal().getAuthorities()){
-			if(role.equals(authority.getAuthority())){
-				return true;
+		if(getCurentUserPrinicipal() != null){
+			for(GrantedAuthority authority : getCurentUserPrinicipal().getAuthorities()){
+				if(role.equals(authority.getAuthority())){
+					return true;
+				}
 			}
 		}
 		return false;
@@ -91,6 +107,11 @@ public class SurveySecurityRealm implements SecurityRealm {
 	@Override
 	public boolean isLoggedIn() {
 		return SecurityContextHolder.getContext().getAuthentication().isAuthenticated();
+	}
+
+	@Override
+	public String getHostAddress() {
+		return ((WebAuthenticationDetails)SecurityContextHolder.getContext().getAuthentication().getDetails()).getRemoteAddress();
 	}
 
 }

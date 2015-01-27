@@ -1,0 +1,44 @@
+<div>
+<h1>Users</h1>
+</div>
+
+<table class="table table-striped table-bordered">
+  <tr>
+    <th>NAME</th>
+    <th>SURNAME</th>
+    <th>EMAIL</th>
+    <th>POINTS</th>
+    <th>ACTIVE</th>
+    <th>GROUP</th>
+    <th>YEAR</th>
+  </tr>
+  <tr ng-repeat="userWrapped in usersWrappedList track by userWrapped.payload.id | orderBy:['userWrapped.payload.classGroup.academicYear', 
+  				'userWrapped.payload.classGroup.name', 'userWrapped.payload.lastName','userWrapped.payload.firstName'
+  				]">
+    <td>
+    	<p ng-click="userWrapped.payload.activities == null ? fetchUserActivites(userWrapped.payload.id, $index) : activityShow=!activityShow">{{userWrapped.payload.firstName}}
+    	<table class="table table-bordered" ng-show="activityShow" ng-click = "fetchUserActivites(userWrapped.payload.id, $index)">
+    		<tr>
+    			<th>TIMESTAMP</th>
+    			<th>SURVEY</th>
+    			<th>OPTION</th>
+    		</tr>
+			<tr ng-repeat="activityWrapped in userWrapped.payload.activities">
+				<td>{{activityWrapped.payload.timestamp | date:'yyyy-MM-dd HH:mm'}}</td>
+				<td>{{activityWrapped.info}}</td>
+				<td ng-class="activityWrapped.payload.option.state == false ? 'wrongAnswer' : 'correctAnswer'">{{activityWrapped.payload.option.name}}</td>
+			</tr>
+    	</table>
+   	</td>
+    <td>{{userWrapped.payload.lastName}}</td>
+    <td>{{userWrapped.payload.email}}</td>
+    <td>{{userWrapped.info}}</td>
+    <td>
+    	<p ng-click="show=!show">{{userWrapped.payload.active}}</p>
+    	<button ng-show="show" ng-class="userWrapped.payload.active == true ? 'btn-warning' : 'btn-success'" 
+    			ng-bind="userWrapped.payload.active != true ? 'Activate' : 'Deactivate'" ng-click="updateUser(userWrapped.payload.id, $index)"/>
+    </td>
+    <td>{{userWrapped.payload.classGroup.name}}</td>
+    <td>{{userWrapped.payload.classGroup.academicYear}}</td>
+  </tr>
+</table>

@@ -6,18 +6,11 @@ var App = angular.module('PollApp', ['ngRoute', 'ngAnimate', 'PollApp.filters',
                                      'PollApp.services','PollApp.directives',
                                      'angular-growl','mgcrea.ngStrap', 'ui.bootstrap.datetimepicker', 'ui.bootstrap'])
                                      .run(function($rootScope, $http, $location, growl){
-//                                    	 $http.get('auth/homeUrl').success(function(homeUrl) {
-////                                    		 $rootScope.homeUrl = "template";
-//                                    		 $location.path(homeUrl);
-//                                    	 }).error(function(error) {
-//                                    	 	console.log("That's an error", error);
-//                                    	 });
-//                                    	 $rootScope.showMenu = true;
                                     	 $http.get('auth/menu')
 	                                 		.success(function(menuWrapper){
-	                                 			$location.path(menuWrapper.info)
+	                                 			$location.path(menuWrapper.info) //home uri for role
 	                                 			$rootScope.menu = menuWrapper.payload;
-	                                 			console.log("menu assigned", menuWrapper.payload);
+//	                                 			console.log("menu assigned", menuWrapper.payload);
 	                                 			$rootScope.homeUrl = menuWrapper.info;
 	                                 		}).error(function(errorlog) {
 	                                 			console.log(errorlog)
@@ -45,6 +38,14 @@ App.config(['$routeProvider','growlProvider','$httpProvider',
     $routeProvider.when('/results', {
     	templateUrl: 'results/layout',
     	controller: ResultsController
+    });
+    $routeProvider.when('/points', {
+    	templateUrl: 'points/layout',
+    	controller: PointsController
+    });
+    $routeProvider.when('/administration', {
+    	templateUrl: 'administration/layout',
+    	controller: AdministrationController
     });
     
     $routeProvider.otherwise({redirectTo: '/vote'});

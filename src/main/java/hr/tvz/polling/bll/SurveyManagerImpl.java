@@ -14,6 +14,8 @@ import hr.tvz.polling.model.User;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(readOnly = true)
 public class SurveyManagerImpl  implements SurveyManager{
-
+	private static final Logger LOG = LoggerFactory.getLogger(SurveyManagerImpl.class);	
 	@Autowired
 	SurveyRepository repository;
 	
@@ -39,7 +41,8 @@ public class SurveyManagerImpl  implements SurveyManager{
 	
 	@Override
 	public List<Survey> findAll() {
-		return repository.findAll();
+//		return repository.findAll();
+		return repository.findAllByHistoryIsNull();
 	}
 
 	@Override
@@ -71,19 +74,23 @@ public class SurveyManagerImpl  implements SurveyManager{
 		}
 	}
 
+	/**
+	 * Called from results controller. Do not auto remove from list, even if date has passed.
+	 */
 	@Override
 	public List<Survey> findAllActive(Boolean active) {
-		return repository.findAllByActive(active);
+		return repository.findAllByActiveAndHistoryIsNull(active);
 	}
 
 	/**
+	 * Called from vote controller.
 	 * Strips values from active surveys which end user could potentially exploit, 
 	 * i.e. removes option state (true/false), counter, and survey hint
 	 */
 	@Override
 	public List<Survey> findAllActiveValuesStripped() {
 		
-		return prepareSurveys(repository.findAllByActive(true));
+		return prepareSurveys(repository.findAllByActiveAndHistoryIsNull(true));
 	}
 	
 	/**
@@ -98,16 +105,18 @@ public class SurveyManagerImpl  implements SurveyManager{
 				o.setState(null);
 				o.setCount(null);
 			}
-//			s.setHint(null);
+//			s.setHint(null); //stripped later in Controller
 		}
 		
 		return surveyList;
 	}
 
+	/**
+	 * Called from VoteController
+	 */
 	@Override
 	public List<Survey> findAllActiveValuesStripped(String curentUsername) {
 		User user = userManager.findByEmail(curentUsername);
-		
 //		return repository.findAllActiveForUser(user.getId(), user.getClassGroup().getId());
 		List<Survey> surveys =  repository.findAllByActiveAndClassId(true, user.getClassGroup().getId());
 		List<Survey> toRemove = new ArrayList<>();
@@ -124,18 +133,23 @@ public class SurveyManagerImpl  implements SurveyManager{
 		return prepareSurveys(surveys);
 	}
 
-//	@Override
-//	public void delete(Long id) {
-//		Survey srv =repository.findOne(id); 
-//		if(srv ==null) {
-//			System.out.println("Survey with id " + id + " doesn't exist");
-//			return;
-//		}
-//		for(Option opt : srv.getOptions()) {
-//			optionManager.delete(opt.getId());
-//		}
-//		
-//		repository.delete(id);
-//	}
+	@Override
+	public void sendToHistory(String surveyId) {
+		Long id = null;
+		Survey srv = null;
+		try{
+			id = Long.valueOf(surveyId);
+		} catch(NumberFormatException ex){
+			LOG.info("bad survey id, cannot convert to long: " + surveyId);
+			return;
+		}
+		srv = repository.findOne(id);
+		if(srv != null) {
+			srv.setHistory(true);
+			repository.saveAndFlush(srv);
+		} else {
+			LOG.info("Survey with id " + surveyId + " doesn't exist");
+		}
+	}
 
 }

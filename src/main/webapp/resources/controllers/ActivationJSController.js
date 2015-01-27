@@ -9,7 +9,7 @@ var ActivationController = function($scope, $http, growl) {
 		$http.get('activation/surveys')
 		.success(function(surveyList){
 			$scope.surveyList = surveyList;
-			console.log("surveys: ", $scope.surveyList);
+//			console.log("surveys: ", $scope.surveyList);
 //			if(surveyList.length == 0){
 //				$scope.surveyList
 //			}
@@ -25,21 +25,22 @@ var ActivationController = function($scope, $http, growl) {
 	
 //	$scope.show;
 	
-	$scope.setActive = function($index, value){
+	$scope.setActive = function($index, value, dateTime){
+		console.log("dateTime", dateTime);
 		var surveyTemp = $scope.surveyList[$index];
 		surveyTemp.active = value;
 		if(value == false){
 			$scope.show=!$scope.show;
 		}
 		
-		if($scope.data && value != null){
-			if($scope.data.dateDropDownInputFrom){
-				surveyTemp.validFrom = $scope.data.dateDropDownInputFrom;
+		if(dateTime && value != null){
+			if(dateTime.dateDropDownInputFrom){
+				surveyTemp.validFrom = dateTime.dateDropDownInputFrom;
 			} else {
 				surveyTemp.validFrom = moment();
 			}
-			if($scope.data.dateDropDownInputTo) {
-				surveyTemp.validTo = $scope.data.dateDropDownInputTo;
+			if(dateTime.dateDropDownInputTo) {
+				surveyTemp.validTo = dateTime.dateDropDownInputTo;
 			} else {
 				surveyTemp.validTo = null;
 			}
@@ -83,9 +84,9 @@ var ActivationController = function($scope, $http, growl) {
 	$scope.remove = function($index){
 		var surveyTemp = $scope.surveyList[$index];
 		
-		$http.post('tempActivate/remove/'+surveyTemp.id)
+		$http.post('activation/remove/'+surveyTemp.id)
 		.success(function() {
-			growl.success("Survey " + surveyTemp.question+ " deleted.")
+			growl.success("Survey " + surveyTemp.question+ " sent to history.")
 			$scope.surveyList.splice($index, 1);
 		})
 		.error(function(errorLog) {

@@ -16,14 +16,14 @@
 		<tbody>
 			<tr ng-repeat="option in survey.options track by option.id">
 				<td style="min-width: 235px !important">
-					<button ng-click="vote(option.id, survey.id, $parent.$index)">{{option.name}}</button>
+					<button class="btn btn-large" ng-click="vote(option.id, survey.id, $parent.$index)">{{option.name}}</button>
 				</td>
 			</tr>
 		</tbody>
 
 	</table>
 	<div ng-show="!survey || !survey.id">
-	<input placeholder="Unlock me!" ng-model="secret"/><button ng-click="unlockSurvey(secret)">Unlock</button>
+	<input placeholder="Unlock me!" ng-model="secret"/><button class="btn btn-primary" ng-click="unlockSurvey(secret)">Unlock</button>
 	</div>
 </div>
 

@@ -47,7 +47,7 @@ var TemplateController = function($scope, $http, growl) {
 				return ($scope.optionName === curr.name) || prev;
 			}, false);
 
-			console.log(match ? 'match' : 'no match');
+//			console.log(match ? 'match' : 'no match');
 			if (!match) {
 				option.name = this.optionName;
 				$scope.survey.options.push(option);
@@ -79,7 +79,7 @@ var TemplateController = function($scope, $http, growl) {
 	}
 
 	$scope.save = function() {
-		console.log("Anketa to save: ", JSON.stringify($scope.survey));
+//		console.log("Anketa to save: ", JSON.stringify($scope.survey));
 		return $http.post('template/save', $scope.survey)
 			.success(function() {
 				growl.success("Survey saved.")
@@ -94,9 +94,9 @@ var TemplateController = function($scope, $http, growl) {
 	}
 	
 	$scope.fetchClassGroups = function(){
-		console.log('fetch cg hit')
+//		console.log('fetch cg hit')
 		$http.get('template/classGroups').success(function(classGroupList) {
-			console.log("Classgroups: ", classGroupList);
+//			console.log("Classgroups: ", classGroupList);
 			$scope.classGroupList = classGroupList;
 		}).error(function(errorLog) {
 			console.log("Error: ", errorLog)

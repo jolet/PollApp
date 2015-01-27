@@ -1,14 +1,16 @@
-<h2 id="track">HERE COMES THE SUN</h2>
+<h2 id="track" ng-click="showbar=!showbar">HERE COMES THE SUN</h2>
 
 <div ng-repeat="survey in surveys track by survey.id">
 	<h2 ng-click="showbar=!showbar">{{survey.question}}</h2>
-	<div ng-show="!showbar" ng-repeat="option in survey.options track by option.id">
+	<div ng-show="showbar" ng-repeat="option in survey.options track by option.id">
 	<h4>{{option.name}}</h4>
-<!-- {{survey.maxVotes}} vs {{maxVotes[$parent.$index]}} vs {{$parent.$index}} vs {{$index}} -->
-	<progressbar max = "maxVotes[$parent.$index]" value = "option.count" class="progress-striped" type="{{survey.scored ? ((maxVotes[$parent.$index] < survey.maxVotes) ? 'success' : 'danger') : 'success'}}">
+	<progressbar max = "maxVotes[$parent.$index]" value = "option.count" class="progress-striped" 
+		type="{{survey.scored ? ((maxVotes[$parent.$index] < survey.maxVotes) ? 'success' : 'danger') : 'success'}}"
+		ng-click="show=!show">
 		<span style="color:white;">{{option.count}} / {{survey.scored ? survey.maxVotes : maxVotes[$parent.$parent.$parent.$index]}}</span>
 	</progressbar>
-
+	<h4 ng-show="show" ng-click="fetchVotingUsers(option.id)" 
+	ng-bind="(optionVotersMap[option.id] == null || optionVotersMap[option.id] == '') ? 'No results. Click to refresh.' : 'Voting users: ' + optionVotersMap[option.id]"></button>
 	</div>
 </div>
 

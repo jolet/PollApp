@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import hr.tvz.polling.bll.interfaces.RoleManager;
+import hr.tvz.polling.controller.util.Constants;
 import hr.tvz.polling.dal.RoleRepository;
 import hr.tvz.polling.model.Role;
 
@@ -30,6 +31,11 @@ public class RoleManagerImpl implements RoleManager{
 	@Override
 	public void saveAndFlush(Role entity) {
 		repository.saveAndFlush(entity);
+	}
+
+	@Override
+	public Role getUserRole() {
+		return repository.findByName(Constants.ROLE_USER);
 	}
 
 }

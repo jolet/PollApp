@@ -1,92 +1,116 @@
 /* app css stylesheet */
 [ng\:cloak], [ng-cloak], .ng-cloak {
-			display: none !important;
-			}
+	display: none !important;
+}
+
+/* * { */
+/* 	margin: 0; */
+/* } */
+html, body {
+	height: 100%;
+}
+.page-wrap {
+  min-height: 100%;
+  /* equal to footer height */
+	margin-bottom: -30px; 
+}
+.page-wrap:after {
+  content: "";
+  display: block;
+}
+.site-footer, .page-wrap:after {
+  /* .push must be the same height as footer */
+	height: 30px; 
+/* 	background: #d8d8d8; */
+}
+
+.site-footer p{
+	color: #337ab7;
+	width:200px;
+	margin:auto;
+}
+
+
 #wrapper {
-	margin: 0 auto;
-	max-width: 1000px;
-	margin-top: 50px;
+	/* 	margin: 0 auto; */
+	/* 	max-width: 1000px; */
+	/* 	margin-top: 50px; */
+	
+}
+
+.container {
+	text-align: center;
+}
+
+.wrongAnswer {
+	color:red;
+}
+.correctAnswer{
+	color:green;
+}
+.nav.nav-center {
+	display: inline-block;
+	left: 0;
+	right: 0;
+	margin: 0;
+	margin-top: 7px;
+	float: none;
 }
 
 .menu {
-//	text-align: center;
-//	list-style: none;
-//	padding: 0 0 0.5em;
-//	font-size: 30px;
-//	font-weight: bolder;
-//	margin-top: 20px;
-width:600px;
-margin:auto;
-margin-top:5px;
-font-weight:bolder;
-font-size:medium;
+	/* 	text-align: center; */
+	/* 	list-style: none; */
+	/* 	padding: 0 0 0.5em; */
+	/* 	font-size: 30px; */
+	/* 	font-weight: bolder; */
+	/* 	margin-top: 20px; */
+	/* min-width:200px; */
+	/* margin:auto; */
+	/* margin-top:10px; */
+	font-weight: bolder;
+	font-size: medium;
+	/* border:1px solid red; */
 }
 
 .menu li:last-child a:last-child {
-	color:#D80000;
+	color: #D80000;
 }
 
 .menu>li {
-//	display: inline;
+	/* 	display: inline; */
+	
 }
 
-
-
 .menu li a {
-//	text-decoration: none;
+	/*	text-decoration: none; */
+	
 }
 
 .menu li a:link {
-//	padding: 20px 0px 20px 0px;
+	/* 	padding: 20px 0px 20px 0px; */
+	
 }
 
 .menu li a:visited {
-//	background-image: url(nav_bg.png);
-//	color: dimgray;
+	/* 	background-image: url(nav_bg.png); */
+	color: #337ab7;
 }
 
 .menu li a:hover {
-	color: #252525;
+	color: #387700;
 	/* 	border:1px solid gray; */
 	/* 	padding:20px 0px 20px 0px; */
 	/* 	background: #f0f0f0; */
+}
+
+.welcomeLabel {
+	color:orange !important;
 }
 
 .contentView {
 	width: 50%;
 	margin-left: auto;
 	margin-right: auto;
-}
-
-.anketaInput {
-	/* 	width: 358px !important; */
-	/* 	margin-left: 100px !important; */
-	
-}
-
-.h3left {
-	/* 	margin-left:100px !important; */
-	
-}
-
-.divalert {
-	/* 	width:400px !important; */
-	/* 	margin-left:100px !important; */
-	
-}
-
-.tableoptions {
-	/* 	width: 450px !important; */
-	/* 	margin-left: 100px !important; */
-	
-}
-
-/* .saveNotification { */
-/* 	margin-top: 10px; */
-/* } */
-
-.ankStudenti {
-	display: inline;
 }
 
 /* .example-animate-container { */
@@ -121,12 +145,11 @@ font-size:medium;
 /* 	opacity: 1; */
 /* 	max-height: 40px; */
 /* } */
-
-.devmode{
-	background-color:dimgray;
-/* 	color:white; */
+.devmode {
+/* 	background-color: dimgray; */
+	/* 	color:white; */
 }
 
-.growlToast{
-	margin-top:15px;
+.growlToast {
+	margin-top: 15px;
 }

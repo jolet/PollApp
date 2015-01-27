@@ -9,13 +9,19 @@
 
 	<security:http auto-config="true" use-expressions="true" access-denied-page="/auth/denied">
 		<security:intercept-url pattern="/auth/login" access="permitAll"/>
-		<security:intercept-url pattern="/" access="hasAnyRole('USER','ADMIN')" />
+		<security:intercept-url pattern="/auth/register" access="permitAll"/>
+		<security:intercept-url pattern="/auth/classGroups" access="permitAll"/>
+		<security:intercept-url pattern="/auth/forgottenPassword" access="permitAll"/>
+		<security:intercept-url pattern="/auth/resetPassword" access="permitAll"/>
+		<security:intercept-url pattern="/resources/js/lib/**" access="permitAll" />
+		<security:intercept-url pattern="/resources/js/login/**" access="permitAll" />
 		
-		<security:intercept-url pattern="/resources/**" access="hasAnyRole('USER','ADMIN')" />
-		<security:intercept-url pattern="/vote/**" access="hasAnyRole('USER','ADMIN')" />
-		<security:intercept-url pattern="/auth/menu" access="hasAnyRole('USER','ADMIN')" />
-		<security:intercept-url pattern="/auth/homeUrl" access="hasAnyRole('USER','ADMIN')" />
-		<security:intercept-url pattern="/**" access="hasAnyRole('ADMIN')" />
+<!-- 		<security:intercept-url pattern="/" access="hasAnyRole('USER','ADMIN')" /> -->
+<!-- 		<security:intercept-url pattern="/resources/**" access="hasAnyRole('USER','ADMIN')" /> -->
+<!-- 		<security:intercept-url pattern="/vote/**" access="hasAnyRole('USER','ADMIN')" /> -->
+<!-- 		<security:intercept-url pattern="/points/**" access="hasAnyRole('USER','ADMIN')" /> -->
+<!-- 		<security:intercept-url pattern="/auth/menu" access="hasAnyRole('USER','ADMIN')" /> -->
+<!-- 		<security:intercept-url pattern="/**" access="hasAnyRole('ADMIN')" /> -->
 		
 		<security:form-login
 			login-page="/auth/login"

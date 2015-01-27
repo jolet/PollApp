@@ -13,12 +13,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "POL_USER")
 public class User implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
+	@JsonIgnore
+//	@JsonManagedReference
+//	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
 	@OneToMany(mappedBy = "user")
 	private List<Activity> activities;
 	
@@ -45,6 +50,10 @@ public class User implements Serializable{
 	private String password;
 	@Column(name = "USR_ACTIVE")
 	private Boolean active;
+	
+	public User() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	public Boolean isActive() {
 		return active;
