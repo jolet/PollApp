@@ -16,12 +16,12 @@
 		<security:intercept-url pattern="/resources/js/lib/**" access="permitAll" />
 		<security:intercept-url pattern="/resources/js/login/**" access="permitAll" />
 		
-<!-- 		<security:intercept-url pattern="/" access="hasAnyRole('USER','ADMIN')" /> -->
-<!-- 		<security:intercept-url pattern="/resources/**" access="hasAnyRole('USER','ADMIN')" /> -->
-<!-- 		<security:intercept-url pattern="/vote/**" access="hasAnyRole('USER','ADMIN')" /> -->
-<!-- 		<security:intercept-url pattern="/points/**" access="hasAnyRole('USER','ADMIN')" /> -->
-<!-- 		<security:intercept-url pattern="/auth/menu" access="hasAnyRole('USER','ADMIN')" /> -->
-<!-- 		<security:intercept-url pattern="/**" access="hasAnyRole('ADMIN')" /> -->
+		<security:intercept-url pattern="/" access="hasAnyRole('USER','ADMIN')" />
+		<security:intercept-url pattern="/resources/**" access="hasAnyRole('USER','ADMIN')" />
+		<security:intercept-url pattern="/vote/**" access="hasAnyRole('USER','ADMIN')" />
+		<security:intercept-url pattern="/points/**" access="hasAnyRole('USER','ADMIN')" />
+		<security:intercept-url pattern="/auth/menu" access="hasAnyRole('USER','ADMIN')" />
+		<security:intercept-url pattern="/**" access="hasAnyRole('ADMIN')" />
 		
 		<security:form-login
 			login-page="/auth/login"
