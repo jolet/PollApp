@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +21,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,7 +38,10 @@ public class SurveySecurityRealm implements SecurityRealm {
 
 	@Autowired
 	private UserManager userManager;
-
+	
+	@Autowired
+	private BCryptPasswordEncoder encoder;
+	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
@@ -112,6 +117,26 @@ public class SurveySecurityRealm implements SecurityRealm {
 	@Override
 	public String getHostAddress() {
 		return ((WebAuthenticationDetails)SecurityContextHolder.getContext().getAuthentication().getDetails()).getRemoteAddress();
+	}
+
+	@Override
+	public String encodePassword(String plainTextPass) {
+		return encoder.encode(plainTextPass);
+	}
+	
+	
+	
+	public BCryptPasswordEncoder getEncoder() {
+		return encoder;
+	}
+
+	public void setEncoder(BCryptPasswordEncoder encoder) {
+		this.encoder = encoder;
+	}
+
+	@Override
+	public String generateResetToken() {
+		return UUID.randomUUID().toString();
 	}
 
 }

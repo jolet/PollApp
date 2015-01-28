@@ -50,6 +50,8 @@ public class User implements Serializable{
 	private String password;
 	@Column(name = "USR_ACTIVE")
 	private Boolean active;
+	@Column(name = "USR_RESETTOKEN")
+	private String resetToken;
 	
 	public User() {
 		// TODO Auto-generated constructor stub
@@ -110,5 +112,12 @@ public class User implements Serializable{
 		this.password = password;
 	}
 	
+	public String getResetToken() {
+		return resetToken;
+	}
+
+	public void setResetToken(String resetToken) {
+		this.resetToken = resetToken;
+	}
 	
 }

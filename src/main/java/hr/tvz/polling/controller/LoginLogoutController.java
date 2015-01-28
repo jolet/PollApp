@@ -1,6 +1,7 @@
 package hr.tvz.polling.controller;
 
 import hr.tvz.polling.bll.interfaces.ClassGroupManager;
+import hr.tvz.polling.bll.interfaces.EmailManager;
 import hr.tvz.polling.bll.interfaces.SecurityRealm;
 import hr.tvz.polling.bll.interfaces.UserManager;
 import hr.tvz.polling.controller.util.Constants;
@@ -38,6 +39,9 @@ public class LoginLogoutController {
 	
 	@Autowired
 	ClassGroupManager classGroupManager;
+	
+	@Autowired
+	EmailManager emailManager;
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String getLoginPage(@RequestParam(value = "error", required = false) boolean error, ModelMap model) {
@@ -47,8 +51,13 @@ public class LoginLogoutController {
 
 	@RequestMapping(value = "/denied", method = RequestMethod.GET)
 	public String getDeniedPage() {
-		LOG.info(SurveyLog.userLog("tried to access denied page..."));
+		LOG.info(SurveyLog.userLog("accessed denied page..."));
 		return "publicPages/deniedPage";
+	}
+	@RequestMapping(value = "/resetPassword", method = RequestMethod.GET)
+	public String getResetPasswordPage() {
+		LOG.info(SurveyLog.userLog("accessed reset password page..."));
+		return "publicPages/resetPasswordPage";
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -61,10 +70,17 @@ public class LoginLogoutController {
 		}
 	}
 	
-	@RequestMapping(value = "/forgottenPassword/{email}", method = RequestMethod.POST)
-	public @ResponseBody void startPasswordResetProcess(@PathVariable String email) {
+//	@RequestMapping(value = "/forgottenPassword/{email}", method = RequestMethod.POST) // json doesn't like dot(.) in parameter
+	@RequestMapping(value = "/forgottenPassword", method = RequestMethod.POST)
+	public @ResponseBody void startPasswordResetProcess(@RequestBody String email) {
 		LOG.info(email);
-//		return "\"bullshit\"";
+		userManager.sendResetToken(email);
+	}
+	
+	@RequestMapping(value="/updatePassword/{resetToken}", method=RequestMethod.POST)
+	public @ResponseBody void resetPassword(@PathVariable String resetToken, @RequestBody String password){
+		LOG.info(SurveyLog.userLog("reset token: "+resetToken));
+		userManager.resetPassword(resetToken, password);
 	}
 
 	@RequestMapping(value = "/menu", method = RequestMethod.GET)

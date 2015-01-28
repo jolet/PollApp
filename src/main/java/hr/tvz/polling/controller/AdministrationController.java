@@ -32,7 +32,7 @@ public class AdministrationController {
 	
 	@RequestMapping(value="/updateUser/{userId}", method = RequestMethod.POST)
 	public @ResponseBody void updateUser(@PathVariable String userId){
-		userManager.flipUserState(userId);
+		userManager.activateUser(userId);
 	}
 
 	@RequestMapping(value="/userActivities/{userId}", method = RequestMethod.GET)

@@ -8,4 +8,6 @@ public interface SecurityRealm extends UserDetailsService{
 	boolean hasRole(String role);
 	boolean isLoggedIn();
 	String getHostAddress();
+	String encodePassword(String plainTextPass);
+	String generateResetToken(); 
 }

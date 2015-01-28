@@ -15,8 +15,12 @@ public interface UserManager extends BaseManager<User>{
 
 	User findById(Long userId);
 
-	void flipUserState(String userId);
+	void activateUser(String userId);
 
 	boolean registerUser(User user);
+
+	void sendResetToken(String email);
+
+	void resetPassword(String resetToken, String password);
 
 }

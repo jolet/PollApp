@@ -11,8 +11,9 @@
 		<security:intercept-url pattern="/auth/login" access="permitAll"/>
 		<security:intercept-url pattern="/auth/register" access="permitAll"/>
 		<security:intercept-url pattern="/auth/classGroups" access="permitAll"/>
-		<security:intercept-url pattern="/auth/forgottenPassword" access="permitAll"/>
-		<security:intercept-url pattern="/auth/resetPassword" access="permitAll"/>
+		<security:intercept-url pattern="/auth/forgottenPassword/**" access="permitAll"/>
+		<security:intercept-url pattern="/auth/resetPassword/**" access="permitAll"/>
+		<security:intercept-url pattern="/auth/updatePassword/**" access="permitAll"/>
 		<security:intercept-url pattern="/resources/js/lib/**" access="permitAll" />
 		<security:intercept-url pattern="/resources/js/login/**" access="permitAll" />
 		
@@ -36,7 +37,7 @@
 	
 	<security:authentication-manager>
 		<security:authentication-provider user-service-ref="surveySecurityRealm">
-<!-- 			<security:password-encoder ref="passwordEncoder"></security:password-encoder> -->
+			<security:password-encoder ref="passwordEncoder"/>
 		</security:authentication-provider>
 <!-- 		  <security:authentication-provider> -->
 <!-- 		  	<security:user-service> -->
@@ -46,8 +47,10 @@
 <!-- 		  </security:authentication-provider> -->
 	</security:authentication-manager>
 	
+	<bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 <!-- 	<bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder"/> -->
 	<bean id="surveySecurityRealm" class="hr.tvz.polling.bll.SurveySecurityRealm">
+		<property name="encoder" ref="passwordEncoder" />
 <!-- 		<property name="userManager" ref="userManagerImpl"/> -->
 	</bean>
 	

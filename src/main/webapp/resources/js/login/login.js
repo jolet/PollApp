@@ -8,7 +8,7 @@ var app = angular.module('PollApp', []);
 //}]);
 
 app.controller('LoginCtrl', function($scope, $location, $http) {
-	
+	console.log('LoginCtrl init')
 	if($location.absUrl().indexOf('login?error=true') >= 0){
 		$scope.errorMessage = 'Wrong username or password!';
 	} else {
@@ -78,9 +78,13 @@ app.controller('LoginCtrl', function($scope, $location, $http) {
 	$scope.forgotPassword = function(){
 		console.log('Email to reset: ', $scope.regEmail);
 		
-		$http.post('/PollApp/auth/register/'+$scope.regEmail)
+//		$http.post('/PollApp/auth/forgottenPassword/'+$scope.regEmail)
+//		$http.post('/PollApp/auth/forgottenPassword/'+JSON.stringify($scope.regEmail))
+		$http.post('/PollApp/auth/forgottenPassword',$scope.regEmail)
 		.success(function(messageBack){
 			console.log('success', messageBack)
+			$scope.forgot=!$scope.forgot;
+			$scope.successMessage = 'Email with further instructions for password reset has been sent to your email address.';
 		}).error(function(errorLog){
 			console.log('error', errorLog)
 		});
@@ -88,5 +92,28 @@ app.controller('LoginCtrl', function($scope, $location, $http) {
 		
 	}
 	
+});
+
+app.controller('ResetCtrl', function($scope, $location, $http) {
+	console.log('ResetCtrl init')
 	
+	$scope.updatePassword = function (){
+		console.log('Resetting...')
+		
+		var url = $location.absUrl()
+		var resetToken = url.substr(url.indexOf('?')+1, url.length);
+		console.log('reset param: ', resetToken);
+		$http.post('/PollApp/auth/updatePassword/'+resetToken, $scope.newPassword)
+		.success(function(messageBack){
+			console.log('success', messageBack)
+			$scope.backToLogin();
+		}).error(function(errorLog){
+			console.log('error', errorLog)
+			$scope.backToLogin();
+		});
+	}
+	
+	$scope.backToLogin = function(){
+		window.location = '/PollApp/auth/login';
+	}
 });

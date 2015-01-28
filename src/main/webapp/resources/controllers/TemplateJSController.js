@@ -81,7 +81,7 @@ var TemplateController = function($scope, $http, growl) {
 	$scope.save = function() {
 //		console.log("Anketa to save: ", JSON.stringify($scope.survey));
 		return $http.post('template/save', $scope.survey)
-			.success(function() {
+			.success(function(messageBack) {
 				growl.success("Survey saved.")
 				$scope.fetchClassGroups();
 				$scope.clearTemplate();

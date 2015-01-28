@@ -10,3 +10,4 @@ target/*
 polling-logs/*
 log.log
 /target/
+.settings/org.eclipse.wst.common.component

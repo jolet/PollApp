@@ -39,7 +39,7 @@ public class TemplateController {
 
 		surveyManager.saveAndFlush(surv);
 
-		return "JSON: Survey name: " + surv.getQuestion();
+		return "\"JSON: Survey name: " + surv.getQuestion()+"\"";
 	}
 
 	@RequestMapping("/classGroups")
