@@ -52,13 +52,13 @@
 				<tbody>
 				<tr class="animate-repeat" ng-repeat="opt in survey.options">
 				
-					<td style = "min-width:235px !important">
+					<td style = "min-width1:235px">
 						<button type = "button" class="btn btn-danger" ng-click = "optionRemove($index)">Remove</button>
 						<button type = "button" class="btn btn-success" ng-show="opt.state && survey.scored" ng-click="setActive($index, false)">Correct</button>
 						<button type = "button" class="btn" ng-show="opt.state==false && survey.scored" ng-click="setActive($index, true)">Incorrect</button>
 					</td>
 		
-					<td style = "min-width:235px !important">{{opt.name}}</td>
+					<td style = "min-width1:235px">{{opt.name}}</td>
 				</tr>
 			</tbody>
  </table>

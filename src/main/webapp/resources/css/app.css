@@ -1,4 +1,4 @@
-/* app css stylesheet */
+s /* app css stylesheet */ 
 [ng\:cloak], [ng-cloak], .ng-cloak {
 	display: none !important;
 }
@@ -9,33 +9,35 @@
 html, body {
 	height: 100%;
 }
+
 .page-wrap {
-  min-height: 100%;
-  /* equal to footer height */
-	margin-bottom: -30px; 
+	min-height: 100%;
+	/* equal to footer height */
+	margin-bottom: -30px;
 }
+
 .page-wrap:after {
-  content: "";
-  display: block;
+	content: "";
+	display: block;
 }
+
 .site-footer, .page-wrap:after {
-  /* .push must be the same height as footer */
-	height: 30px; 
-/* 	background: #d8d8d8; */
+	/* .push must be the same height as footer */
+	height: 30px;
+	/* 	background: #d8d8d8; */
 }
 
-.site-footer p{
-	color: #337ab7;
-	width:200px;
-	margin:auto;
+.site-footer p {
+	/* 	color: #337ab7; */
+	color: #777;
+	width: 200px;
+	margin: auto;
 }
-
 
 #wrapper {
 	/* 	margin: 0 auto; */
 	/* 	max-width: 1000px; */
 	/* 	margin-top: 50px; */
-	
 }
 
 .container {
@@ -43,11 +45,13 @@ html, body {
 }
 
 .wrongAnswer {
-	color:red;
+	color: red;
 }
-.correctAnswer{
-	color:green;
+
+.correctAnswer {
+	color: green;
 }
+
 .nav.nav-center {
 	display: inline-block;
 	left: 0;
@@ -66,15 +70,15 @@ html, body {
 	/* 	margin-top: 20px; */
 	/* min-width:200px; */
 	/* margin:auto; */
-	/* margin-top:10px; */
-	font-weight: bolder;
-	font-size: medium;
+/* 	margin-top: -5px !important; */
+	font-weight: 600;
+	font-size: 1.2em;
 	/* border:1px solid red; */
 }
 
-.menu li:last-child a:last-child {
-	color: #D80000;
-}
+/* .menu li:last-child a:last-child { */
+/* 	color: #D80000; */
+/* } */
 
 .menu>li {
 	/* 	display: inline; */
@@ -104,7 +108,7 @@ html, body {
 }
 
 .welcomeLabel {
-	color:orange !important;
+	color: orange !important;
 }
 
 .contentView {
@@ -113,6 +117,19 @@ html, body {
 	margin-right: auto;
 }
 
+@media all and (max-width: 767px) {
+	.contentView {
+		width: 90%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+
+/* @media all and (max-width: 2000px) and (min-width: 768px) { */
+/*   .contentView { */
+/*     background: #666; */
+/*   } */
+/* } */
 /* .example-animate-container { */
 /* 	background: white; */
 /* 	border: 1px solid black; */
@@ -146,8 +163,9 @@ html, body {
 /* 	max-height: 40px; */
 /* } */
 .devmode {
-/* 	background-color: dimgray; */
+	/* 	background-color: dimgray; */
 	/* 	color:white; */
+	
 }
 
 .growlToast {

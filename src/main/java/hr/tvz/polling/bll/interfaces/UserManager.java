@@ -22,5 +22,7 @@ public interface UserManager extends BaseManager<User>{
 	void sendResetToken(String email);
 
 	void resetPassword(String resetToken, String password);
+	
+	String getUserFullName(String username);
 
 }

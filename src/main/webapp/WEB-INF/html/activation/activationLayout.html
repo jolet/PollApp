@@ -13,7 +13,7 @@
 	<tbody>
 		<tr ng-repeat="survey in surveyList track by survey.id">
 <!-- LEFT COLUMN -->		
-			<td style = "min-width:235px !important">
+			<td style = "min-width1:235px !important">
 				<p style="margin-bottom:-10px;" ng-show="survey.active != null">DATE FROM / TO </p>
 				<br>
 				<button ng-show="survey.active == null" class="btn  btn-danger" ng-click="remove($index)">History</button>
@@ -53,7 +53,7 @@
 				<p ng-show="survey.active != null && data.dateDropDownInputTo">Date to: {{ data.dateDropDownInputTo | date:'yyyy-MM-dd HH:mm' }}</p> 
 			</td>
 <!-- RIGHT COLUMN -->
-			<td style = "min-width:235px !important">
+			<td style = "min-width1:235px !important">
 				<h3 ng-click="hint=!hint">{{survey.question}}</h3>
 				<h5>{{survey.classGroup.name}} {{survey.classGroup.academicYear}}</h5>
 				<br/>

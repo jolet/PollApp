@@ -191,5 +191,10 @@ public class UserManagerImpl implements UserManager {
 			LOG.info(SurveyLog.userLog("tried to reset password, but bad token was given: " + resetToken));
 		}
 	}
+	@Override
+	public String getUserFullName(String username) {
+		User user = findByEmail(username);
+		return user.getFirstName() + " " + user.getLastName();
+	}
 	
 }

@@ -100,11 +100,11 @@ public class LoginLogoutController {
 				menu.add(new MenuItem("#/points", "SCORE"));
 			}
 //			menu.add(new MenuItem("#", "Welcome " + secRealm.getCurentUsername()));
-			menu.add(new MenuItem("/PollApp/auth/logout", "Logout"));
+//			menu.add(new MenuItem("/PollApp/auth/logout", "Logout"));
 		}
 		
 		
-		return new HttpResponsePayloadWrapper(getRoleHomeUrl(), menu);
+		return new HttpResponsePayloadWrapper(getRoleHomeUrl(), menu, userManager.getUserFullName(secRealm.getCurentUsername()));
 	}
 	
 	@RequestMapping("/classGroups")

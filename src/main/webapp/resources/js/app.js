@@ -12,6 +12,7 @@ var App = angular.module('PollApp', ['ngRoute', 'ngAnimate', 'PollApp.filters',
 	                                 			$rootScope.menu = menuWrapper.payload;
 //	                                 			console.log("menu assigned", menuWrapper.payload);
 	                                 			$rootScope.homeUrl = menuWrapper.info;
+	                                 			$rootScope.loggedUser = menuWrapper.additionalIntel;
 	                                 		}).error(function(errorlog) {
 	                                 			console.log(errorlog)
 	                                 			growl.error("That's an error: ", errorLog);
