@@ -1,9 +1,9 @@
 <div>
-<h3>HERE COMES THE SUN</h3>
+<h4>Survey administration</h4>
 </div>
 
 <hr>
-<table class="table table-bordered table-striped">
+<table class="table table-bordered table-striped table-hover">
 	<thead>
 		<tr>
 			<th>Activation</th>
@@ -14,7 +14,8 @@
 		<tr ng-repeat="survey in surveyList track by survey.id">
 <!-- LEFT COLUMN -->		
 			<td style = "min-width:235px !important">
-
+				<p style="margin-bottom:-10px;" ng-show="survey.active != null">DATE FROM / TO </p>
+				<br>
 				<button ng-show="survey.active == null" class="btn  btn-danger" ng-click="remove($index)">History</button>
 				<button ng-show="survey.active == null" class="btn  btn-primary" ng-click="setActive($index,false, data)">Activate</button>
 				
@@ -46,15 +47,18 @@
 
 				<button ng-show="!survey.active && survey.active != null" class="btn  btn-success " ng-click="setActive($index,!survey.active, data)">Update</button>
 				<button ng-show="survey.active && survey.active != null" class="btn  btn-warning " ng-click="setActive($index,null, data)">Deactivate</button>
-				<p ng-show="data.dateDropDownInputFrom">Date from: {{ data.dateDropDownInputFrom | date:'yyyy-MM-dd HH:mm' }}</p> 
-				<p ng-show="data.dateDropDownInputTo">Date to: {{ data.dateDropDownInputTo | date:'yyyy-MM-dd HH:mm' }}</p> 
+<!-- 				<p ng-show="data.dateDropDownInputFrom">Date from: {{ data.dateDropDownInputFrom | date:'yyyy-MM-dd HH:mm' }}</p>  -->
+<!-- 				<p ng-show="data.dateDropDownInputTo">Date to: {{ data.dateDropDownInputTo | date:'yyyy-MM-dd HH:mm' }}</p>  -->
+				<p ng-show="survey.active != null && data.dateDropDownInputFrom">Date from: {{ data.dateDropDownInputFrom | date:'yyyy-MM-dd HH:mm' }}</p> 
+				<p ng-show="survey.active != null && data.dateDropDownInputTo">Date to: {{ data.dateDropDownInputTo | date:'yyyy-MM-dd HH:mm' }}</p> 
 			</td>
 <!-- RIGHT COLUMN -->
 			<td style = "min-width:235px !important">
 				<h3 ng-click="hint=!hint">{{survey.question}}</h3>
 				<h5>{{survey.classGroup.name}} {{survey.classGroup.academicYear}}</h5>
 				<br/>
-				<textarea ng-show="hint || survey.hint" ng-model="survey.hint" placeholder="Hint"></textarea>
+				<textarea ng-show="hint || survey.hint" ng-model="survey.hint" placeholder="Hint" class="form-control"></textarea>
+<!-- 				<textarea ng-show="hint" ng-model="survey.hint" placeholder="Hint" class="form-control"></textarea> -->
 			</td>
 
 		</tr>

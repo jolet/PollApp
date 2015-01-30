@@ -6,9 +6,17 @@
 }
 .errorMessage{
 	margin-top:10px;
+	margin-bottom:10px;
 	color:red;
+	font-size:120%
 }
 .successMessage{
 	margin-top:10px;
+	margin-bottom:10px;
 	color:#005800;
+	font-size:120%
+}
+
+.linkp {
+	color:#204d74;
 }

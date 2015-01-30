@@ -1,9 +1,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html ng-app="PollApp">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Survey portal - Login</title>
-<link rel="stylesheet" href="/PollApp/resources/js/login/login.css" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Survey portal - Login</title>
+    <link rel="stylesheet" href="/PollApp/resources/bootstrap/css/bootstrap.min.3.3.1.css" />
+	<link rel="stylesheet" href="/PollApp/resources/js/login/login.css" />
 </head>
 <body 
 	style="width: 400px; margin: auto; margin-top: 100px;">
@@ -15,61 +16,73 @@
 <!--   LOGIN   -->
 
 		<div ng-show="!reg && !forgot">
-			<h1>Login</h1>
-		
+			<h2>Survey Portal - Login</h2>
+			<br>
 			<form name="loginForm" action="/PollApp/j_spring_security_check" method="POST">
-				<p>
-					<label for="j_username">Username: </label> 
-					<input id="j_username" name="j_username" type="text" ng-model="login.name" required/>
-				</p>
-				<p>
-					<label for="j_password">Password: </label> 
-					<input id="j_password" name="j_password" type="password" ng-model="login.pass" required/>
-				</p>
-				<input type="submit" value="Login" ng-disabled="loginForm.$invalid"/>
+				<div class="form-group">
+<!-- 					<label for="j_username">Username: </label>  -->
+					<input class="form-control" placeholder = "Username:" id="j_username" name="j_username" type="text" ng-model="login.name" required/>
+				</div>
+				
+				<div class="form-group">
+<!-- 					<label for="j_password">Password: </label>  -->
+					<input class="form-control" placeholder="Password:" id="j_password" name="j_password" type="password" ng-model="login.pass" required/>
+				</div>
+				<input class="btn btn-primary" type="submit" value="Login" ng-disabled="loginForm.$invalid"/>
 			</form>
-		
+			<br>
 			<!-- 	<div id="login-error">${error}</div> -->
 			<div ng-show="errorMessage" class = "errorMessage" ng-bind="errorMessage"></div>
 			<div ng-show="successMessage" class = "successMessage" ng-bind= "successMessage"></div>
-			
-		<p ng-click="reg=!reg">Registration</p>
-		<p ng-click="forgot=!forgot">Forgot password?</p>
+<!-- 			<br> -->
+		<p class="linkp" ng-click="reg=!reg">Registration</p>
+		<p class="linkp" ng-click="forgot=!forgot">Forgot password?</p>
 		</div>
 		
 <!-- REGISTRATION -->
 
 		<div ng-show="reg">
-			<h1>Registration</h1>
+			<h2>Registration</h2>
 			
 			<p>Note: Only valid university emails are allowed.</p>
 			
 			<form name="registrationForm" ng-submit="register()" method="POST">
 					
-				<p>
-					<input placeholder="name" id="registrationName" name="registrationName" type="text" ng-model="registeringUser.firstName" required/>
-					<input placeholder="surname" id="registrationSurname" name="registrationSurname" type="text" ng-model="registeringUser.lastName" required/>
-				</p>
-				<p>
-					<input placeholder="email" id="registrationEmail" name="registrationEmail" type="text" ng-model="registeringUser.email" required/><label>@tvz.hr</label>
-				</p>
-				
-				<p>
-					<input type = "text" placeholder = "Class group:" ng-model = "classGroupSelect.name" readonly="readonly" required>
-					<input type = "text" placeholder = "Academic Year:" ng-model = "classGroupSelect.academicYear" readonly="readonly" required></input>
-					<select ng-model="classGroupSelect" 
-						ng-options="classGroup.name group by classGroup.academicYear for classGroup in classGroupList | orderBy:['-academicYear', 'name']">
-						<option/>
+				<div class="input-group">
+					<input class="form-control" style="width:50%; float:left" placeholder="name" id="registrationName" name="registrationName" type="text" ng-model="registeringUser.firstName" required/>
+					<input class="form-control" style="width:50%; float:left" placeholder="surname" id="registrationSurname" name="registrationSurname" type="text" ng-model="registeringUser.lastName" required/>
+				</div>
+				<div class="input-group">
+					<input class="form-control" placeholder="email" id="registrationEmail" name="registrationEmail" type="text" ng-model="registeringUser.email" required/>
+					<label class="input-group-addon">@tvz.hr</label>
+				</div>
+				<br>
+				<div class="form-group">
+					<select class="form-control" ng-model="classGroupSelect" ng-change="classChange()" 
+							ng-options="classGroup.name group by classGroup.academicYear for classGroup in classGroupList 
+							| orderBy:['-academicYear', 'name']">
+							<option/>
 					</select>
-		<br />
-				</p>
-				
+					<input class="form-control" style="width:50%; float:left;" type = "text" placeholder = "Class group:" ng-model = "classGroupSelect.name" readonly="readonly" required>
+					<input class="form-control" style="width:50%; float:left;" type = "text" placeholder = "Academic Year:" ng-model = "classGroupSelect.academicYear" readonly="readonly" required></input>
+				</div>					
+<!-- 				<p> -->
+<!-- 					<select ng-model="classGroupSelect"  -->
+<!-- 						ng-options="classGroup.name group by classGroup.academicYear for classGroup in classGroupList | orderBy:['-academicYear', 'name']"> -->
+<!-- 						<option/> -->
+<!-- 					</select> -->
+<!-- 					<input type = "text" placeholder = "Class group:" ng-model = "classGroupSelect.name" readonly="readonly" required> -->
+<!-- 					<input type = "text" placeholder = "Academic Year:" ng-model = "classGroupSelect.academicYear" readonly="readonly" required></input> -->
+<!-- 			<br /> -->
+<!-- 				</p> -->
+				<br>
+				<br>
 				<p>
-					<input type="submit" value="Register" ng-disabled="registrationForm.$invalid">
+					<input class="btn btn-primary" type="submit" value="Register" ng-disabled="registrationForm.$invalid">
 				</p>
 			</form>
-			
-			<p ng-click="backToLogin()">Cancel</p>
+			<br>
+			<p class="linkp" ng-click="backToLogin()">Cancel</p>
 			
 		</div>
 
@@ -77,12 +90,16 @@
 <!--  FORGOTTEN PASSWORD  -->
 
 		<div ng-show="forgot">
-			<h1>Forgotten Password</h1>
-			<p>
-				<input type="text" placeholder = "email" ng-model="regEmail">
-				<button ng-click="forgotPassword()" ng-disabled="!regEmail">Send</button>
-			</p>
-			<p ng-click="forgot=!forgot">Cancel</p>
+			<h2>Forgotten Password</h2>
+			<br>
+			<div class="input-group">
+				<label class ="input-group-btn">
+					<button class="btn btn-primary" ng-click="forgotPassword()" ng-disabled="!regEmail">Send</button>
+				</label>
+				<input class="form-control" type="text" placeholder = "Email:" ng-model="regEmail">
+			</div>
+			<br>
+			<p class="linkp" ng-click="forgot=!forgot">Cancel</p>
 		</div>
 		
 		<script src="/PollApp/resources/js/lib/angular/angular.js"></script>

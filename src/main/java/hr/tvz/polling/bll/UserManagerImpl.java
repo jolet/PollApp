@@ -101,7 +101,7 @@ public class UserManagerImpl implements UserManager {
 		
 		if(activated){ // user deactivation case.
 			userToSave.setActive(false);
-			repository.saveAndFlush(userToSave);
+//			repository.saveAndFlush(userToSave);
 		} else { // activation case - generate and send reset token
 			String resetToken = secRealm.generateResetToken();
 			userToSave.setResetToken(resetToken);
@@ -109,9 +109,10 @@ public class UserManagerImpl implements UserManager {
 			//send reset token to user
 			emailManager.sendEmail(userToSave.getEmail(), "Survey portal - activation", "Your account has been approved.\n"
 					+ "Follow next link to update your login details.\n\n"
-					+ "http://localhost:8080/PollApp/resetPassword/"+resetToken);
+					+ LOCALHOST_PASS_RESET_LINK +resetToken);
 			userToSave.setActive(true);
 		} 
+		repository.saveAndFlush(userToSave);
 		
 	}
 	@Override

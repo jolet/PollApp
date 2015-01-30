@@ -1,27 +1,48 @@
 <div>
-<h3>HERE COMES THE SUN</h3>
+<h4>Survey template</h4>
 </div>
 
 	<form name = "templateForm" ng-submit="save()" method="POST">
 
-		<input type = "text" ng-model = "survey.question" placeholder="Survey name:" required> 
-		<br />
-		<br/>
-		<input type = "text" placeholder = "Class group:" ng-model = "survey.classGroup.name" required>
-		<input type = "text" placeholder = "Academic Year:" ng-model = "survey.classGroup.academicYear" required></input>
-		<select ng-model="classGroupSelect" ng-change="classChange()" 
-				ng-options="classGroup.name group by classGroup.academicYear for classGroup in classGroupList | orderBy:['-academicYear', 'name']"><option/></select>
-		<br />
-		<input type = "text"  placeholder="Option name:" ng-model = "optionName" > 
-		<button type="button" class = "btn btn-default" ng-click="addOption()" ng-disabled="!optionName">Add option</button>
-		<br />
+		<div class="form-group">
+			<input class="form-control" type = "text" ng-model = "survey.question" placeholder="Survey name:" required> 
+		</div>
+		
+		<div class="form-group">
+			<select class="form-control" ng-model="classGroupSelect" ng-change="classChange()" 
+					ng-options="classGroup.name group by classGroup.academicYear for classGroup in classGroupList 
+					| orderBy:['-academicYear', 'name']">
+					<option/>
+			</select>
+			<input class="form-control" style="width:50%; float:left;" type = "text" placeholder = "Class group:" ng-model = "survey.classGroup.name" required>
+			<input class="form-control" style="width:50%; float:left;" type = "text" placeholder = "Academic Year:" ng-model = "survey.classGroup.academicYear" required></input>
+			
+<!-- 			<div class="dropdown"> -->
+<!-- 				<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"  -->
+<!-- 				aria-expanded="true">DropDown -->
+<!-- 				</button> -->
+<!-- 				<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" ng-model="classGroupSelect" ng-change="classChange()">  -->
+<!-- 						<li role="presentation" ng-repeat="classGroup in classGroupList">{{classGroup.name}}<li/> -->
+<!-- 				</ul> -->
+<!-- 			</div> -->
+		</div>
+		<br>
+		<br>
+		<div class="input-group">
+			<label class="input-group-btn"> 
+				<button type="button" class = "btn btn-default btn-primary" ng-click="addOption()" ng-disabled="!optionName">Add option</button>
+			</label>
+			<input class="form-control" type = "text"  placeholder="Option name:" ng-model = "optionName" >
+		</div>
 		
 	<hr>
 	<div ng-show="survey.question">
-	<p>Anketa:		<span style="font-size:150%">{{survey.question}}</span></p>
+	<p style="font-size:130%">Survey:
+		<span style="font-size:150%">{{survey.question}}</span>
+	</p>
 	</div>
 	<div ng-show="survey.options.length > 0">
-		<table class="table table-bordered table-striped example-animate-container" >
+		<table class="table table-bordered table-striped" >
 			<thead>
 		<tr>
 					<th>Action</th>
@@ -41,15 +62,20 @@
 				</tr>
 			</tbody>
  </table>
-	<hr>
+<!-- 	<hr> -->
 		<div ng-show = "survey.options.length > 1">
-			Points:
-			<button type = "button" class="btn btn-default" ng-show="survey.scored" ng-click="setScored(false)">Scored</button>
-			<button type = "button" class="btn" ng-show="!survey.scored" ng-click="setScored(true)">Not scored</button>
-			<br />
+			
+			<div class="">
+				<label>Points: </label>
+				<label class=""> 
+					<button type = "button" class="btn btn-default" ng-show="survey.scored" ng-click="setScored(false)">Scored</button>
+					<button type = "button" class="btn" ng-show="!survey.scored" ng-click="setScored(true)">Not scored</button>
+				</label>
+				
+			</div>
+<!-- 			<br /> -->
 			<!-- 		<number-only-input input-value="survey.maxVotes" input-name="maxInputVotes"> -->
-			<input type = "text" ng-model = "survey.maxVotes" placeholder = "Max number of votes(optional)">
-			<br />
+			<input class="form-control" type = "text" ng-model = "survey.maxVotes" ng-keyup="checkNumeric()" placeholder = "Max number of votes(optional)">
 			<br />
 			
 			<input type = "button" class = "btn btn-danger" value="Remove all" ng-show = "survey.options.length > 1" ng-click = "clearTemplate()"> 
@@ -57,7 +83,6 @@
 		</div>		
 	</div>
 	</form>
-<!-- <button ng-click="growl()" type="button" class="btn btn-warning">Growl</button>  -->
 	<div class = "growlToast" growl limit-messages="5"></div>
 		
 	

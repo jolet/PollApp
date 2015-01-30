@@ -1,4 +1,4 @@
-<h2 id="track" ng-click="showbar=!showbar">HERE COMES THE SUN</h2>
+<h4 id="track" ng-click="showbar=!showbar">Results for surveys in progress</h4>  
 
 <div ng-repeat="survey in surveys track by survey.id">
 	<h2 ng-click="showbar=!showbar">{{survey.question}}</h2>
@@ -10,9 +10,8 @@
 		<span style="color:white;">{{option.count}} / {{survey.scored ? survey.maxVotes : maxVotes[$parent.$parent.$parent.$index]}}</span>
 	</progressbar>
 	<h4 ng-show="show" ng-click="fetchVotingUsers(option.id)" 
-	ng-bind="(optionVotersMap[option.id] == null || optionVotersMap[option.id] == '') ? 'No results. Click to refresh.' : 'Voting users: ' + optionVotersMap[option.id]"></button>
+		ng-bind="(optionVotersMap[option.id] == null || optionVotersMap[option.id] == '') ? 
+				'No results. Click to refresh.' : 'Voting users: ' + optionVotersMap[option.id]">
+	</h4>
 	</div>
 </div>
-
-
-

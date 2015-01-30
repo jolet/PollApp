@@ -120,5 +120,9 @@ var TemplateController = function($scope, $http, growl) {
 		}
 	}
 	
+	$scope.checkNumeric = function(){
+		var intRegex = /[^0-9]+/;  
+		$scope.survey.maxVotes = $scope.survey.maxVotes.replace(new RegExp( intRegex ), "");
+	}
 	
 }

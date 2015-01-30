@@ -16,6 +16,7 @@
 		<security:intercept-url pattern="/auth/updatePassword/**" access="permitAll"/>
 		<security:intercept-url pattern="/resources/js/lib/**" access="permitAll" />
 		<security:intercept-url pattern="/resources/js/login/**" access="permitAll" />
+		<security:intercept-url pattern="/resources/bootstrap/css/**" access="permitAll" />
 		
 		<security:intercept-url pattern="/" access="hasAnyRole('USER','ADMIN')" />
 		<security:intercept-url pattern="/resources/**" access="hasAnyRole('USER','ADMIN')" />
@@ -27,7 +28,9 @@
 		<security:form-login
 			login-page="/auth/login"
 			authentication-failure-url="/auth/login?error=true"
-			default-target-url="/"/>
+			default-target-url="/"
+			always-use-default-target="true"
+			/>
 		
 		<security:logout
 			invalidate-session="true"

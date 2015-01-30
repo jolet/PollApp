@@ -1,11 +1,12 @@
 <div>
-	<h3>HERE COMES THE SUN</h3>
+<!-- 	<h3>VOTING</h3> -->
+	<h4>If there are active surveys available, they will be shown here.</h4>
 </div>
 
 
 <div class="surveyContainer" ng-repeat="survey in surveyList track by survey.id">
 <!-- 	<h2>{{survey.question}}</h2> -->
-	<table class="table table-bordered table-striped" ng-show="survey && survey.id">
+	<table class="table table-borderless " ng-show="survey && survey.id">
 
 
 		<thead>
@@ -15,7 +16,7 @@
 		</thead>
 		<tbody>
 			<tr ng-repeat="option in survey.options track by option.id">
-				<td style="min-width: 235px !important">
+				<td class="btn-group-vertical" style=" display: inline-table; width:100%; margin-top:10px;">
 					<button class="btn btn-large" ng-click="vote(option.id, survey.id, $parent.$index)">{{option.name}}</button>
 				</td>
 			</tr>
@@ -23,8 +24,13 @@
 
 	</table>
 	<div ng-show="!survey || !survey.id">
-	<input placeholder="Unlock me!" ng-model="secret"/><button class="btn btn-primary" ng-click="unlockSurvey(secret)">Unlock</button>
+		<p style="font-size:1.5em;">Locked survey</p>
+		<div class="input-group">
+			<label class="input-group-btn">
+			<button class="btn btn-primary" ng-click="unlockSurvey(secret)">Unlock</button>
+			</label>
+			<input placeholder="Unlock me!" ng-model="secret" class="form-control"/>
+		</div>
 	</div>
 </div>
-
 <div class = "growlToast" growl limit-messages="5"></div>
