@@ -27,7 +27,7 @@ public class EmailManagerImpl implements EmailManager {
 		emailToSend.setText(content);
 		emailToSend.setTo(emailAddress);
 
-		// emailer.send(emailToSend);
+		emailer.send(emailToSend);
 		System.out.println("done");
 	}
 
