@@ -23,7 +23,7 @@
 	<util:map id="jpaProperties">
 		<!-- H2 Test Database Dialect -->
 		<entry key="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
-		<entry key="hibernate.hbm2ddl.auto" value="update" />
+		<entry key="hibernate.hbm2ddl.auto" value="validate" />
 		<entry key="hibernate.default_schema" value="polling" />
 	</util:map>	
 	

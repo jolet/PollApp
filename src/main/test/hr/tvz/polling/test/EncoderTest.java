@@ -9,7 +9,7 @@ public class EncoderTest {
 		
 		int i = 0;
 		while (i < 10) {
-			String password = "te";
+			String password = "test";
 			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 			String hashedPassword = passwordEncoder.encode(password);
 	 
@@ -18,3 +18,5 @@ public class EncoderTest {
 		}
 	}
 }
+
+//
