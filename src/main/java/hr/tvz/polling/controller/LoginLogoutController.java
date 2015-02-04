@@ -63,7 +63,9 @@ public class LoginLogoutController {
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public @ResponseBody String registerUser(@RequestBody User user) {
 //		LOG.info(SurveyLog.userLog("user" + user.getEmail() + " trying to register..."));
-		if(userManager.registerUser(user)){
+		if(user.getEmail().contains("@")){
+			return "\"error\"";
+		} else if(userManager.registerUser(user)){
 			return "\"success\"";
 		} else {
 			return "\"error\"";

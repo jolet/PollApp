@@ -5,20 +5,21 @@ var PollApp = {};
 var App = angular.module('PollApp', ['ngRoute', 'ngAnimate', 'PollApp.filters', 
                                      'PollApp.services','PollApp.directives',
                                      'angular-growl','mgcrea.ngStrap', 'ui.bootstrap.datetimepicker', 'ui.bootstrap'])
-                                     .run(function($rootScope, $http, $location, growl){
-                                    	 $http.get('auth/menu')
-	                                 		.success(function(menuWrapper){
-	                                 			$location.path(menuWrapper.info) //home uri for role
-	                                 			$rootScope.menu = menuWrapper.payload;
-//	                                 			console.log("menu assigned", menuWrapper.payload);
-	                                 			$rootScope.homeUrl = menuWrapper.info;
-	                                 			$rootScope.loggedUser = menuWrapper.additionalIntel;
-	                                 		}).error(function(errorlog) {
-	                                 			console.log(errorlog)
-	                                 			growl.error("That's an error: ", errorLog);
-	                                 		});
-                                    	 
-                                     });
+                                     
+ .run(function($rootScope, $http, $location, growl){
+	 $http.get('auth/menu')
+ 		.success(function(menuWrapper){
+ 			$location.path(menuWrapper.info) //home uri for role
+ 			$rootScope.menu = menuWrapper.payload;
+// 			console.log("menu assigned", menuWrapper.payload);
+ 			$rootScope.homeUrl = menuWrapper.info;
+ 			$rootScope.loggedUser = menuWrapper.additionalIntel;
+ 		}).error(function(errorlog) {
+ 			console.log(errorlog)
+ 			growl.error("That's an error: ", errorLog);
+ 		});
+	 
+ });
 
 // Declare app level module which depends on filters, and services
 App.config(['$routeProvider','growlProvider','$httpProvider', 

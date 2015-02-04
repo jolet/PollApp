@@ -117,7 +117,7 @@ html, body {
 	margin-right: auto;
 }
 
-@media all and (max-width: 767px) {
+@media all and (min-width: 1px) and (max-width: 767px) {
 	.contentView {
 		width: 90%;
 		margin-left: auto;

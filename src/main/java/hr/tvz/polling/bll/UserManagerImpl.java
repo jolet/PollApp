@@ -23,11 +23,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 public class UserManagerImpl implements UserManager {
 	private static final Logger LOG = LoggerFactory.getLogger(UserManagerImpl.class);
 
-	private static final String LOCALHOST_PASS_RESET_LINK = "http://localhost:8080/PollApp/auth/resetPassword?";
+//	private static final String LOCALHOST_PASS_RESET_LINK = "http://localhost:8080/PollApp/auth/resetPassword?";
+	private String localhostUrl;
 	
 	@Autowired
 	UserRepository repository;
@@ -55,6 +56,8 @@ public class UserManagerImpl implements UserManager {
 	public User findOne(Long id) {
 		return repository.findOne(id);
 	}
+	
+	@Transactional(readOnly = false)
 	@Override
 	public void saveAndFlush(User user) {
 		repository.saveAndFlush(user);
@@ -67,6 +70,8 @@ public class UserManagerImpl implements UserManager {
 	public Long findIdByEmail(String email) {
 		return repository.findIdByEmail(email);
 	}
+	
+	@Transactional(readOnly = true)
 	@Override
 	public List<HttpResponsePayloadWrapper> findAllByRole(String roleUser) {
 		return protectSensitiveData(repository.findByRoleName(roleUser));
@@ -77,10 +82,13 @@ public class UserManagerImpl implements UserManager {
 	 * @param userList
 	 * @return
 	 */
+	
+	@Transactional(readOnly = true)
 	private List<HttpResponsePayloadWrapper> protectSensitiveData(List<User> userList){
 		List<HttpResponsePayloadWrapper> usersWrapped = new ArrayList<HttpResponsePayloadWrapper>();
 		for(User u : userList){
 			u.setPassword(null);
+			u.setResetToken(null);
 //			u.setActivities(null);
 			usersWrapped.add(new HttpResponsePayloadWrapper(activityRepository.getUserPoints(u.getId()), u));
 		}
@@ -90,6 +98,8 @@ public class UserManagerImpl implements UserManager {
 	public User findById(Long userId) {
 		return repository.findById(userId);
 	}
+	
+	@Transactional(readOnly = false)
 	@Override
 	public void activateUser(String userId) {
 		// XXX: string to long conversion, need util class
@@ -107,14 +117,16 @@ public class UserManagerImpl implements UserManager {
 			userToSave.setResetToken(resetToken);
 			
 			//send reset token to user
-			emailManager.sendEmail(userToSave.getEmail(), "Survey portal - activation", "Your account has been approved.\n"
+			emailManager.sendEmail(userToSave.getEmail(), "Survey portal - activation", "Your account has been activated.\n"
 					+ "Follow next link to update your login details.\n\n"
-					+ LOCALHOST_PASS_RESET_LINK +resetToken);
+					+ localhostUrl +"auth/resetPassword?"+resetToken);
 			userToSave.setActive(true);
 		} 
 		repository.saveAndFlush(userToSave);
 		
 	}
+	
+	@Transactional(readOnly = false)
 	@Override
 	public boolean registerUser(User user) {
 		//check valid email and university
@@ -153,6 +165,7 @@ public class UserManagerImpl implements UserManager {
 		return true;
 	}
 	
+	@Transactional(readOnly = false)
 	@Override
 	public void sendResetToken(String email) {
 		LOG.info(SurveyLog.userLog("email " + email +" requested password reset"));
@@ -165,7 +178,7 @@ public class UserManagerImpl implements UserManager {
 			//send reset token to user
 			emailManager.sendEmail(user.getEmail(), "Survey portal - password reset", "You (or someone pretending to be you) has requested password reset on Survey portal.\n"
 					+ "If this was you, follow next link to update your login details. If this was not you, ignore this email.\n\n"
-					+ LOCALHOST_PASS_RESET_LINK+resetToken);
+					+ localhostUrl+"auth/resetPassword?"+resetToken);
 			user.setResetToken(resetToken);
 			repository.saveAndFlush(user);
 			LOG.info(SurveyLog.userLog("resetToken set and emailed to " + user.getEmail()));
@@ -175,6 +188,8 @@ public class UserManagerImpl implements UserManager {
 		
 		
 	}
+	
+	@Transactional(readOnly = false)
 	@Override
 	public void resetPassword(String resetToken, String plainTextPass) {
 		User user = repository.findByResetToken(resetToken);
@@ -191,10 +206,17 @@ public class UserManagerImpl implements UserManager {
 			LOG.info(SurveyLog.userLog("tried to reset password, but bad token was given: " + resetToken));
 		}
 	}
+	
 	@Override
 	public String getUserFullName(String username) {
 		User user = findByEmail(username);
 		return user.getFirstName() + " " + user.getLastName();
+	}
+	public String getLocalhostUrl() {
+		return localhostUrl;
+	}
+	public void setLocalhostUrl(String localhostUrl) {
+		this.localhostUrl = localhostUrl;
 	}
 	
 }

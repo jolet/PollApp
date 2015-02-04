@@ -5,9 +5,9 @@
 	<div ng-show="showbar" ng-repeat="option in survey.options track by option.id">
 	<h4>{{option.name}}</h4>
 	<progressbar max = "maxVotes[$parent.$index]" value = "option.count" class="progress-striped" 
-		type="{{survey.scored ? ((maxVotes[$parent.$index] < survey.maxVotes) ? 'success' : 'danger') : 'success'}}"
+		type="{{survey.maxVotes ? ((maxVotes[$parent.$index] < survey.maxVotes) ? 'success' : 'danger') : 'success'}}"
 		ng-click="show=!show">
-		<span style="color:white;">{{option.count}} / {{survey.scored ? survey.maxVotes : maxVotes[$parent.$parent.$parent.$index]}}</span>
+		<span style="color:white;">{{option.count}} / {{survey.maxVotes ? survey.maxVotes : maxVotes[$parent.$parent.$parent.$index]}}</span>
 	</progressbar>
 	<h4 ng-show="show" ng-click="fetchVotingUsers(option.id)" 
 		ng-bind="(optionVotersMap[option.id] == null || optionVotersMap[option.id] == '') ? 

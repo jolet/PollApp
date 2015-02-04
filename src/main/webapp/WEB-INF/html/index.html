@@ -2,6 +2,7 @@
 <html ng-app="PollApp">
 	<head>
 	    <meta charset="utf-8">
+	    <meta name="viewport" content="initial-scale=1">
 	    <title>Survey portal</title>
     	<style type="text/css">
 			.ng-cloak {display: none !important;}
@@ -31,7 +32,7 @@
 			    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				    <ul class="nav nav-pills nav-center menu">
 				    	<li ng-repeat="menuItem in menu">
-				    		<a href="{{menuItem.link}}" ng-class="{{menuItem.className}}">{{menuItem.name}}</a>
+				    		<a href="{{menuItem.link}}" ng-class="{{menuItem.className}} ">{{menuItem.name}}</a>
 			    		</li>
 		<!-- 		        <li><a href="#/template">Template</a></li> -->
 		<!-- 		        <li><a href="#/activation">Activation</a></li> -->
@@ -52,7 +53,7 @@
 		    <div ng-view class = "contentView"></div>
 	    </div>
 	    <div class="site-footer ng-cloak">
-	    	<p>copyright (c) 2015 TVZ.hr </p>
+	    	<p>copyright &#169; 2015 TVZ.hr </p>
 	    </div>
 
 		<script src="resources/js/lib/angular/angular.js"></script>

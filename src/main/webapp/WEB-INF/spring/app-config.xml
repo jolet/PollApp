@@ -27,4 +27,8 @@
 			</value>
 		</property>
 	</bean>
+	
+	<bean id="userManager" class="hr.tvz.polling.bll.UserManagerImpl">
+		<property name="localhostUrl" value="http://localhost:8080/PollApp/"></property>
+	</bean>
 </beans>
